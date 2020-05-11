@@ -10,9 +10,9 @@ import SwiftUI
 import CoreLocation
 
 struct TextButtonView: View {
-    @State var text: String
-    @State var backgroundColor: Color
-    @State var tappedHandler: (() -> Void)?
+    var text: String
+    var backgroundColor: Color
+    var tappedHandler: (() -> Void)?
     
     var body: some View {
         Button(action: {

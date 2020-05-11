@@ -13,50 +13,47 @@ struct ContentView: View {
     
     @State var route: MKPolyline? = nil
     
-    @State private var headerText: String = LocationManager().locationAutherisationStatus?.asString ?? "?"
+//    @State private var headerText: String = LocationManager().locationAutherisationStatus?.asString ?? "?"
+//
+//    @State private var recordedLocations: [CLLocation] = LocationManager().recordedLocations
     
-    private var locationManager: LocationManager = LocationManager()
+    @ObservedObject var locationManager: LocationManager = LocationManager.shared
     
-    private var mapView = MapView()
+    @EnvironmentObject var userData: UserData
+//
+//    private var mapView = MapView()
     
-    private func buttonTappedHandler() {
-        if let location = locationManager.recentLocation {
-            mapView.showUserLocation()
-            mapView.zoom(to: location)
-        } else if locationManager.canGetLocation {
-            locationManager.getLocation { location in
-                guard let location = location else { return }
-                self.mapView.showUserLocation()
-                self.mapView.zoom(to: location)
-            }
-        } else {
-            locationManager.requestWhenInUseAuthorization { status in
-                self.headerText = status.asString
-                
-                self.locationManager.getLocation { location in
-                    guard let location = location else { return }
-                    self.mapView.showUserLocation()
-                    self.mapView.zoom(to: location)
-                }
-            }
-        }
-        
+    private func startButtonTappedHandler() {
+        userData.isRecordingActivity.toggle()
+        locationManager.startRecordingLocation()
+    
+    }
+    private func stopButtonTappedHandler() {
+        userData.isRecordingActivity.toggle()
+        locationManager.stopRecordingLocation()
     }
     
     var body: some View {
         ZStack {
-            mapView
+            MapView(currentLocation: locationManager.lastLocation)
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                Text("Location Auth Status: \(headerText)")
+                Text("Location Auth Status: \(locationManager.recordedLocations.description)")
                     .animation(.spring())
                 Spacer()
                 HStack{
                     Spacer()
-                    TextButtonView(text: "Start",
-                                   backgroundColor: .green,
-                                   tappedHandler: buttonTappedHandler)
+                    if userData.isRecordingActivity {
+                        TextButtonView(text: "Stop",
+                        backgroundColor: .red,
+                        tappedHandler: stopButtonTappedHandler)
+                    } else {
+                        TextButtonView(text: "Start",
+                        backgroundColor: .green,
+                        tappedHandler: startButtonTappedHandler)
+                    }
+
                     Spacer()
                         .frame(width: 10)
                 }
@@ -72,6 +69,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+        .environmentObject(UserData())
     }
 }
 

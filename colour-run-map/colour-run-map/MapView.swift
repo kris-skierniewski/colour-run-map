@@ -10,32 +10,48 @@ import SwiftUI
 import MapKit
 
 struct MapView: UIViewRepresentable {
-    var map = MKMapView()
+    //var map = MKMapView()
+    
+    var currentLocation: CLLocation?
+    var polyline: MKPolyline?
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
     
     func makeUIView(context: UIViewRepresentableContext<MapView>) -> MKMapView {
+        let map = MKMapView(frame: .zero)
         map.delegate = context.coordinator
         return map
     }
     
-    func updateUIView(_ view: MKMapView, context: Context) {}
+    func updateUIView(_ uiView: MKMapView, context: Context) {
+        if let location = currentLocation {
+            let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
+            let region = MKCoordinateRegion(center: location.coordinate, span: span)
+            uiView.setRegion(region, animated: true)
+        } else {
+//            let coordinate = CLLocationCoordinate2D(
+//                latitude: 34.011286, longitude: -116.166868)
+//            let span = MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
+//            let region = MKCoordinateRegion(center: coordinate, span: span)
+//            uiView.setRegion(region, animated: true)
+        }
+    }
     
 }
 
 extension MapView {
     
-    func zoom(to location: CLLocation?) {
-        if let location = location {
-            let span = MKCoordinateSpan(latitudeDelta: 0.009, longitudeDelta: 0.009)
-            let region = MKCoordinateRegion(center: location.coordinate, span: span)
-            map.setRegion(region, animated: true)
-        }
-    }
+//    func zoom(to location: CLLocation?) {
+//        if let location = location {
+//            let span = MKCoordinateSpan(latitudeDelta: 0.009, longitudeDelta: 0.009)
+//            let region = MKCoordinateRegion(center: location.coordinate, span: span)
+//            map.setRegion(region, animated: true)
+//        }
+//    }
     
-    func showUserLocation() { map.showsUserLocation = true }
+    //func showUserLocation() { map.showsUserLocation = true }
 }
 
 class Coordinator: NSObject, MKMapViewDelegate {
@@ -51,10 +67,10 @@ class Coordinator: NSObject, MKMapViewDelegate {
         return view
     }
     
-    func mapViewWillStartLocatingUser(_ mapView: MKMapView) {
-        mapView.showsUserLocation = true
-        parent.zoom(to: mapView.userLocation.location)
-    }
+//    func mapViewWillStartLocatingUser(_ mapView: MKMapView) {
+//        mapView.showsUserLocation = true
+//        parent.zoom(to: mapView.userLocation.location)
+//    }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)

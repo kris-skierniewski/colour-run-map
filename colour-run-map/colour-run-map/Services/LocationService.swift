@@ -19,7 +19,7 @@ protocol LocationServiceProtocol {
 
 class LocationService: LocationServiceProtocol {
     
-    private var locationManager: LocationManager = LocationManager()
+    //private var locationManager: LocationManager = LocationManager()
 
     
     
