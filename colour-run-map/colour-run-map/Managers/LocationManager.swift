@@ -44,6 +44,7 @@ class LocationManager: NSObject, ObservableObject {
         willSet { objectWillChange.send() }
     }
     
+    
     var recentLocation: CLLocation? {
         if let lastLocation = lastLocation,
             lastLocation.timestamp.timeIntervalSinceNow < 60.0 {

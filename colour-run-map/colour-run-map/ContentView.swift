@@ -35,11 +35,11 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            MapView(currentLocation: locationManager.lastLocation)
+            MapView(recordedLocations: locationManager.recordedLocations)
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                Text("Location Auth Status: \(locationManager.recordedLocations.description)")
+                Text("Recorded locations: \(locationManager.recordedLocations.description)")
                     .animation(.spring())
                 Spacer()
                 HStack{

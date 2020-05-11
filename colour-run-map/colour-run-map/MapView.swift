@@ -12,8 +12,8 @@ import MapKit
 struct MapView: UIViewRepresentable {
     //var map = MKMapView()
     
-    var currentLocation: CLLocation?
-    var polyline: MKPolyline?
+    //var currentLocation: CLLocation?
+    var recordedLocations: [CLLocation]?
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -26,17 +26,19 @@ struct MapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        if let location = currentLocation {
-            let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
-            let region = MKCoordinateRegion(center: location.coordinate, span: span)
-            uiView.setRegion(region, animated: true)
-        } else {
-//            let coordinate = CLLocationCoordinate2D(
-//                latitude: 34.011286, longitude: -116.166868)
-//            let span = MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
-//            let region = MKCoordinateRegion(center: coordinate, span: span)
-//            uiView.setRegion(region, animated: true)
+        if let coordinates = recordedLocations?.compactMap({ $0.coordinate }) {
+            uiView.addOverlay(MKPolyline(coordinates: coordinates, count: coordinates.count))
         }
+        
+        if let location = recordedLocations?.last {
+            let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
+                       let region = MKCoordinateRegion(center: location.coordinate, span: span)
+                       uiView.setRegion(region, animated: true)
+        }
+        
+        
+        
+        
     }
     
 }
