@@ -13,6 +13,10 @@
 		037404B42464ACD000F8DFAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 037404B32464ACD000F8DFAF /* Assets.xcassets */; };
 		037404B72464ACD000F8DFAF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 037404B62464ACD000F8DFAF /* Preview Assets.xcassets */; };
 		037404BA2464ACD000F8DFAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 037404B82464ACD000F8DFAF /* LaunchScreen.storyboard */; };
+		A3D2272E24697D8800B55BDD /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D2272924697D8800B55BDD /* LocationManager.swift */; };
+		A3D2272F24697D8800B55BDD /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D2272A24697D8800B55BDD /* MapView.swift */; };
+		A3D2273024697D8800B55BDD /* TextButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D2272B24697D8800B55BDD /* TextButtonView.swift */; };
+		A3D2273124697D8800B55BDD /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D2272D24697D8800B55BDD /* LocationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		037404B62464ACD000F8DFAF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		037404B92464ACD000F8DFAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		037404BB2464ACD000F8DFAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3D2272924697D8800B55BDD /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		A3D2272A24697D8800B55BDD /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapView.swift; path = "colour-run-map/MapView.swift"; sourceTree = "<group>"; };
+		A3D2272B24697D8800B55BDD /* TextButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextButtonView.swift; path = "colour-run-map/TextButtonView.swift"; sourceTree = "<group>"; };
+		A3D2272D24697D8800B55BDD /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +50,10 @@
 			children = (
 				037404AC2464ACCD00F8DFAF /* colour-run-map */,
 				037404AB2464ACCD00F8DFAF /* Products */,
+				A3D2272824697D8800B55BDD /* Managers */,
+				A3D2272A24697D8800B55BDD /* MapView.swift */,
+				A3D2272C24697D8800B55BDD /* Services */,
+				A3D2272B24697D8800B55BDD /* TextButtonView.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,6 +85,24 @@
 				037404B62464ACD000F8DFAF /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A3D2272824697D8800B55BDD /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				A3D2272924697D8800B55BDD /* LocationManager.swift */,
+			);
+			name = Managers;
+			path = "colour-run-map/Managers";
+			sourceTree = "<group>";
+		};
+		A3D2272C24697D8800B55BDD /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A3D2272D24697D8800B55BDD /* LocationService.swift */,
+			);
+			name = Services;
+			path = "colour-run-map/Services";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,9 +176,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3D2273124697D8800B55BDD /* LocationService.swift in Sources */,
+				A3D2272E24697D8800B55BDD /* LocationManager.swift in Sources */,
 				037404AE2464ACCD00F8DFAF /* AppDelegate.swift in Sources */,
+				A3D2272F24697D8800B55BDD /* MapView.swift in Sources */,
 				037404B02464ACCD00F8DFAF /* SceneDelegate.swift in Sources */,
 				037404B22464ACCD00F8DFAF /* ContentView.swift in Sources */,
+				A3D2273024697D8800B55BDD /* TextButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
