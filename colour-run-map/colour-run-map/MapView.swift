@@ -12,6 +12,8 @@ import MapKit
 struct MapView: UIViewRepresentable {
     //var map = MKMapView()
     
+    @State var showsUserLocation = true
+    
     //var currentLocation: CLLocation?
     var recordedLocations: [CLLocation]?
     
@@ -26,6 +28,8 @@ struct MapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
+        uiView.showsUserLocation = showsUserLocation
+        
         if let coordinates = recordedLocations?.compactMap({ $0.coordinate }) {
             uiView.addOverlay(MKPolyline(coordinates: coordinates, count: coordinates.count))
         }

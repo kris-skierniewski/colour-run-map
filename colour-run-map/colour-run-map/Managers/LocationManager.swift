@@ -22,6 +22,9 @@ class LocationManager: NSObject, ObservableObject {
     
     private override init() {
         super.init()
+        if canGetLocation == false {
+            requestWhenInUseAuthorization(withCompletion: nil)
+        }
         self.locationManager.delegate = self
         self.locationManager.allowsBackgroundLocationUpdates = true
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -83,7 +86,7 @@ class LocationManager: NSObject, ObservableObject {
         distance = 0.0
         isRecordingLocation = true
         locationManager.activityType = .fitness
-        locationManager.distanceFilter = 50
+        locationManager.distanceFilter = 2
         locationManager.startUpdatingLocation()
     }
     
