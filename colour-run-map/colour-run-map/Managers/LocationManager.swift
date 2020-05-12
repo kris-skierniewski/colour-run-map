@@ -23,6 +23,7 @@ class LocationManager: NSObject, ObservableObject {
     private override init() {
         super.init()
         self.locationManager.delegate = self
+        self.locationManager.allowsBackgroundLocationUpdates = true
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
@@ -39,7 +40,13 @@ class LocationManager: NSObject, ObservableObject {
     }
     
     var isRecordingLocation = false
-    
+    @Published var distance: CLLocationDistance = 0.0 {
+        willSet { objectWillChange.send() }
+    }
+    @Published var startDate = Date() {
+        willSet { objectWillChange.send() }
+    }
+
     @Published var recordedLocations: [CLLocation] = [] {
         willSet { objectWillChange.send() }
     }
@@ -72,7 +79,11 @@ class LocationManager: NSObject, ObservableObject {
     
     func startRecordingLocation() {
         recordedLocations.removeAll()
+        startDate = Date()
+        distance = 0.0
         isRecordingLocation = true
+        locationManager.activityType = .fitness
+        locationManager.distanceFilter = 50
         locationManager.startUpdatingLocation()
     }
     
@@ -106,7 +117,8 @@ extension LocationManager: CLLocationManagerDelegate {
                 let howRecent = newLocation.timestamp.timeIntervalSinceNow
                 guard newLocation.horizontalAccuracy < 20 && newLocation.verticalAccuracy < 20 && abs(howRecent) < 10 else { continue }
                 if let lastLocation = recordedLocations.last {
-                    //calculate distance etc
+                    distance += newLocation.distance(from: lastLocation)
+                    //distance = distance + Measurement(value: newLocation.distance(from: lastLocation), unit: UnitLength.meters)
                 }
                 recordedLocations.append(newLocation)
                 objectWillChange.send()

@@ -11,7 +11,8 @@ import CoreLocation
 
 struct Activity: Identifiable {
     var id: Int
-    var date: Date
+    var startDate: Date
+    var finishDate: Date
     var locations: [CLLocation]
     
     
