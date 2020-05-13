@@ -34,18 +34,17 @@ struct MapView: UIViewRepresentable {
         uiView.showsUserLocation = showsUserLocation
         uiView.isUserInteractionEnabled = isUserInteractionEnabled
         
-        if let locations = recordedLocations {
+        if let locations = recordedLocations, showsUserLocation == false {
             uiView.addOverlay(GradientPolyline(locations: locations))
+        } else if let coordinates = recordedLocations?.compactMap({ $0.coordinate }) {
+            uiView.addOverlay(MKPolyline(coordinates: coordinates, count: coordinates.count))
         }
         
-//        if let coordinates = recordedLocations?.compactMap({ $0.coordinate }) {
-//            uiView.addOverlay(MKPolyline(coordinates: coordinates, count: coordinates.count))
-//        }
         
         if let location = recordedLocations?.last {
             let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
-                       let region = MKCoordinateRegion(center: location.coordinate, span: span)
-                       uiView.setRegion(region, animated: true)
+            let region = MKCoordinateRegion(center: location.coordinate, span: span)
+            uiView.setRegion(region, animated: true)
         }
         
         
@@ -88,14 +87,16 @@ class Coordinator: NSObject, MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is GradientPolyline {
-            let polyLineRender = GradientPolylineRenderer(overlay: overlay)
-            polyLineRender.lineWidth = 7
-            return polyLineRender
+            let gradientRender = GradientPolylineRenderer(overlay: overlay)
+            gradientRender.lineWidth = 9
+            return gradientRender
+        } else {
+            let renderer = MKPolylineRenderer(overlay: overlay)
+            renderer.fillColor = UIColor.red.withAlphaComponent(0.5)
+            renderer.strokeColor = UIColor.red.withAlphaComponent(0.8)
+            renderer.lineWidth = 9
+            return renderer
         }
-        let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.fillColor = UIColor.red.withAlphaComponent(0.5)
-        renderer.strokeColor = UIColor.red.withAlphaComponent(0.8)
-        return renderer
     }
 }
 
