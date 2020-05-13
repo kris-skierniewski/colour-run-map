@@ -17,13 +17,13 @@ struct TabBarView: View {
     var body: some View {
         TabView {
             ActivityList()
-                .environment(\.managedObjectContext, managedObjectContext)
-                .environmentObject(UserData())
+                .environment(\.managedObjectContext, self.managedObjectContext)
+                .environmentObject(self.userData)
                 .tabItem {
                     Image(systemName: "book.fill")
                     Text("Activities")
                 }.tag(0)
-            ContentView()
+            LiveRecorderView()
                 .environment(\.managedObjectContext, self.managedObjectContext)
                 .environmentObject(self.userData)
                 .tabItem {

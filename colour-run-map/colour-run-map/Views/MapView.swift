@@ -9,16 +9,17 @@
 import SwiftUI
 import MapKit
 
+ public enum MapState {
+    case showUserLocation
+    case showRoute(_ coordinates: [CLLocationCoordinate2D])
+    case showCompleteRoute(_ locations: [CLLocation])
+}
+
 struct MapView: UIViewRepresentable {
-    //var map = MKMapView()
     
     @State var showsUserLocation = true
     @State var isUserInteractionEnabled = true
-    
-    //var currentLocation: CLLocation?
-    var recordedLocations: [CLLocation]?
-    
-    //var colour: UIColor = .
+    @State var mapState: MapState
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -33,38 +34,41 @@ struct MapView: UIViewRepresentable {
     func updateUIView(_ uiView: MKMapView, context: Context) {
         uiView.showsUserLocation = showsUserLocation
         uiView.isUserInteractionEnabled = isUserInteractionEnabled
-        
-        if let locations = recordedLocations, showsUserLocation == false {
-            uiView.addOverlay(GradientPolyline(locations: locations))
-        } else if let coordinates = recordedLocations?.compactMap({ $0.coordinate }) {
-            uiView.addOverlay(MKPolyline(coordinates: coordinates, count: coordinates.count))
-        }
-        
-        
-        if let location = recordedLocations?.last {
-            let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
-            let region = MKCoordinateRegion(center: location.coordinate, span: span)
-            uiView.setRegion(region, animated: true)
-        }
-        
-        
-        
-        
+        updateUIView(uiView, forState: self.mapState)
     }
     
-}
-
-extension MapView {
+    private func updateUIView(_ uiView: MKMapView, forState mapState: MapState) {
+        switch mapState {
+        case .showUserLocation:
+            let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
+            let region = MKCoordinateRegion(center: uiView.userLocation.coordinate, span: span)
+            uiView.setRegion(region, animated: true)
+        case .showRoute(let coordinates):
+            if coordinates.count == 0 {
+                if showsUserLocation {
+                    let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
+                    let region = MKCoordinateRegion(center: uiView.userLocation.coordinate, span: span)
+                    uiView.setRegion(region, animated: true)
+                }
+            }
+            else if coordinates.count == 1 {
+                let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
+                let region = MKCoordinateRegion(center: coordinates[0], span: span)
+                uiView.setRegion(region, animated: true)
+            } else {
+                uiView.addOverlay(MKPolyline(coordinates: coordinates, count: coordinates.count))
+            }
+            
+            if let lastCoordinate = coordinates.last {
+                let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
+                let region = MKCoordinateRegion(center: lastCoordinate, span: span)
+                uiView.setRegion(region, animated: true)
+            }
+        case .showCompleteRoute(let locations):
+            uiView.addOverlay(GradientPolyline(locations: locations))
+        }
+    }
     
-//    func zoom(to location: CLLocation?) {
-//        if let location = location {
-//            let span = MKCoordinateSpan(latitudeDelta: 0.009, longitudeDelta: 0.009)
-//            let region = MKCoordinateRegion(center: location.coordinate, span: span)
-//            map.setRegion(region, animated: true)
-//        }
-//    }
-    
-    //func showUserLocation() { map.showsUserLocation = true }
 }
 
 class Coordinator: NSObject, MKMapViewDelegate {
@@ -79,11 +83,6 @@ class Coordinator: NSObject, MKMapViewDelegate {
         view.canShowCallout = true
         return view
     }
-    
-//    func mapViewWillStartLocatingUser(_ mapView: MKMapView) {
-//        mapView.showsUserLocation = true
-//        parent.zoom(to: mapView.userLocation.location)
-//    }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is GradientPolyline {
@@ -101,8 +100,8 @@ class Coordinator: NSObject, MKMapViewDelegate {
 }
 
 struct MapView_Previews: PreviewProvider {
-    
     static var previews: some View {
-        MapView()
+        MapView(mapState: .showUserLocation)
+            .edgesIgnoringSafeArea(.all)
     }
 }

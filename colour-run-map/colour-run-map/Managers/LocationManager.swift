@@ -86,7 +86,7 @@ class LocationManager: NSObject, ObservableObject {
         distance = 0.0
         isRecordingLocation = true
         locationManager.activityType = .fitness
-        locationManager.distanceFilter = 10
+        locationManager.distanceFilter = 1
         locationManager.startUpdatingLocation()
     }
     

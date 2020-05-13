@@ -16,7 +16,7 @@ struct ActivityRow: View {
         ZStack(alignment: .bottom) {
             MapView(showsUserLocation: false,
                     isUserInteractionEnabled: false,
-                    recordedLocations: activity.locations)
+                    mapState: .showCompleteRoute(activity.locations))
             
             VStack(alignment: .leading) {
                 Text(activity.createdAt.mwFormatted("EEEE\n dd MMMM").uppercased())
@@ -54,7 +54,7 @@ private struct ActivityRowDetails: View {
             BlurView()
                 .frame(height: 90)
             HStack() {
-                StackedTextView(topText: "\(activity.distance.formattedDistanceString)", bottomText: "km")
+                StackedTextView(topText: "\(activity.distance.formattedDistanceString)", bottomText: "distance")
                 Spacer()
                 StackedTextView(topText: "\(activity.duration.mwRoundedMinutesString)", bottomText: "time")
                 Spacer()

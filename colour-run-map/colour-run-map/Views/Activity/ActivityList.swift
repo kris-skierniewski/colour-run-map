@@ -10,31 +10,31 @@ import SwiftUI
 
 struct ActivityList: View {
     
-    //var activities: [Activity]
+    @State var isShowingActivityDetailView = false
     
     @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(fetchRequest: Activity.fetchRequest()) var activities: FetchedResults<Activity>
+    
     @EnvironmentObject var userData: UserData
-    @State var isShowingMap = false
+    
+    @FetchRequest(fetchRequest: Activity.fetchRequest()) var activities: FetchedResults<Activity>
     
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottom) {
                 ScrollView {
-                        ForEach(activities) { activity in
-                            NavigationLink(destination: ActivityDetailView(activity: activity)) {
-                                ActivityRow(activity: activity).padding()
-                            }
-                        .buttonStyle(PlainButtonStyle())
+                    ForEach(activities) { activity in
+                        NavigationLink(destination: ActivityDetailView(activity: activity)) {
+                            ActivityRow(activity: activity).padding()
                         }
+                        .buttonStyle(PlainButtonStyle())
                     }
+                }
                 .navigationBarTitle("Activities")
-                .sheet(isPresented: $isShowingMap) {
-                    ContentView()
+                .sheet(isPresented: $isShowingActivityDetailView) {
+                    LiveRecorderView()
                         .environment(\.managedObjectContext, self.managedObjectContext)
                         .environmentObject(self.userData)
                 }
-                TextButtonView(text: "New Activity", backgroundColor: .blue, tappedHandler: { self.isShowingMap = true })
             }
             
         }
@@ -44,6 +44,12 @@ struct ActivityList: View {
 
 struct ActivityList_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityList()
+        
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        
+        return ActivityList()
+            .environment(\.managedObjectContext, context)
+            .environmentObject(UserData())
     }
 }

@@ -58,7 +58,8 @@ struct LiveRecorderView: View {
     
     var body: some View {
         ZStack {
-            MapView(recordedLocations: locationManager.recordedLocations)
+            MapView(mapState: userData.isRecordingActivity ?
+                MapState.showRoute(locationManager.recordedLocations.map({ $0.coordinate })) : MapState.showUserLocation)
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
@@ -98,7 +99,6 @@ struct LiveRecorderView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         LiveRecorderView()
-        .environmentObject(UserData())
+            .environmentObject(UserData())
     }
 }
-
