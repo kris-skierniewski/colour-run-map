@@ -10,8 +10,6 @@ import SwiftUI
 
 public struct CardView<ContentView: View>: View {
     
-    @Binding var isPresented: Bool
-    
     @State private var height: CGFloat = 200
     
     private let content: ContentView
@@ -20,12 +18,8 @@ public struct CardView<ContentView: View>: View {
     private var maxHeight: CGFloat = UIScreen.main.bounds.size.height * 0.8
     private var minHeight: CGFloat = UIScreen.main.bounds.size.height * 0.2
     
-    public init(isPresented: Binding<Bool>,
-                height: CGFloat,
-                topBarBackgroundColor: Color = Color(.systemBackground),
-                contentBackgroundColor: Color = Color(.systemBackground),
+    public init(height: CGFloat,
                 @ViewBuilder content: () -> ContentView) {
-        self._isPresented = isPresented
         self._height = State(initialValue: height)
         self.content = content()
     }
@@ -70,17 +64,10 @@ public struct CardView<ContentView: View>: View {
     }
 }
 
-
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(isPresented: Binding.constant(true), height: 400, content: {  TestContent() }).background(Color.black)
-
-    }
-}
-
-
-struct TestContent: View {
-    var body: some View {
-        Text("Banana")
+        CardView(height: 400,
+                 content: { Text("Example") })
+            .background(Color.black)
     }
 }
