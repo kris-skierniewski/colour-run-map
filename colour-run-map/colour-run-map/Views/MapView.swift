@@ -13,12 +13,12 @@ struct MapView: UIViewRepresentable {
     //var map = MKMapView()
     
     @State var showsUserLocation = true
-    @State var isScrollEnabled = true
+    @State var isUserInteractionEnabled = true
     
     //var currentLocation: CLLocation?
     var recordedLocations: [CLLocation]?
     
-    var colour: UIColor = .
+    //var colour: UIColor = .
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -32,11 +32,15 @@ struct MapView: UIViewRepresentable {
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
         uiView.showsUserLocation = showsUserLocation
-        uiView.isUserInteractionEnabled = isScrollEnabled
+        uiView.isUserInteractionEnabled = isUserInteractionEnabled
         
-        if let coordinates = recordedLocations?.compactMap({ $0.coordinate }) {
-            uiView.addOverlay(MKPolyline(coordinates: coordinates, count: coordinates.count))
+        if let locations = recordedLocations {
+            uiView.addOverlay(GradientPolyline(locations: locations))
         }
+        
+//        if let coordinates = recordedLocations?.compactMap({ $0.coordinate }) {
+//            uiView.addOverlay(MKPolyline(coordinates: coordinates, count: coordinates.count))
+//        }
         
         if let location = recordedLocations?.last {
             let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
@@ -83,6 +87,11 @@ class Coordinator: NSObject, MKMapViewDelegate {
 //    }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is GradientPolyline {
+            let polyLineRender = GradientPolylineRenderer(overlay: overlay)
+            polyLineRender.lineWidth = 7
+            return polyLineRender
+        }
         let renderer = MKPolylineRenderer(overlay: overlay)
         renderer.fillColor = UIColor.red.withAlphaComponent(0.5)
         renderer.strokeColor = UIColor.red.withAlphaComponent(0.8)

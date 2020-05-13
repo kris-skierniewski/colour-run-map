@@ -22,7 +22,7 @@ struct ActivityList: View {
             ZStack(alignment: .bottom) {
                 ScrollView {
                         ForEach(activities) { activity in
-                            NavigationLink(destination: ActivityDetailView()) {
+                            NavigationLink(destination: ActivityDetailView(activity: activity)) {
                                 ActivityRow(activity: activity).padding()
                             }
                         .buttonStyle(PlainButtonStyle())

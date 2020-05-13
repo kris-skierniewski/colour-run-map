@@ -16,7 +16,7 @@ struct ActivityRow: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            MapView(showsUserLocation: false, isScrollEnabled: false, recordedLocations: activity.locations)
+            MapView(showsUserLocation: false, isUserInteractionEnabled: false, recordedLocations: activity.locations)
             VStack(alignment: .leading) {
                 Text(formatter.dayString(from: activity.createdAt).uppercased())
                     .padding(.horizontal)

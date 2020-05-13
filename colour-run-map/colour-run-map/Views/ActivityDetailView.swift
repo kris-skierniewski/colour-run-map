@@ -12,11 +12,11 @@ struct ActivityDetailView: View {
     
     @State var showCard = false
     
-    //var activity: Activity
+    var activity: Activity
     
     var body: some View {
         ZStack {
-            MapView()
+            MapView(showsUserLocation: false, recordedLocations: activity.locations)
                 .edgesIgnoringSafeArea(.all)
             CardView(isPresented: $showCard, height: 400) {
                 Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
@@ -27,6 +27,6 @@ struct ActivityDetailView: View {
 
 struct ActivityDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityDetailView()
+        ActivityDetailView(activity: Activity())
     }
 }
