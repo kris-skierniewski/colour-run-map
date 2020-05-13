@@ -11,14 +11,14 @@ import MapKit
 
 struct ContentView: View {
     
-    @State var route: MKPolyline? = nil
+    //@State var route: MKPolyline? = nil
     
 //    @State private var headerText: String = LocationManager().locationAutherisationStatus?.asString ?? "?"
     
     @ObservedObject var locationManager: LocationManager = LocationManager.shared
     
     @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(fetchRequest: Activity.fetchRequest()) var activities: FetchedResults<Activity>
+    //@FetchRequest(fetchRequest: Activity.fetchRequest()) var activities: FetchedResults<Activity>
     
     @EnvironmentObject var userData: UserData
     
@@ -45,6 +45,9 @@ struct ContentView: View {
         let activity = Activity(context: managedObjectContext)
         activity.locations = locationManager.recordedLocations
         activity.id = UUID().uuidString
+        activity.createdAt = Date()
+        activity.distance = locationManager.distance
+        activity.time = abs(locationManager.startDate.timeIntervalSinceNow)
         
         do {
             try self.managedObjectContext.save()
@@ -60,7 +63,7 @@ struct ContentView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                Text("Recorded activities: \(activities.count)")
+                Text("Recorded activities: \(0)")
                     .animation(.spring())
                 Spacer()
                 if userData.isRecordingActivity {

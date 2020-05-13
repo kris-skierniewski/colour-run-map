@@ -12,6 +12,10 @@
 		036F609D246AE9AB0036BCF0 /* Activity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F6099246AE9AB0036BCF0 /* Activity+CoreDataClass.swift */; };
 		036F609E246AE9AB0036BCF0 /* Activity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F609A246AE9AB0036BCF0 /* Activity+CoreDataProperties.swift */; };
 		036F60C5246AFB0F0036BCF0 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60C4246AFB0F0036BCF0 /* Formatter.swift */; };
+		036F60C7246B0FA60036BCF0 /* ActivityRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60C6246B0FA60036BCF0 /* ActivityRow.swift */; };
+		036F60C9246B13FF0036BCF0 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60C8246B13FF0036BCF0 /* BlurView.swift */; };
+		036F60CB246B1A130036BCF0 /* StackedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60CA246B1A130036BCF0 /* StackedTextView.swift */; };
+		036F60D1246B24480036BCF0 /* ActivityList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60D0246B24480036BCF0 /* ActivityList.swift */; };
 		037404AE2464ACCD00F8DFAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037404AD2464ACCD00F8DFAF /* AppDelegate.swift */; };
 		037404B02464ACCD00F8DFAF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037404AF2464ACCD00F8DFAF /* SceneDelegate.swift */; };
 		037404B22464ACCD00F8DFAF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037404B12464ACCD00F8DFAF /* ContentView.swift */; };
@@ -30,6 +34,10 @@
 		036F6099246AE9AB0036BCF0 /* Activity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		036F609A246AE9AB0036BCF0 /* Activity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		036F60C4246AFB0F0036BCF0 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		036F60C6246B0FA60036BCF0 /* ActivityRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRow.swift; sourceTree = "<group>"; };
+		036F60C8246B13FF0036BCF0 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
+		036F60CA246B1A130036BCF0 /* StackedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedTextView.swift; sourceTree = "<group>"; };
+		036F60D0246B24480036BCF0 /* ActivityList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityList.swift; sourceTree = "<group>"; };
 		037404AA2464ACCD00F8DFAF /* colour-run-map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "colour-run-map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		037404AD2464ACCD00F8DFAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		037404AF2464ACCD00F8DFAF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +108,10 @@
 				037404AF2464ACCD00F8DFAF /* SceneDelegate.swift */,
 				037404B12464ACCD00F8DFAF /* ContentView.swift */,
 				A3D2272A24697D8800B55BDD /* MapView.swift */,
+				036F60C6246B0FA60036BCF0 /* ActivityRow.swift */,
+				036F60D0246B24480036BCF0 /* ActivityList.swift */,
+				036F60CA246B1A130036BCF0 /* StackedTextView.swift */,
+				036F60C8246B13FF0036BCF0 /* BlurView.swift */,
 				A3D2272B24697D8800B55BDD /* TextButtonView.swift */,
 				036F60C4246AFB0F0036BCF0 /* Formatter.swift */,
 				037404B32464ACD000F8DFAF /* Assets.xcassets */,
@@ -208,15 +220,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3D2273124697D8800B55BDD /* LocationService.swift in Sources */,
+				036F60C9246B13FF0036BCF0 /* BlurView.swift in Sources */,
+				036F60C7246B0FA60036BCF0 /* ActivityRow.swift in Sources */,
 				A3D2272E24697D8800B55BDD /* LocationManager.swift in Sources */,
 				036F60922469BA210036BCF0 /* UserData.swift in Sources */,
 				037404AE2464ACCD00F8DFAF /* AppDelegate.swift in Sources */,
+				036F60D1246B24480036BCF0 /* ActivityList.swift in Sources */,
 				A3D2272F24697D8800B55BDD /* MapView.swift in Sources */,
 				037404B02464ACCD00F8DFAF /* SceneDelegate.swift in Sources */,
 				036F60C5246AFB0F0036BCF0 /* Formatter.swift in Sources */,
 				037404B22464ACCD00F8DFAF /* ContentView.swift in Sources */,
 				036F609E246AE9AB0036BCF0 /* Activity+CoreDataProperties.swift in Sources */,
 				036F6098246AE62E0036BCF0 /* colour-run-map.xcdatamodeld in Sources */,
+				036F60CB246B1A130036BCF0 /* StackedTextView.swift in Sources */,
 				036F609D246AE9AB0036BCF0 /* Activity+CoreDataClass.swift in Sources */,
 				A3D2273024697D8800B55BDD /* TextButtonView.swift in Sources */,
 			);

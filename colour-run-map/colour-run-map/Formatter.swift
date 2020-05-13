@@ -19,6 +19,13 @@ class Formatter {
         return formatter
     }
     
+    func dayString(from date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        //dateFormatter.dateFormat = "dd-MM-yyyy"
+        dateFormatter.dateFormat = "EEEE\n dd MMMM"
+        return dateFormatter.string(from: date)
+    }
+    
     func timeString(from date: Date, until now: Date) -> String {
         let calendar = Calendar(identifier: .gregorian)
         let components = calendar.dateComponents([.hour, .minute, .second], from: date, to: now)
