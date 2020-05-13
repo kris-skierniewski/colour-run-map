@@ -23,8 +23,6 @@
 		036F60EB246C0B670036BCF0 /* CLLocationDistanceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60E5246C0B670036BCF0 /* CLLocationDistanceExtensions.swift */; };
 		036F60EE246C0CDA0036BCF0 /* PaceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60ED246C0CDA0036BCF0 /* PaceHelper.swift */; };
 		036F60F4246C0DDD0036BCF0 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60F0246C0DDD0036BCF0 /* CardView.swift */; };
-		036F60F5246C0DDD0036BCF0 /* MenuContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60F1246C0DDD0036BCF0 /* MenuContentView.swift */; };
-		036F60F6246C0DDD0036BCF0 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60F2246C0DDD0036BCF0 /* SideMenuView.swift */; };
 		036F60F7246C0DDD0036BCF0 /* ImageButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60F3246C0DDD0036BCF0 /* ImageButtonView.swift */; };
 		036F60FA246C0E170036BCF0 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60F9246C0E170036BCF0 /* RoundedCorner.swift */; };
 		036F60FC246C0F140036BCF0 /* ActivityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60FB246C0F140036BCF0 /* ActivityDetailView.swift */; };
@@ -58,8 +56,6 @@
 		036F60E5246C0B670036BCF0 /* CLLocationDistanceExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLLocationDistanceExtensions.swift; sourceTree = "<group>"; };
 		036F60ED246C0CDA0036BCF0 /* PaceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaceHelper.swift; sourceTree = "<group>"; };
 		036F60F0246C0DDD0036BCF0 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		036F60F1246C0DDD0036BCF0 /* MenuContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuContentView.swift; sourceTree = "<group>"; };
-		036F60F2246C0DDD0036BCF0 /* SideMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		036F60F3246C0DDD0036BCF0 /* ImageButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageButtonView.swift; sourceTree = "<group>"; };
 		036F60F9246C0E170036BCF0 /* RoundedCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		036F60FB246C0F140036BCF0 /* ActivityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailView.swift; sourceTree = "<group>"; };
@@ -130,17 +126,15 @@
 		036F60EF246C0DB40036BCF0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				036F60F0246C0DDD0036BCF0 /* CardView.swift */,
-				036F60F3246C0DDD0036BCF0 /* ImageButtonView.swift */,
-				036F60F1246C0DDD0036BCF0 /* MenuContentView.swift */,
-				036F60F2246C0DDD0036BCF0 /* SideMenuView.swift */,
-				037404B12464ACCD00F8DFAF /* ContentView.swift */,
-				A3D2272A24697D8800B55BDD /* MapView.swift */,
-				036F60C6246B0FA60036BCF0 /* ActivityRow.swift */,
-				036F60D0246B24480036BCF0 /* ActivityList.swift */,
 				036F60FB246C0F140036BCF0 /* ActivityDetailView.swift */,
-				036F60CA246B1A130036BCF0 /* StackedTextView.swift */,
+				036F60D0246B24480036BCF0 /* ActivityList.swift */,
+				036F60C6246B0FA60036BCF0 /* ActivityRow.swift */,
 				036F60C8246B13FF0036BCF0 /* BlurView.swift */,
+				036F60F0246C0DDD0036BCF0 /* CardView.swift */,
+				037404B12464ACCD00F8DFAF /* ContentView.swift */,
+				036F60F3246C0DDD0036BCF0 /* ImageButtonView.swift */,
+				A3D2272A24697D8800B55BDD /* MapView.swift */,
+				036F60CA246B1A130036BCF0 /* StackedTextView.swift */,
 				A3D2272B24697D8800B55BDD /* TextButtonView.swift */,
 			);
 			path = Views;
@@ -299,12 +293,10 @@
 				036F60FE246C19020036BCF0 /* GradientPolyline.swift in Sources */,
 				036F60FC246C0F140036BCF0 /* ActivityDetailView.swift in Sources */,
 				A3D2272E24697D8800B55BDD /* LocationManager.swift in Sources */,
-				036F60F6246C0DDD0036BCF0 /* SideMenuView.swift in Sources */,
 				036F60922469BA210036BCF0 /* UserData.swift in Sources */,
 				037404AE2464ACCD00F8DFAF /* AppDelegate.swift in Sources */,
 				036F60D1246B24480036BCF0 /* ActivityList.swift in Sources */,
 				A3D2272F24697D8800B55BDD /* MapView.swift in Sources */,
-				036F60F5246C0DDD0036BCF0 /* MenuContentView.swift in Sources */,
 				037404B02464ACCD00F8DFAF /* SceneDelegate.swift in Sources */,
 				036F60C5246AFB0F0036BCF0 /* Formatter.swift in Sources */,
 				037404B22464ACCD00F8DFAF /* ContentView.swift in Sources */,

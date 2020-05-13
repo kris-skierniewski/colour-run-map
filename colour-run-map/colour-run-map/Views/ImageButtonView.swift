@@ -32,5 +32,7 @@ struct ImageButtonView_Previews: PreviewProvider {
     static var previews: some View {
         ImageButtonView(image: Image(systemName: "book.fill"),
                         backgroundColor: .purple)
+            .previewLayout(.sizeThatFits)
+            .padding(10)
     }
 }

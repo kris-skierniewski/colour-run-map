@@ -7,47 +7,61 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct ActivityRow: View {
-    
     var activity: Activity
-    
-    var formatter = Formatter()
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            MapView(showsUserLocation: false, isUserInteractionEnabled: false, recordedLocations: activity.locations)
+            MapView(showsUserLocation: false,
+                    isUserInteractionEnabled: false,
+                    recordedLocations: activity.locations)
+            
             VStack(alignment: .leading) {
-                Text(formatter.dayString(from: activity.createdAt).uppercased())
+                Text(activity.createdAt.mwFormatted("EEEE\n dd MMMM").uppercased())
                     .padding(.horizontal)
-                    .font(.system(size: 35, weight: .bold, design: Font.Design.default))
-                ZStack(alignment: .leading) {
-                    BlurView().frame(height: 150)
-                    HStack() {
-                        //Spacer()
-                        StackedTextView(topText: "6.65", bottomText: "km")
-                        Spacer()
-                        StackedTextView(topText: "52:43", bottomText: "time")
-                        Spacer()
-                        StackedTextView(topText: "8:31", bottomText: "min/km")
-                        //Spacer()
-                    }.padding(.horizontal)
-                    
-                }
+                    .font(.system(size: 30, weight: .bold, design: Font.Design.default))
+                ActivityRowDetails(activity: activity)
             }
-            
-            
         }
-        .frame(height: 400)
+        .frame(height: 300)
         .cornerRadius(30)
         .shadow(radius: 30)
-        
-        
     }
 }
 
 struct ActivityRow_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityRow(activity: Activity())
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let mockActivity = Activity.init(context: context)
+        mockActivity.createdAt = Date()
+        mockActivity.distance = CLLocationDistance(1250.0)
+        mockActivity.duration = TimeInterval.hourInSeconds * 1
+        
+        return List{
+            ActivityRow(activity: mockActivity)
+            ActivityRow(activity: mockActivity)
+        }
+    }
+}
+
+
+private struct ActivityRowDetails: View {
+    var activity: Activity
+    
+    var body: some View {
+        ZStack(alignment: .leading) {
+            BlurView()
+                .frame(height: 90)
+            HStack() {
+                StackedTextView(topText: "\(activity.distance.formattedDistanceString)", bottomText: "km")
+                Spacer()
+                StackedTextView(topText: "\(activity.duration.mwRoundedMinutesString)", bottomText: "time")
+                Spacer()
+                StackedTextView(topText: "\(activity.pace?.mwMinutesRounded ?? 0)", bottomText: "min/km")
+            }
+            .padding(.horizontal)
+        }
     }
 }

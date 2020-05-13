@@ -36,5 +36,7 @@ struct TextButtonView: View {
 struct TextButtonView_Previews: PreviewProvider {
     static var previews: some View {
         TextButtonView(text: "Start", backgroundColor: .green)
+            .previewLayout(.sizeThatFits)
+            .padding(10)
     }
 }

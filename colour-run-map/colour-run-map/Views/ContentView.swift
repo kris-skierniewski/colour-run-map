@@ -47,7 +47,7 @@ struct ContentView: View {
         activity.id = UUID().uuidString
         activity.createdAt = Date()
         activity.distance = locationManager.distance
-        activity.time = abs(locationManager.startDate.timeIntervalSinceNow)
+        activity.duration = abs(locationManager.startDate.timeIntervalSinceNow)
         
         do {
             try self.managedObjectContext.save()

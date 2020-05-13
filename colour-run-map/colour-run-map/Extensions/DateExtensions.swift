@@ -9,6 +9,13 @@
 import Foundation
 
 public extension Date {
+    
+    func mwFormatted(_ format: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
+    }
+    
     // MARK: - Vars
     /// The date with seconds forced to 0
     var mwRemoveSeconds: Date {

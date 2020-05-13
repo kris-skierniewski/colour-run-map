@@ -25,5 +25,7 @@ struct StackedTextView: View {
 struct StackedTextView_Previews: PreviewProvider {
     static var previews: some View {
         StackedTextView(topText: "51:30", bottomText: "min/km")
+            .previewLayout(.sizeThatFits)
+            .padding(10)
     }
 }

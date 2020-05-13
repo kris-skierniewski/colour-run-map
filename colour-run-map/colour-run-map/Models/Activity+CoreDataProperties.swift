@@ -21,10 +21,12 @@ extension Activity {
         return request
     }
 
-    @NSManaged public var locations: [CLLocation]
     @NSManaged public var id: String
-    @NSManaged public var time: Double
     @NSManaged public var createdAt: Date
-    @NSManaged public var distance: Double
+    
+    @NSManaged public var locations: [CLLocation]
+    
+    @NSManaged public var duration: TimeInterval
+    @NSManaged public var distance: CLLocationDistance
 
 }

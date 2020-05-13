@@ -16,7 +16,8 @@ struct ActivityDetailView: View {
     
     var body: some View {
         ZStack {
-            MapView(showsUserLocation: false, recordedLocations: activity.locations)
+            MapView(showsUserLocation: false,
+                    recordedLocations: [])
                 .edgesIgnoringSafeArea(.all)
             CardView(isPresented: $showCard, height: 400) {
                 Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
@@ -26,7 +27,15 @@ struct ActivityDetailView: View {
 }
 
 struct ActivityDetailView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        ActivityDetailView(activity: Activity())
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let mockActivity = Activity.init(context: context)
+        mockActivity.createdAt = Date()
+        mockActivity.locations = []
+        
+        return ActivityDetailView(activity: mockActivity)
     }
 }
+
+

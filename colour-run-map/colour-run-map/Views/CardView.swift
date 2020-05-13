@@ -78,17 +78,8 @@ struct CardView_Previews: PreviewProvider {
     }
 }
 
-protocol CardContentProtocol {
-    var minHeight: CGFloat { get }
 
-    var maxHeight: CGFloat { get }
-}
-
-struct TestContent: View, CardContentProtocol {
-    var minHeight: CGFloat { return 100 }
-
-    var maxHeight: CGFloat { return 200 }
-
+struct TestContent: View {
     var body: some View {
         Text("Banana")
     }
