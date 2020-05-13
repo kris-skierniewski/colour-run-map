@@ -33,6 +33,7 @@
 		037404B42464ACD000F8DFAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 037404B32464ACD000F8DFAF /* Assets.xcassets */; };
 		037404B72464ACD000F8DFAF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 037404B62464ACD000F8DFAF /* Preview Assets.xcassets */; };
 		037404BA2464ACD000F8DFAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 037404B82464ACD000F8DFAF /* LaunchScreen.storyboard */; };
+		A3215BBF246C5CA9003DCB2B /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3215BBE246C5CA9003DCB2B /* TabBarView.swift */; };
 		A3D2272E24697D8800B55BDD /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D2272924697D8800B55BDD /* LocationManager.swift */; };
 		A3D2272F24697D8800B55BDD /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D2272A24697D8800B55BDD /* MapView.swift */; };
 		A3D2273024697D8800B55BDD /* TextButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D2272B24697D8800B55BDD /* TextButtonView.swift */; };
@@ -68,6 +69,7 @@
 		037404B62464ACD000F8DFAF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		037404B92464ACD000F8DFAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		037404BB2464ACD000F8DFAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3215BBE246C5CA9003DCB2B /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		A3D2272924697D8800B55BDD /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		A3D2272A24697D8800B55BDD /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		A3D2272B24697D8800B55BDD /* TextButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextButtonView.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				A3D2272A24697D8800B55BDD /* MapView.swift */,
 				036F60CA246B1A130036BCF0 /* StackedTextView.swift */,
 				A3D2272B24697D8800B55BDD /* TextButtonView.swift */,
+				A3215BBE246C5CA9003DCB2B /* TabBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 			files = (
 				036F60E9246C0B670036BCF0 /* CLAuthorizationStatusExtensions.swift in Sources */,
 				036F60EE246C0CDA0036BCF0 /* PaceHelper.swift in Sources */,
+				A3215BBF246C5CA9003DCB2B /* TabBarView.swift in Sources */,
 				A3D2273124697D8800B55BDD /* LocationService.swift in Sources */,
 				036F60E7246C0B670036BCF0 /* TimeIntervalExtensions.swift in Sources */,
 				036F60C9246B13FF0036BCF0 /* BlurView.swift in Sources */,

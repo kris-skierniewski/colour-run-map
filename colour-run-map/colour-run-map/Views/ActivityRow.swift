@@ -46,7 +46,6 @@ struct ActivityRow_Previews: PreviewProvider {
     }
 }
 
-
 private struct ActivityRowDetails: View {
     var activity: Activity
     

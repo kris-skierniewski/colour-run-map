@@ -12,5 +12,4 @@ import CoreLocation
 
 final class UserData: ObservableObject {
     @Published var isRecordingActivity = false
-    //@Published var activities = [Activity]()
 }
