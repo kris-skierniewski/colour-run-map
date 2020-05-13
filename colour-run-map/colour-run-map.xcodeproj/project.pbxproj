@@ -16,6 +16,17 @@
 		036F60C9246B13FF0036BCF0 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60C8246B13FF0036BCF0 /* BlurView.swift */; };
 		036F60CB246B1A130036BCF0 /* StackedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60CA246B1A130036BCF0 /* StackedTextView.swift */; };
 		036F60D1246B24480036BCF0 /* ActivityList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60D0246B24480036BCF0 /* ActivityList.swift */; };
+		036F60E6246C0B670036BCF0 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60E0246C0B670036BCF0 /* ViewExtensions.swift */; };
+		036F60E7246C0B670036BCF0 /* TimeIntervalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60E1246C0B670036BCF0 /* TimeIntervalExtensions.swift */; };
+		036F60E9246C0B670036BCF0 /* CLAuthorizationStatusExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60E3246C0B670036BCF0 /* CLAuthorizationStatusExtensions.swift */; };
+		036F60EA246C0B670036BCF0 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60E4246C0B670036BCF0 /* DateExtensions.swift */; };
+		036F60EB246C0B670036BCF0 /* CLLocationDistanceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60E5246C0B670036BCF0 /* CLLocationDistanceExtensions.swift */; };
+		036F60EE246C0CDA0036BCF0 /* PaceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60ED246C0CDA0036BCF0 /* PaceHelper.swift */; };
+		036F60F4246C0DDD0036BCF0 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60F0246C0DDD0036BCF0 /* CardView.swift */; };
+		036F60F5246C0DDD0036BCF0 /* MenuContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60F1246C0DDD0036BCF0 /* MenuContentView.swift */; };
+		036F60F6246C0DDD0036BCF0 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60F2246C0DDD0036BCF0 /* SideMenuView.swift */; };
+		036F60F7246C0DDD0036BCF0 /* ImageButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60F3246C0DDD0036BCF0 /* ImageButtonView.swift */; };
+		036F60FA246C0E170036BCF0 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60F9246C0E170036BCF0 /* RoundedCorner.swift */; };
 		037404AE2464ACCD00F8DFAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037404AD2464ACCD00F8DFAF /* AppDelegate.swift */; };
 		037404B02464ACCD00F8DFAF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037404AF2464ACCD00F8DFAF /* SceneDelegate.swift */; };
 		037404B22464ACCD00F8DFAF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037404B12464ACCD00F8DFAF /* ContentView.swift */; };
@@ -38,6 +49,17 @@
 		036F60C8246B13FF0036BCF0 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		036F60CA246B1A130036BCF0 /* StackedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedTextView.swift; sourceTree = "<group>"; };
 		036F60D0246B24480036BCF0 /* ActivityList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityList.swift; sourceTree = "<group>"; };
+		036F60E0246C0B670036BCF0 /* ViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
+		036F60E1246C0B670036BCF0 /* TimeIntervalExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtensions.swift; sourceTree = "<group>"; };
+		036F60E3246C0B670036BCF0 /* CLAuthorizationStatusExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLAuthorizationStatusExtensions.swift; sourceTree = "<group>"; };
+		036F60E4246C0B670036BCF0 /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		036F60E5246C0B670036BCF0 /* CLLocationDistanceExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLLocationDistanceExtensions.swift; sourceTree = "<group>"; };
+		036F60ED246C0CDA0036BCF0 /* PaceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaceHelper.swift; sourceTree = "<group>"; };
+		036F60F0246C0DDD0036BCF0 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		036F60F1246C0DDD0036BCF0 /* MenuContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuContentView.swift; sourceTree = "<group>"; };
+		036F60F2246C0DDD0036BCF0 /* SideMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
+		036F60F3246C0DDD0036BCF0 /* ImageButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageButtonView.swift; sourceTree = "<group>"; };
+		036F60F9246C0E170036BCF0 /* RoundedCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		037404AA2464ACCD00F8DFAF /* colour-run-map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "colour-run-map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		037404AD2464ACCD00F8DFAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		037404AF2464ACCD00F8DFAF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +103,52 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		036F60DF246C0B670036BCF0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				036F60E0246C0B670036BCF0 /* ViewExtensions.swift */,
+				036F60E1246C0B670036BCF0 /* TimeIntervalExtensions.swift */,
+				036F60E3246C0B670036BCF0 /* CLAuthorizationStatusExtensions.swift */,
+				036F60E4246C0B670036BCF0 /* DateExtensions.swift */,
+				036F60E5246C0B670036BCF0 /* CLLocationDistanceExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		036F60EC246C0CDA0036BCF0 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				036F60ED246C0CDA0036BCF0 /* PaceHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		036F60EF246C0DB40036BCF0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				036F60F0246C0DDD0036BCF0 /* CardView.swift */,
+				036F60F3246C0DDD0036BCF0 /* ImageButtonView.swift */,
+				036F60F1246C0DDD0036BCF0 /* MenuContentView.swift */,
+				036F60F2246C0DDD0036BCF0 /* SideMenuView.swift */,
+				037404B12464ACCD00F8DFAF /* ContentView.swift */,
+				A3D2272A24697D8800B55BDD /* MapView.swift */,
+				036F60C6246B0FA60036BCF0 /* ActivityRow.swift */,
+				036F60D0246B24480036BCF0 /* ActivityList.swift */,
+				036F60CA246B1A130036BCF0 /* StackedTextView.swift */,
+				036F60C8246B13FF0036BCF0 /* BlurView.swift */,
+				A3D2272B24697D8800B55BDD /* TextButtonView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		036F60F8246C0E170036BCF0 /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				036F60F9246C0E170036BCF0 /* RoundedCorner.swift */,
+			);
+			path = Shapes;
+			sourceTree = "<group>";
+		};
 		037404A12464ACCD00F8DFAF = {
 			isa = PBXGroup;
 			children = (
@@ -104,19 +172,16 @@
 			children = (
 				036F6095246AE60D0036BCF0 /* Resources */,
 				036F60902469B9FA0036BCF0 /* Models */,
+				036F60EF246C0DB40036BCF0 /* Views */,
+				036F60F8246C0E170036BCF0 /* Shapes */,
 				037404AD2464ACCD00F8DFAF /* AppDelegate.swift */,
 				037404AF2464ACCD00F8DFAF /* SceneDelegate.swift */,
-				037404B12464ACCD00F8DFAF /* ContentView.swift */,
-				A3D2272A24697D8800B55BDD /* MapView.swift */,
-				036F60C6246B0FA60036BCF0 /* ActivityRow.swift */,
-				036F60D0246B24480036BCF0 /* ActivityList.swift */,
-				036F60CA246B1A130036BCF0 /* StackedTextView.swift */,
-				036F60C8246B13FF0036BCF0 /* BlurView.swift */,
-				A3D2272B24697D8800B55BDD /* TextButtonView.swift */,
 				036F60C4246AFB0F0036BCF0 /* Formatter.swift */,
 				037404B32464ACD000F8DFAF /* Assets.xcassets */,
 				037404B82464ACD000F8DFAF /* LaunchScreen.storyboard */,
 				037404BB2464ACD000F8DFAF /* Info.plist */,
+				036F60EC246C0CDA0036BCF0 /* Helpers */,
+				036F60DF246C0B670036BCF0 /* Extensions */,
 				037404B52464ACD000F8DFAF /* Preview Content */,
 			);
 			path = "colour-run-map";
@@ -219,19 +284,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				036F60E9246C0B670036BCF0 /* CLAuthorizationStatusExtensions.swift in Sources */,
+				036F60EE246C0CDA0036BCF0 /* PaceHelper.swift in Sources */,
 				A3D2273124697D8800B55BDD /* LocationService.swift in Sources */,
+				036F60E7246C0B670036BCF0 /* TimeIntervalExtensions.swift in Sources */,
 				036F60C9246B13FF0036BCF0 /* BlurView.swift in Sources */,
 				036F60C7246B0FA60036BCF0 /* ActivityRow.swift in Sources */,
 				A3D2272E24697D8800B55BDD /* LocationManager.swift in Sources */,
+				036F60F6246C0DDD0036BCF0 /* SideMenuView.swift in Sources */,
 				036F60922469BA210036BCF0 /* UserData.swift in Sources */,
 				037404AE2464ACCD00F8DFAF /* AppDelegate.swift in Sources */,
 				036F60D1246B24480036BCF0 /* ActivityList.swift in Sources */,
 				A3D2272F24697D8800B55BDD /* MapView.swift in Sources */,
+				036F60F5246C0DDD0036BCF0 /* MenuContentView.swift in Sources */,
 				037404B02464ACCD00F8DFAF /* SceneDelegate.swift in Sources */,
 				036F60C5246AFB0F0036BCF0 /* Formatter.swift in Sources */,
 				037404B22464ACCD00F8DFAF /* ContentView.swift in Sources */,
+				036F60EB246C0B670036BCF0 /* CLLocationDistanceExtensions.swift in Sources */,
+				036F60EA246C0B670036BCF0 /* DateExtensions.swift in Sources */,
 				036F609E246AE9AB0036BCF0 /* Activity+CoreDataProperties.swift in Sources */,
+				036F60E6246C0B670036BCF0 /* ViewExtensions.swift in Sources */,
+				036F60F4246C0DDD0036BCF0 /* CardView.swift in Sources */,
+				036F60FA246C0E170036BCF0 /* RoundedCorner.swift in Sources */,
 				036F6098246AE62E0036BCF0 /* colour-run-map.xcdatamodeld in Sources */,
+				036F60F7246C0DDD0036BCF0 /* ImageButtonView.swift in Sources */,
 				036F60CB246B1A130036BCF0 /* StackedTextView.swift in Sources */,
 				036F609D246AE9AB0036BCF0 /* Activity+CoreDataClass.swift in Sources */,
 				A3D2273024697D8800B55BDD /* TextButtonView.swift in Sources */,

@@ -147,18 +147,3 @@ extension LocationManager: CLLocationManagerDelegate {
     }
     
 }
-
-extension CLAuthorizationStatus {
-    
-    var asString: String {
-        switch self {
-        case .notDetermined: return "Not Determined"
-        case .authorizedWhenInUse: return "Authorized When In Use"
-        case .authorizedAlways: return "Authorized Always"
-        case .restricted: return "Restricted"
-        case .denied: return "Denied"
-        default: return "Unknown"
-        }
-    }
-    
-}
