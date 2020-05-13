@@ -18,6 +18,8 @@ struct MapView: UIViewRepresentable {
     //var currentLocation: CLLocation?
     var recordedLocations: [CLLocation]?
     
+    var colour: UIColor = .
+    
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
