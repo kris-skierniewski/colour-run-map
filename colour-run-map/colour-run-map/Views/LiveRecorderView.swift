@@ -21,22 +21,29 @@ struct LiveRecorderView: View {
     
     @EnvironmentObject var userData: UserData
     
-    var timer: Timer {
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {_ in
+    @State private var timer: Timer? = nil
+    
+    private func startTimer() {
+        self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {_ in
             self.mapState = .showRoute(self.locationManager.recordedLocations.map({ $0.coordinate }))
         }
+        self.timer?.fire()
+    }
+    private func stopTimer() {
+        self.timer?.invalidate()
+        self.timer = nil
     }
     
     private func startStopButtonTappedHandler() {
         if isRecording {
             mapState = .showUserLocation
             locationManager.stopRecordingLocation()
-            timer.invalidate()
+            stopTimer()
             saveActivity()
         } else {
             locationManager.startRecordingLocation()
             mapState = .showRoute(locationManager.recordedLocations.map({ $0.coordinate }))
-            timer.fire()
+            stopTimer()
         }
         isRecording.toggle()
     }
@@ -48,7 +55,7 @@ struct LiveRecorderView: View {
         activity.createdAt = Date()
         activity.distance = locationManager.distance
         activity.duration = abs(locationManager.startDate.timeIntervalSinceNow)
-        mapState = .showCompleteRoute(activity.locations)
+
         do {
             try self.managedObjectContext.save()
             print("successfully saved")

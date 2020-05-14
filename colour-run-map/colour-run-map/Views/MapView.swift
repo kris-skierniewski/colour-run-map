@@ -59,6 +59,7 @@ struct MapView: UIViewRepresentable {
     private func updateUIView(_ uiView: MKMapView, forState mapState: MapState) {
         switch mapState {
         case .showUserLocation:
+            uiView.removeOverlays(uiView.overlays)
             if let userLocation = uiView.userLocation.location {
                 let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
                 let region = MKCoordinateRegion(center: userLocation.coordinate, span: span)

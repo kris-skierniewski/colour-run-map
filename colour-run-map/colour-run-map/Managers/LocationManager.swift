@@ -93,8 +93,6 @@ class LocationManager: NSObject, ObservableObject {
         isRecordingLocation = false
         locationManager.stopUpdatingLocation()
     }
-
-    
 }
 
 extension LocationManager: CLLocationManagerDelegate {

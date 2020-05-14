@@ -10,6 +10,20 @@ import Foundation
 import CoreLocation
 import MapKit
 
+class DistanceHelper {
+    static func sumOfDistance(betweenLocations locations: [CLLocation]) -> CLLocationDistance {
+        var sumOfDistance: CLLocationDistance = 0
+        
+        locations.enumerated().forEach { (index, location) in
+            if locations[index+1] != nil {
+                sumOfDistance += location.distance(from: locations[index+1])
+            }
+        }
+        
+        return sumOfDistance
+    }
+}
+
 class PaceHelper {
     static func paceString(distance: CLLocationDistance, startDate: Date, endDate: Date = Date()) -> String {
         let pace = Self.calculatePace(distance: distance,
