@@ -40,34 +40,53 @@ struct MapView: UIViewRepresentable {
     private func updateUIView(_ uiView: MKMapView, forState mapState: MapState) {
         switch mapState {
         case .showUserLocation:
+            if let userLocation = uiView.userLocation.location {
+                let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
+                let region = MKCoordinateRegion(center: userLocation.coordinate, span: span)
+                uiView.setRegion(region, animated: true)
+            } else {
+                LocationManager.shared.getLocation(withCompletion: { userLocation in
+                    guard let userLocation = userLocation else { return }
+                    let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
+                    let region = MKCoordinateRegion(center: userLocation.coordinate, span: span)
+                    uiView.setRegion(region, animated: true)
+                })
+            }
+            
+        case .showRoute(let coordinates):
+            uiView.addOverlay(MKPolyline(coordinates: coordinates, count: coordinates.count))
+            
             let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
             let region = MKCoordinateRegion(center: uiView.userLocation.coordinate, span: span)
             uiView.setRegion(region, animated: true)
-        case .showRoute(let coordinates):
-            if coordinates.count == 0 {
-                if showsUserLocation {
-                    let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
-                    let region = MKCoordinateRegion(center: uiView.userLocation.coordinate, span: span)
-                    uiView.setRegion(region, animated: true)
-                }
-            }
-            else if coordinates.count == 1 {
-                let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
-                let region = MKCoordinateRegion(center: coordinates[0], span: span)
-                uiView.setRegion(region, animated: true)
-            } else {
-                uiView.addOverlay(MKPolyline(coordinates: coordinates, count: coordinates.count))
-            }
             
-            if let lastCoordinate = coordinates.last {
-                let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
-                let region = MKCoordinateRegion(center: lastCoordinate, span: span)
-                uiView.setRegion(region, animated: true)
-            }
         case .showCompleteRoute(let locations):
             uiView.addOverlay(GradientPolyline(locations: locations))
+            if isUserInteractionEnabled {
+                addMilestonePins(map: uiView, locations: locations)
+            }
+            let region = MKCoordinateRegion.enclosingRegion(locations: locations)
+            uiView.setRegion(region, animated: true)
         }
     }
+    
+    func addMilestonePins(map: MKMapView, locations: [CLLocation]) {
+        var totalDistance: CLLocationDistance = 0
+        var milestone: CLLocationDistance = 1000
+        locations.enumerated().forEach( { index, location in
+            guard index != 0 else { return } //ignore first coordinate
+            totalDistance = totalDistance + location.distance(from: locations[index - 1])
+            
+            if totalDistance >= milestone {
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = location.coordinate
+                annotation.title = milestone.stringWithUnitsRounded
+                map.addAnnotation(annotation)
+                milestone = milestone + 1000
+            }
+        })
+    }
+
     
 }
 
@@ -78,11 +97,11 @@ class Coordinator: NSObject, MKMapViewDelegate {
         self.parent = parent
     }
     
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: nil)
-        view.canShowCallout = true
-        return view
-    }
+//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//        let view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: nil)
+//        view.canShowCallout = true
+//        return view
+//    }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is GradientPolyline {

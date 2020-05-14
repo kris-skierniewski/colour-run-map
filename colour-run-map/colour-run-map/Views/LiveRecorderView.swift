@@ -65,7 +65,7 @@ struct LiveRecorderView: View {
             VStack {
                 Spacer()
                 if userData.isRecordingActivity {
-                    Text("Distance: \(formatter.distanceString(from: locationManager.distance))")
+                    Text("Distance: \(locationManager.distance.stringWithUnits)")
                         .font(.system(size: 30))
                     Text("Time: \(formatter.timeString(from: locationManager.startDate, until: now))")
                         .font(.system(size: 30))
