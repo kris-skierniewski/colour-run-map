@@ -11,14 +11,16 @@ import CoreLocation
 import MapKit
 
 extension CLLocationDistance {
-    private var distanceFormatter: MKDistanceFormatter {
-        let formatter = MKDistanceFormatter()
-        formatter.units = .metric
-        formatter.unitStyle = .abbreviated
-        return formatter
+    // show distance as a whole number with units (for milestone pins on the map)
+    var stringWithUnitsRounded: String {
+        return String(format: "%.0f km", floor(self) / 1000)
     }
     
-    var formattedDistanceString: String {
-        return distanceFormatter.string(fromDistance: self)
+    var stringWithUnits: String {
+        return String(format: "%.2f km", floor(self / 10) / 100)
+    }
+    
+    var string: String {
+        return String(format: "%.2f", floor(self / 10) / 100)
     }
 }
