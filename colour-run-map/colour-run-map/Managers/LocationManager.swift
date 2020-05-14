@@ -91,7 +91,6 @@ class LocationManager: NSObject, ObservableObject {
     func stopRecordingLocation() {
         isRecordingLocation = false
         locationManager.stopUpdatingLocation()
-        recordedLocations.removeAll()
     }
 }
 
