@@ -17,7 +17,6 @@ class LocationManager: NSObject, ObservableObject {
     private var autherisationRequestCompletionBlocks = [((CLAuthorizationStatus) -> Void)]()
     private var locationRequestCompletionBlocks = [((CLLocation?) -> Void)]()
     
-    
     static let shared = LocationManager()
     
     private override init() {

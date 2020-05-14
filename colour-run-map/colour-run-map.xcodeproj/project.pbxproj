@@ -149,7 +149,6 @@
 			children = (
 				037404AC2464ACCD00F8DFAF /* colour-run-map */,
 				037404AB2464ACCD00F8DFAF /* Products */,
-				A3D2272824697D8800B55BDD /* Managers */,
 			);
 			sourceTree = "<group>";
 		};
@@ -164,20 +163,21 @@
 		037404AC2464ACCD00F8DFAF /* colour-run-map */ = {
 			isa = PBXGroup;
 			children = (
-				036F6095246AE60D0036BCF0 /* Resources */,
-				036F60902469B9FA0036BCF0 /* Models */,
-				036F60EF246C0DB40036BCF0 /* Views */,
-				036F60F8246C0E170036BCF0 /* Shapes */,
 				037404AD2464ACCD00F8DFAF /* AppDelegate.swift */,
-				037404AF2464ACCD00F8DFAF /* SceneDelegate.swift */,
+				037404B32464ACD000F8DFAF /* Assets.xcassets */,
+				036F60DF246C0B670036BCF0 /* Extensions */,
 				036F60C4246AFB0F0036BCF0 /* Formatter.swift */,
 				036F60FD246C19020036BCF0 /* GradientPolyline.swift */,
-				037404B32464ACD000F8DFAF /* Assets.xcassets */,
-				037404B82464ACD000F8DFAF /* LaunchScreen.storyboard */,
-				037404BB2464ACD000F8DFAF /* Info.plist */,
 				036F60EC246C0CDA0036BCF0 /* Helpers */,
-				036F60DF246C0B670036BCF0 /* Extensions */,
+				037404BB2464ACD000F8DFAF /* Info.plist */,
+				037404B82464ACD000F8DFAF /* LaunchScreen.storyboard */,
+				A3D2272824697D8800B55BDD /* Managers */,
+				036F60902469B9FA0036BCF0 /* Models */,
 				037404B52464ACD000F8DFAF /* Preview Content */,
+				036F6095246AE60D0036BCF0 /* Resources */,
+				037404AF2464ACCD00F8DFAF /* SceneDelegate.swift */,
+				036F60F8246C0E170036BCF0 /* Shapes */,
+				036F60EF246C0DB40036BCF0 /* Views */,
 			);
 			path = "colour-run-map";
 			sourceTree = "<group>";
@@ -216,8 +216,7 @@
 			children = (
 				A3D2272924697D8800B55BDD /* LocationManager.swift */,
 			);
-			name = Managers;
-			path = "colour-run-map/Managers";
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

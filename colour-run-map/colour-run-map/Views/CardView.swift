@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 public struct CardView<ContentView: View>: View {
     
@@ -66,8 +67,14 @@ public struct CardView<ContentView: View>: View {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(height: 400,
-                 content: { Text("Example") })
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let mockActivity = Activity.init(context: context)
+        mockActivity.createdAt = Date()
+        mockActivity.distance = CLLocationDistance(1678.0)
+        mockActivity.duration = TimeInterval.hourInSeconds * 0.34
+        
+        return CardView(height: 400,
+                        content: { ActivityRowDetails(activity: mockActivity) })
             .background(Color.black)
     }
 }

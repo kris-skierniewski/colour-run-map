@@ -46,7 +46,7 @@ struct ActivityRow_Previews: PreviewProvider {
     }
 }
 
-private struct ActivityRowDetails: View {
+struct ActivityRowDetails: View {
     var activity: Activity
     
     var body: some View {

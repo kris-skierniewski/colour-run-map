@@ -11,7 +11,8 @@ import MapKit
 
 struct LiveRecorderView: View {
     
-    @State var now: Date = Date()
+    @State private var now: Date = Date()
+    @State private var currentActivity: Activity? = nil
     
     @ObservedObject var locationManager: LocationManager = LocationManager.shared
     
@@ -64,14 +65,7 @@ struct LiveRecorderView: View {
             
             VStack {
                 Spacer()
-                if userData.isRecordingActivity {
-                    Text("Distance: \(formatter.distanceString(from: locationManager.distance))")
-                        .font(.system(size: 30))
-                    Text("Time: \(formatter.timeString(from: locationManager.startDate, until: now))")
-                        .font(.system(size: 30))
-                    Text("Pace: \(formatter.paceString(distance: locationManager.distance, start: locationManager.startDate))")
-                        .font(.system(size: 30))
-                }
+                    .frame(height: 10)
                 HStack{
                     Spacer()
                     if userData.isRecordingActivity {
@@ -83,16 +77,29 @@ struct LiveRecorderView: View {
                         backgroundColor: .green,
                         tappedHandler: startButtonTappedHandler)
                     }
-
                     Spacer()
                         .frame(width: 10)
                 }
                 Spacer()
-                    .frame(height: 10)
+            }
+            
+            VStack {
+                Spacer()
+                if userData.isRecordingActivity {
+                    Text("Distance: \(formatter.distanceString(from: locationManager.distance))")
+                        .font(.system(size: 30))
+                    Text("Time: \(formatter.timeString(from: locationManager.startDate, until: now))")
+                        .font(.system(size: 30))
+                    Text("Pace: \(formatter.paceString(distance: locationManager.distance, start: locationManager.startDate))")
+                        .font(.system(size: 30))
+                }
+            }
+            
+            CardView(height: 150) {
+//                ActivityRowDetails(activity: )
+                Text("Content")
             }
         }
-        
-        
     }
 }
 
