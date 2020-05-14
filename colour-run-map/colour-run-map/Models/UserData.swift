@@ -11,5 +11,5 @@ import Combine
 import CoreLocation
 
 final class UserData: ObservableObject {
-    @Published var isRecordingActivity = false
+    //@Published var isRecordingActivity = false
 }

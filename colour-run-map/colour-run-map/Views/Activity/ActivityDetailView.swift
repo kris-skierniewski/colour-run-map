@@ -15,7 +15,7 @@ struct ActivityDetailView: View {
     var body: some View {
         ZStack {
             MapView(showsUserLocation: false,
-                    mapState: MapState.showCompleteRoute(activity.locations))
+                    mapState: Binding.constant(MapState.showCompleteRoute(activity.locations)))
                 .edgesIgnoringSafeArea(.all)
             CardView(height: 400) {
                 Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)

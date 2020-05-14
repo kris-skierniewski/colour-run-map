@@ -16,7 +16,7 @@ struct ActivityRow: View {
         ZStack(alignment: .bottom) {
             MapView(showsUserLocation: false,
                     isUserInteractionEnabled: false,
-                    mapState: .showCompleteRoute(activity.locations))
+                    mapState: Binding.constant(.showCompleteRoute(activity.locations)))
             
             VStack(alignment: .leading) {
                 Text(activity.createdAt.mwFormatted("EEEE\n dd MMMM").uppercased())
