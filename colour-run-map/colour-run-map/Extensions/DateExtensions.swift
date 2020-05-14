@@ -10,12 +10,6 @@ import Foundation
 
 public extension Date {
     
-    func mwFormatted(_ format: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        return dateFormatter.string(from: self)
-    }
-    
     // MARK: - Vars
     /// The date with seconds forced to 0
     var mwRemoveSeconds: Date {
@@ -33,39 +27,28 @@ public extension Date {
     
     /// The date as a string with format HH:mm
     var mwShortTimeString: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        dateFormatter.locale = Locale(identifier: "en")
-        return dateFormatter.string(from: self)
-    }
-    
-    /// The date as a localized string with format HH:mm
-    var mwLocalizedShortTimeString: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        return dateFormatter.string(from: self)
+        return mwFormatted("HH:mm")
     }
     
     /// The date as a string with format dd/MM/yyyy
     var mwDateString: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        dateFormatter.locale = Locale(identifier: "en")
-        return dateFormatter.string(from: self)
+        return mwFormatted("dd/MM/yyyy")
     }
     
     /// The day of the Date, Monday, Tuesday, Etc
     var mwLocalizedDayString: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE"
-        return dateFormatter.string(from: self)
+        return mwFormatted("EEEE")
     }
     
     /// The day of the Date, Mon, Tue, Etc
     var mwLocalizedDayShortString: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "E"
-        return dateFormatter.string(from: self)
+        return mwFormatted("E")
+    }
+    
+    var mwTimeSinceNow: String {
+        let calendar = Calendar(identifier: .gregorian)
+        let components = calendar.dateComponents([.hour, .minute, .second], from: self, to: Date())
+        return String(format: "%02d:%02d:%02d", components.hour ?? 00, components.minute ?? 00, components.second ?? 00)
     }
     
     /// The day of a date localised with today, tomorrow, or mwAsDayString
@@ -83,7 +66,14 @@ public extension Date {
         }
     }
     
-    func timeString(until date: Date) -> String {
+    // MARK: - Funcs
+    func mwFormatted(_ format: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
+    }
+    
+    func mwTimeSince(_ date: Date) -> String {
         let calendar = Calendar(identifier: .gregorian)
         let components = calendar.dateComponents([.hour, .minute, .second], from: self, to: date)
         return String(format: "%02d:%02d:%02d", components.hour ?? 00, components.minute ?? 00, components.second ?? 00)

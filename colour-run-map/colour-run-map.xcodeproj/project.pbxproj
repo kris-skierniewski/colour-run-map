@@ -11,7 +11,6 @@
 		036F6098246AE62E0036BCF0 /* colour-run-map.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 036F6096246AE62E0036BCF0 /* colour-run-map.xcdatamodeld */; };
 		036F609D246AE9AB0036BCF0 /* Activity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F6099246AE9AB0036BCF0 /* Activity+CoreDataClass.swift */; };
 		036F609E246AE9AB0036BCF0 /* Activity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F609A246AE9AB0036BCF0 /* Activity+CoreDataProperties.swift */; };
-		036F60C5246AFB0F0036BCF0 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60C4246AFB0F0036BCF0 /* Formatter.swift */; };
 		036F60C7246B0FA60036BCF0 /* ActivityRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60C6246B0FA60036BCF0 /* ActivityRow.swift */; };
 		036F60C9246B13FF0036BCF0 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60C8246B13FF0036BCF0 /* BlurView.swift */; };
 		036F60CB246B1A130036BCF0 /* StackedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F60CA246B1A130036BCF0 /* StackedTextView.swift */; };
@@ -45,7 +44,6 @@
 		036F6097246AE62E0036BCF0 /* colour-run-map.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "colour-run-map.xcdatamodel"; sourceTree = "<group>"; };
 		036F6099246AE9AB0036BCF0 /* Activity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		036F609A246AE9AB0036BCF0 /* Activity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		036F60C4246AFB0F0036BCF0 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		036F60C6246B0FA60036BCF0 /* ActivityRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRow.swift; sourceTree = "<group>"; };
 		036F60C8246B13FF0036BCF0 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		036F60CA246B1A130036BCF0 /* StackedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedTextView.swift; sourceTree = "<group>"; };
@@ -169,7 +167,6 @@
 				037404AD2464ACCD00F8DFAF /* AppDelegate.swift */,
 				037404B32464ACD000F8DFAF /* Assets.xcassets */,
 				036F60DF246C0B670036BCF0 /* Extensions */,
-				036F60C4246AFB0F0036BCF0 /* Formatter.swift */,
 				036F60FD246C19020036BCF0 /* GradientPolyline.swift */,
 				036F60EC246C0CDA0036BCF0 /* Helpers */,
 				037404BB2464ACD000F8DFAF /* Info.plist */,
@@ -307,7 +304,6 @@
 				036F60D1246B24480036BCF0 /* ActivityList.swift in Sources */,
 				A3D2272F24697D8800B55BDD /* MapView.swift in Sources */,
 				037404B02464ACCD00F8DFAF /* SceneDelegate.swift in Sources */,
-				036F60C5246AFB0F0036BCF0 /* Formatter.swift in Sources */,
 				037404B22464ACCD00F8DFAF /* LiveRecorderView.swift in Sources */,
 				036F60EB246C0B670036BCF0 /* CLLocationDistanceExtensions.swift in Sources */,
 				036F6102246D48B60036BCF0 /* MKCoordinateRegionExtensions.swift in Sources */,

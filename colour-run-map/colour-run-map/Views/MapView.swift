@@ -101,7 +101,7 @@ struct MapView: UIViewRepresentable {
             if totalDistance >= milestone {
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = location.coordinate
-                annotation.title = milestone.stringWithUnitsRounded
+                annotation.title = milestone.mwKilometersRoundedDown0dp
                 map.addAnnotation(annotation)
                 milestone = milestone + 1000
             }

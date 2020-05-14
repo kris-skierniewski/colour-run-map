@@ -27,8 +27,6 @@ struct LiveRecorderView: View {
         }
     }
     
-    private var formatter = Formatter()
-    
     private func startStopButtonTappedHandler() {
         if isRecording {
             mapState = .showUserLocation
@@ -81,11 +79,11 @@ struct LiveRecorderView: View {
             VStack {
                 Spacer().frame(height: 70)
                 if isRecording {
-                    Text("Distance: \(formatter.distanceString(from: locationManager.distance))")
+                    Text("Distance: \(locationManager.distance.mwKilometersRoundedDown2dp)")
                         .font(.system(size: 30))
-                    Text("Time: \(formatter.timeString(from: locationManager.startDate, until: Date()))")
+                    Text("Time: \(locationManager.startDate.mwTimeSince())")
                         .font(.system(size: 30))
-                    Text("Pace: \(formatter.paceString(distance: locationManager.distance, start: locationManager.startDate))")
+                    Text("Pace: \(PaceHelper.paceString(distance: locationManager.distance, startDate: locationManager.startDate))")
                         .font(.system(size: 30))
                 }
                 Spacer()
