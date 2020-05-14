@@ -12,7 +12,7 @@ import MapKit
 public enum MapState: Equatable {
     case other
     case showUserLocation
-    case showRoute(_ coordinates: [CLLocationCoordinate2D])
+    case showPartialRoute(_ coordinates: [CLLocationCoordinate2D])
     case showCompleteRoute(_ locations: [CLLocation])
     
     static public func == (lhs: MapState, rhs: MapState) -> Bool {
@@ -20,7 +20,7 @@ public enum MapState: Equatable {
         case (.other, .other),
              (.showUserLocation, .showUserLocation):
             return true
-        case (.showRoute(_), .showRoute(_)):
+        case (.showPartialRoute(_), .showPartialRoute(_)):
             return true
 //                a.compactMap({ $0.latitude }).elementsEqual(b.compactMap({ $0.latitude })) &&
 //                a.compactMap({ $0.longitude }).elementsEqual(b.compactMap({ $0.longitude }))
@@ -58,41 +58,16 @@ struct MapView: UIViewRepresentable {
     
     private func updateUIView(_ uiView: MKMapView, forState mapState: MapState) {
         switch mapState {
-        case .showUserLocation:
-            uiView.removeOverlays(uiView.overlays)
-            if let userLocation = uiView.userLocation.location {
-                let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
-                let region = MKCoordinateRegion(center: userLocation.coordinate, span: span)
-                uiView.setRegion(region, animated: true)
-            } else {
-                LocationManager.shared.getLocation(withCompletion: { userLocation in
-                    guard let userLocation = userLocation else { return }
-                    let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
-                    let region = MKCoordinateRegion(center: userLocation.coordinate, span: span)
-                    uiView.setRegion(region, animated: true)
-                })
-            }
-            
-        case .showRoute(let coordinates):
-            uiView.addOverlay(MKPolyline(coordinates: coordinates, count: coordinates.count))
-
-            let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
-            let region = MKCoordinateRegion(center: uiView.userLocation.coordinate, span: span)
-            uiView.setRegion(region, animated: true)
-            
-        case .showCompleteRoute(let locations):
-            uiView.addOverlay(GradientPolyline(locations: locations))
-            if isUserInteractionEnabled {
-                addMilestonePins(map: uiView, locations: locations)
-            }
-            let region = MKCoordinateRegion.enclosingRegion(locations: locations)
-            uiView.setRegion(region, animated: true)
-        case .other:
-            break
+        case .showUserLocation: showUserLocation(uiView)
+        case .showPartialRoute(let coordinates): showRoute(uiView, with: coordinates)
+        case .showCompleteRoute(let locations): showCompleteRoute(uiView, with: locations)
+        case .other: break
         }
     }
     
-    func addMilestonePins(map: MKMapView, locations: [CLLocation]) {
+    
+    // MARK: - Helpers
+    private func addMilestonePins(map: MKMapView, locations: [CLLocation]) {
         var totalDistance: CLLocationDistance = 0
         var milestone: CLLocationDistance = 1000
         locations.enumerated().forEach( { index, location in
@@ -108,8 +83,36 @@ struct MapView: UIViewRepresentable {
             }
         })
     }
-
     
+    private func showUserLocation(_ uiView: MKMapView) {
+        uiView.removeOverlays(uiView.overlays)
+        if let userLocation = uiView.userLocation.location {
+            let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
+            let region = MKCoordinateRegion(center: userLocation.coordinate, span: span)
+            uiView.setRegion(region, animated: true)
+        } else {
+            LocationManager.shared.getLocation(withCompletion: { userLocation in
+                guard let userLocation = userLocation else { return }
+                let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
+                let region = MKCoordinateRegion(center: userLocation.coordinate, span: span)
+                uiView.setRegion(region, animated: true)
+            })
+        }
+    }
+    
+    private func showRoute(_ uiView: MKMapView, with coordinates: ([CLLocationCoordinate2D])) {
+        uiView.addOverlay(MKPolyline(coordinates: coordinates, count: coordinates.count))
+        let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
+        let region = MKCoordinateRegion(center: uiView.userLocation.coordinate, span: span)
+        uiView.setRegion(region, animated: true)
+    }
+    
+    private func showCompleteRoute(_ uiView: MKMapView, with locations: ([CLLocation])) {
+        uiView.addOverlay(GradientPolyline(locations: locations))
+        if isUserInteractionEnabled { addMilestonePins(map: uiView, locations: locations) }
+        let region = MKCoordinateRegion.enclosingRegion(locations: locations)
+        uiView.setRegion(region, animated: true)
+    }
 }
 
 class Coordinator: NSObject, MKMapViewDelegate {

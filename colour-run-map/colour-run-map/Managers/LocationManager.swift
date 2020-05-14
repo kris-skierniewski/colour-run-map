@@ -55,8 +55,7 @@ class LocationManager: NSObject, ObservableObject {
     
     
     var recentLocation: CLLocation? {
-        if let lastLocation = lastLocation,
-            lastLocation.timestamp.timeIntervalSinceNow < 60.0 {
+        if let lastLocation = lastLocation, lastLocation.timestamp.timeIntervalSinceNow < 60.0 {
             return lastLocation
         }
         
@@ -92,6 +91,7 @@ class LocationManager: NSObject, ObservableObject {
     func stopRecordingLocation() {
         isRecordingLocation = false
         locationManager.stopUpdatingLocation()
+        recordedLocations.removeAll()
     }
 }
 
@@ -99,18 +99,11 @@ extension LocationManager: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         self.locationAutherisationStatus = status
-        
-//        if status == .authorizedAlways || status == .authorizedWhenInUse {
-//            manager.startUpdatingLocation()
-//        }
-        autherisationRequestCompletionBlocks.forEach { block in
-            block(status)
-        }
+        autherisationRequestCompletionBlocks.forEach { $0(status) }
         autherisationRequestCompletionBlocks = []
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
         if isRecordingLocation {
             //continuously recording locations
             for newLocation in locations {
@@ -118,7 +111,6 @@ extension LocationManager: CLLocationManagerDelegate {
                 guard newLocation.horizontalAccuracy < 20 && newLocation.verticalAccuracy < 20 && abs(howRecent) < 10 else { continue }
                 if let lastLocation = recordedLocations.last {
                     distance += newLocation.distance(from: lastLocation)
-                    //distance = distance + Measurement(value: newLocation.distance(from: lastLocation), unit: UnitLength.meters)
                 }
                 recordedLocations.append(newLocation)
                 objectWillChange.send()
@@ -128,18 +120,13 @@ extension LocationManager: CLLocationManagerDelegate {
             //just getting current location
             guard let location = locations.last else { return }
             lastLocation = location
-            locationRequestCompletionBlocks.forEach{ block in
-                block(location)
-            }
+            locationRequestCompletionBlocks.forEach{ $0(location) }
             locationRequestCompletionBlocks = []
-
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        locationRequestCompletionBlocks.forEach{ block in
-            block(nil)
-        }
+        locationRequestCompletionBlocks.forEach{ $0(nil) }
         locationRequestCompletionBlocks = []
     }
     

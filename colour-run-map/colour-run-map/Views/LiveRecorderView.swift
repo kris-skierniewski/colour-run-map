@@ -25,7 +25,7 @@ struct LiveRecorderView: View {
     
     private func startTimer() {
         self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {_ in
-            self.mapState = .showRoute(self.locationManager.recordedLocations.map({ $0.coordinate }))
+            self.mapState = .showPartialRoute(self.locationManager.recordedLocations.map({ $0.coordinate }))
         }
         self.timer?.fire()
     }
@@ -42,8 +42,8 @@ struct LiveRecorderView: View {
             saveActivity()
         } else {
             locationManager.startRecordingLocation()
-            mapState = .showRoute(locationManager.recordedLocations.map({ $0.coordinate }))
-            stopTimer()
+            mapState = .showPartialRoute(locationManager.recordedLocations.map({ $0.coordinate }))
+            startTimer()
         }
         isRecording.toggle()
     }
