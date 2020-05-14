@@ -15,7 +15,7 @@ struct LiveRecorderView: View {
     @State private var currentActivity: Activity? = nil
     @State private var mapState: MapState = .showUserLocation
     
-    @ObservedObject var locationManager: LocationManager = LocationManager.shared
+    var locationManager: LocationManager = LocationManager.shared
     
     @Environment(\.managedObjectContext) var managedObjectContext
     
