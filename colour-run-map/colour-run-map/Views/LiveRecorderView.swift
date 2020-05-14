@@ -81,7 +81,7 @@ struct LiveRecorderView: View {
                 if isRecording {
                     Text("Distance: \(locationManager.distance.mwKilometersRoundedDown2dp)")
                         .font(.system(size: 30))
-                    Text("Time: \(locationManager.startDate.mwTimeSince())")
+                    Text("Time: \(locationManager.startDate.mwTimeSinceNow)")
                         .font(.system(size: 30))
                     Text("Pace: \(PaceHelper.paceString(distance: locationManager.distance, startDate: locationManager.startDate))")
                         .font(.system(size: 30))
