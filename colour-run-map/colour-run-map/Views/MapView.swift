@@ -19,7 +19,15 @@ public enum MapState: Equatable {
         switch (lhs, rhs) {
         case (.other, .other),
              (.showUserLocation, .showUserLocation):
-          return true
+            return true
+        case (.showRoute(_), .showRoute(_)):
+            return true
+//                a.compactMap({ $0.latitude }).elementsEqual(b.compactMap({ $0.latitude })) &&
+//                a.compactMap({ $0.longitude }).elementsEqual(b.compactMap({ $0.longitude }))
+        case (.showCompleteRoute(_), .showCompleteRoute(_)):
+            return true
+//                a.compactMap({ $0.coordinate.latitude }).elementsEqual(b.compactMap({ $0.coordinate.latitude })) &&
+//                a.compactMap({ $0.coordinate.longitude }).elementsEqual(b.compactMap({ $0.coordinate.longitude }))
         default:
           return false
         }
@@ -33,7 +41,7 @@ struct MapView: UIViewRepresentable {
     @Binding var mapState: MapState
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(self, state: mapState)
+        Coordinator(self)
     }
     
     func makeUIView(context: UIViewRepresentableContext<MapView>) -> MKMapView {
@@ -105,12 +113,9 @@ struct MapView: UIViewRepresentable {
 
 class Coordinator: NSObject, MKMapViewDelegate {
     var parent: MapView
-    
-    var mapViewState: MapState
 
-    init(_ parent: MapView, state: MapState) {
+    init(_ parent: MapView) {
         self.parent = parent
-        self.mapViewState = state
     }
     
 //    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

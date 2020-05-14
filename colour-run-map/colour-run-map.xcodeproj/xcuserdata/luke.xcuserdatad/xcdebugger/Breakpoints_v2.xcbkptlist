@@ -14,8 +14,8 @@
             filePath = "colour-run-map/Views/MapView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "updateUIView(_:context:)"
             landmarkType = "7">
             <Actions>

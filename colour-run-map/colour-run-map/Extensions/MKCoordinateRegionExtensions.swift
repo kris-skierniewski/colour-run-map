@@ -11,7 +11,6 @@ import MapKit
 
 extension MKCoordinateRegion {
     static func enclosingRegion(locations: [CLLocation]) -> MKCoordinateRegion {
-        
         var minLat: CLLocationDegrees = 90.0;
         var maxLat: CLLocationDegrees = -90.0;
         var minLon: CLLocationDegrees = 180.0;
@@ -33,7 +32,6 @@ extension MKCoordinateRegion {
         }
         
         let span = MKCoordinateSpan(latitudeDelta: maxLat - minLat , longitudeDelta: maxLon - minLon)
-        
         let center = CLLocationCoordinate2DMake((maxLat - span.latitudeDelta / 2), maxLon - span.longitudeDelta / 2);
         
         return MKCoordinateRegion(center: center, span: span);

@@ -11,9 +11,9 @@ import MapKit
 
 struct LiveRecorderView: View {
     
-    @State private var now: Date = Date()
+    @State private var isRecording: Bool = false
     @State private var currentActivity: Activity? = nil
-    @State var mapState: MapState = .showUserLocation
+    @State private var mapState: MapState = .showUserLocation
     
     @ObservedObject var locationManager: LocationManager = LocationManager.shared
     
@@ -23,26 +23,24 @@ struct LiveRecorderView: View {
     
     var timer: Timer {
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {_ in
-            self.now = Date()
             self.mapState = .showRoute(self.locationManager.recordedLocations.map({ $0.coordinate }))
         }
     }
     
     private var formatter = Formatter()
     
-    private func startButtonTappedHandler() {
-        locationManager.startRecordingLocation()
-        mapState = .showRoute(locationManager.recordedLocations.map({ $0.coordinate }))
-        //userData.isRecordingActivity.toggle()
-        timer.fire()
-        
-    }
-    private func stopButtonTappedHandler() {
-        //userData.isRecordingActivity.toggle()
-        mapState = .showUserLocation
-        locationManager.stopRecordingLocation()
-        timer.invalidate()
-        saveActivity()
+    private func startStopButtonTappedHandler() {
+        if isRecording {
+            mapState = .showUserLocation
+            locationManager.stopRecordingLocation()
+            timer.invalidate()
+            saveActivity()
+        } else {
+            locationManager.startRecordingLocation()
+            mapState = .showRoute(locationManager.recordedLocations.map({ $0.coordinate }))
+            timer.fire()
+        }
+        isRecording.toggle()
     }
     
     private func saveActivity() {
@@ -71,15 +69,9 @@ struct LiveRecorderView: View {
                     .frame(height: 10)
                 HStack{
                     Spacer()
-                    if self.mapState == .showUserLocation {
-                        TextButtonView(text: "Start",
-                                       backgroundColor: .green,
-                                       tappedHandler: startButtonTappedHandler)
-                    } else {
-                        TextButtonView(text: "Stop",
-                                       backgroundColor: .red,
-                                       tappedHandler: stopButtonTappedHandler)
-                    }
+                    TextButtonView(text: isRecording ? "Stop" : "Start",
+                                   backgroundColor: isRecording ? .red : .green,
+                                   tappedHandler: startStopButtonTappedHandler)
                     Spacer()
                         .frame(width: 10)
                 }
@@ -87,19 +79,19 @@ struct LiveRecorderView: View {
             }
             
             VStack {
-                Spacer()
-                if mapState != .showUserLocation {
+                Spacer().frame(height: 70)
+                if isRecording {
                     Text("Distance: \(formatter.distanceString(from: locationManager.distance))")
                         .font(.system(size: 30))
-                    Text("Time: \(formatter.timeString(from: locationManager.startDate, until: now))")
+                    Text("Time: \(formatter.timeString(from: locationManager.startDate, until: Date()))")
                         .font(.system(size: 30))
                     Text("Pace: \(formatter.paceString(distance: locationManager.distance, start: locationManager.startDate))")
                         .font(.system(size: 30))
                 }
+                Spacer()
             }
             
             CardView(height: 150) {
-                //                ActivityRowDetails(activity: )
                 Text("Content")
             }
         }
