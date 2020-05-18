@@ -12,11 +12,8 @@ import MapKit
 struct LiveRecorderView: View {
     
     @State private var isRecording: Bool = false
-    @State private var currentActivity: Activity? = nil
-    @State private var mapState: MapState = .showUserLocation
-    @State private var timer: Timer? = nil
     
-    private var locationManager: LocationManager = LocationManager.shared
+    @ObservedObject var locationManager: LocationManager = LocationManager.shared
     
     @Environment(\.managedObjectContext) var managedObjectContext
     
@@ -24,7 +21,7 @@ struct LiveRecorderView: View {
     
     var body: some View {
         ZStack {
-            MapView(mapState: $mapState)
+            MapView(mapState: isRecording ? .showRecordingActivity : .showUserLocation, recordedLocations: locationManager.recordedLocations)
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
@@ -46,7 +43,7 @@ struct LiveRecorderView: View {
                 if isRecording {
                     Text("Distance: \(locationManager.distance.mwKilometersRoundedDown2dp)")
                         .font(.system(size: 30))
-                    Text("Time: \(locationManager.startDate.mwTimeSinceNow)")
+                    Text("Time: \(locationManager.startDate.mwTimeSince(now))")
                         .font(.system(size: 30))
                     Text("Pace: \(PaceHelper.paceString(distance: locationManager.distance, startDate: locationManager.startDate))")
                         .font(.system(size: 30))
@@ -61,42 +58,34 @@ struct LiveRecorderView: View {
     }
     
     // MARK: - Timer
-    private func startTimer() {
-        self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {_ in
-            self.mapState = .showPartialRoute(self.locationManager.recordedLocations.map({ $0.coordinate }))
+    @State var now: Date = Date()
+    private var timer: Timer {
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {_ in
+            self.now = Date()
         }
-        self.timer?.fire()
-    }
-    
-    private func stopTimer() {
-        self.timer?.invalidate()
-        self.timer = nil
     }
     
     // MARK: - Actions
     private func startStopButtonTappedHandler() {
         if isRecording {
-            mapState = .showUserLocation
             locationManager.stopRecordingLocation()
-            stopTimer()
+            timer.invalidate()
             saveActivity()
         } else {
-            createActivity()
             locationManager.startRecordingLocation()
-            mapState = .showPartialRoute(locationManager.recordedLocations.map({ $0.coordinate }))
-            startTimer()
+            timer.fire()
         }
         isRecording.toggle()
     }
     
     // MARK: - Helpers
     private func saveActivity() {
-//        let activity = Activity(context: managedObjectContext)
-//        currentActivity?.locations = locationManager.recordedLocations
-//        activity.id = UUID().uuidString
-//        activity.createdAt = Date()
-        currentActivity?.distance = locationManager.distance
-        currentActivity?.duration = abs(locationManager.startDate.timeIntervalSinceNow)
+        let activity = Activity(context: managedObjectContext)
+        activity.locations = locationManager.recordedLocations
+        activity.id = UUID().uuidString
+        activity.createdAt = Date()
+        activity.distance = locationManager.distance
+        activity.duration = abs(locationManager.startDate.timeIntervalSinceNow)
         
         do {
             try self.managedObjectContext.save()
@@ -105,20 +94,6 @@ struct LiveRecorderView: View {
             print(error)
         }
         
-        currentActivity = nil
-    }
-    
-    private func createActivity() {
-        let activity = Activity(context: managedObjectContext)
-        activity.id = UUID().uuidString
-        activity.createdAt = Date()
-        self.currentActivity = activity
-        
-        let _ = locationManager.objectWillChange.sink { _ in
-            if let lastLocation = self.locationManager.lastLocation {
-                self.currentActivity?.locations.append(lastLocation)
-            }
-        }
     }
 }
 

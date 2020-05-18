@@ -13,11 +13,12 @@ import CoreData
 
 public class Activity: NSManagedObject, Identifiable {
 
-    var pace: TimeInterval? {
+    var pace: TimeInterval {
         let pace = PaceHelper.calculatePace(distance: distance,
                                             start: createdAt,
                                             end: createdAt.addingTimeInterval(duration))
-        return pace.isInfinite || pace.isNaN ? nil : pace
+        return pace
+        //return pace.isInfinite || pace.isNaN ? nil : pace
     }
     
 }

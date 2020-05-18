@@ -14,9 +14,7 @@ struct ActivityRow: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            MapView(showsUserLocation: false,
-                    isUserInteractionEnabled: false,
-                    mapState: Binding.constant(.showCompleteRoute(activity.locations)))
+            MapView(mapState: .showActivityRow, recordedLocations: activity.locations)
             
             VStack(alignment: .leading) {
                 Text(activity.createdAt.mwFormatted("EEEE\n dd MMMM").uppercased())
@@ -58,7 +56,7 @@ struct ActivityRowDetails: View {
                 Spacer()
                 StackedTextView(topText: "\(activity.duration.mwRoundedMinutesString)", bottomText: "time")
                 Spacer()
-                StackedTextView(topText: "\(activity.pace?.mwMinutesRounded ?? 0)", bottomText: "min/km")
+                StackedTextView(topText: "\(activity.pace.asString)", bottomText: "min/km")
             }
             .padding(.horizontal)
         }

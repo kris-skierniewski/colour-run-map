@@ -10,35 +10,19 @@ import SwiftUI
 import MapKit
 
 public enum MapState: Equatable {
-    case other
     case showUserLocation
-    case showPartialRoute(_ coordinates: [CLLocationCoordinate2D])
-    case showCompleteRoute(_ locations: [CLLocation])
-    
-    static public func == (lhs: MapState, rhs: MapState) -> Bool {
-        switch (lhs, rhs) {
-        case (.other, .other),
-             (.showUserLocation, .showUserLocation):
-            return true
-        case (.showPartialRoute(_), .showPartialRoute(_)):
-            return true
-//                a.compactMap({ $0.latitude }).elementsEqual(b.compactMap({ $0.latitude })) &&
-//                a.compactMap({ $0.longitude }).elementsEqual(b.compactMap({ $0.longitude }))
-        case (.showCompleteRoute(_), .showCompleteRoute(_)):
-            return true
-//                a.compactMap({ $0.coordinate.latitude }).elementsEqual(b.compactMap({ $0.coordinate.latitude })) &&
-//                a.compactMap({ $0.coordinate.longitude }).elementsEqual(b.compactMap({ $0.coordinate.longitude }))
-        default:
-          return false
-        }
-    }
+    case showActivityRow
+    case showActivityDetail
+    case showRecordingActivity
 }
 
 struct MapView: UIViewRepresentable {
     
-    @State var showsUserLocation = true
-    @State var isUserInteractionEnabled = true
-    @Binding var mapState: MapState
+    @State private var showsUserLocation = true
+    @State private var isUserInteractionEnabled = true
+    
+    var mapState: MapState
+    var recordedLocations: [CLLocation]?
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -51,17 +35,15 @@ struct MapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        uiView.showsUserLocation = showsUserLocation
-        uiView.isUserInteractionEnabled = isUserInteractionEnabled
         updateUIView(uiView, forState: mapState)
     }
     
     private func updateUIView(_ uiView: MKMapView, forState mapState: MapState) {
         switch mapState {
         case .showUserLocation: showUserLocation(uiView)
-        case .showPartialRoute(let coordinates): showRoute(uiView, with: coordinates)
-        case .showCompleteRoute(let locations): showCompleteRoute(uiView, with: locations)
-        case .other: break
+        case .showRecordingActivity: showRecordingActivity(uiView)
+        case .showActivityDetail: showActivityDetail(uiView)
+        case .showActivityRow: showActivityRow(uiView)
         }
     }
     
@@ -82,9 +64,22 @@ struct MapView: UIViewRepresentable {
                 milestone = milestone + 1000
             }
         })
+        
+        let start = MKPointAnnotation()
+        start.coordinate = locations.first!.coordinate
+        start.title = "Start"
+        map.addAnnotation(start)
+        
+        let end = MKPointAnnotation()
+        end.coordinate = locations.last!.coordinate
+        end.title = "End"
+        map.addAnnotation(end)
+        
     }
     
     private func showUserLocation(_ uiView: MKMapView) {
+        uiView.showsUserLocation = true
+        uiView.isUserInteractionEnabled = true
         uiView.removeOverlays(uiView.overlays)
         if let userLocation = uiView.userLocation.location {
             let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
@@ -100,16 +95,32 @@ struct MapView: UIViewRepresentable {
         }
     }
     
-    private func showRoute(_ uiView: MKMapView, with coordinates: ([CLLocationCoordinate2D])) {
-        uiView.addOverlay(MKPolyline(coordinates: coordinates, count: coordinates.count))
-        let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
-        let region = MKCoordinateRegion(center: uiView.userLocation.coordinate, span: span)
+    private func showRecordingActivity(_ uiView: MKMapView) {
+        uiView.showsUserLocation = true
+        uiView.isUserInteractionEnabled = true
+        if let coordinates = recordedLocations?.compactMap({ $0.coordinate }) {
+            uiView.addOverlay(MKPolyline(coordinates: coordinates, count: coordinates.count))
+            let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
+            let region = MKCoordinateRegion(center: coordinates.last ?? uiView.userLocation.coordinate, span: span)
+            uiView.setRegion(region, animated: true)
+        }
+    }
+    
+    private func showActivityDetail(_ uiView: MKMapView) {
+        uiView.showsUserLocation = false
+        uiView.isUserInteractionEnabled = true
+        guard let locations = recordedLocations else { return }
+        uiView.addOverlay(GradientPolyline(locations: locations))
+        addMilestonePins(map: uiView, locations: locations)
+        let region = MKCoordinateRegion.enclosingRegion(locations: locations)
         uiView.setRegion(region, animated: true)
     }
     
-    private func showCompleteRoute(_ uiView: MKMapView, with locations: ([CLLocation])) {
+    private func showActivityRow(_ uiView: MKMapView) {
+        uiView.showsUserLocation = false
+        uiView.isUserInteractionEnabled = false
+        guard let locations = recordedLocations else { return }
         uiView.addOverlay(GradientPolyline(locations: locations))
-        if isUserInteractionEnabled { addMilestonePins(map: uiView, locations: locations) }
         let region = MKCoordinateRegion.enclosingRegion(locations: locations)
         uiView.setRegion(region, animated: true)
     }
@@ -145,7 +156,7 @@ class Coordinator: NSObject, MKMapViewDelegate {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(mapState: Binding.constant(.showUserLocation))
+        MapView(mapState: .showUserLocation, recordedLocations: nil)
             .edgesIgnoringSafeArea(.all)
     }
 }
