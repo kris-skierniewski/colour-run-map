@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct ActivityDetailView: View {
     
@@ -19,7 +20,10 @@ struct ActivityDetailView: View {
     var body: some View {
         VStack{
             ZStack {
-                MapView(selected: $selected, polylineType: polylineType, mapState: .showActivityDetail, recordedLocations: activity.locations)
+                MapView(selected: $selected,
+                        polylineType: polylineType,
+                        mapState: .showActivityDetail,
+                        recordedLocations: activity.locations)
                     .edgesIgnoringSafeArea(.all)
                 CardView(height: 300) {
                     if selected != nil {
@@ -27,8 +31,6 @@ struct ActivityDetailView: View {
                     } else {
                         Text("Nothing selected")
                     }
-                    
-                    
                 }
             }
         }.navigationBarItems(trailing:
@@ -37,6 +39,7 @@ struct ActivityDetailView: View {
                 Text("Altitude").tag(GradientPolyline.type.altitude)
             }.pickerStyle(SegmentedPickerStyle())
         )
+        
     }
 }
 
@@ -46,9 +49,14 @@ struct ActivityDetailView_Previews: PreviewProvider {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let mockActivity = Activity.init(context: context)
         mockActivity.createdAt = Date()
-        mockActivity.locations = []
+        mockActivity.locations = [CLLocation(latitude: 36.063457, longitude: -95.880516),
+                                  CLLocation(latitude: 36.063457, longitude: -95.980516)]
+        mockActivity.duration = .minuteInSeconds
+        mockActivity.distance = .kilometerInMeters
         
-        return ActivityDetailView(activity: mockActivity)
+        return ActivityDetailView(activity: mockActivity,
+                                  selected: ActivityAnnotation(),
+                                  polylineType: .speed)
     }
 }
 

@@ -12,6 +12,8 @@ import MapKit
 
 extension CLLocationDistance {
     
+    static var kilometerInMeters: CLLocationDistance = 1000
+    
     /// Distance as a whole number with units (for milestone pins on the map)
     var mwKilometersRoundedDown0dp: String {
         return String(format: "%.0f km", floor(self) / 1000)

@@ -9,19 +9,17 @@
 import Foundation
 import MapKit
 
-
-
 class GradientPolyline: MKPolyline {
     enum type {
         case speed
         case altitude
     }
     
-    var hues: [CGFloat]?
+    private var hues: [CGFloat]?
+    
     public func getHue(from index: Int) -> CGColor {
         return UIColor(hue: (hues?[index])!, saturation: 1, brightness: 1, alpha: 1).cgColor
     }
-    
     
     convenience init(locations: [CLLocation], type: GradientPolyline.type) {
         let coordinates = locations.map( { $0.coordinate } )
@@ -46,29 +44,20 @@ class GradientPolyline: MKPolyline {
         
         hues = locations.map({
             let velocity: Double
-            if type == .speed {
-                velocity = $0.speed
-            } else {
-                velocity = $0.altitude
-            }
+            if type == .speed { velocity = $0.speed }
+            else {  velocity = $0.altitude }
 
-            if velocity == maxValue {
-                return CGFloat(maxHue)
-            }
+            if velocity == maxValue { return CGFloat(maxHue) }
             
-            if velocity == minValue {
-                return CGFloat(minHue)
-            }
+            if velocity == minValue { return CGFloat(minHue) }
 
             if minValue < velocity || velocity < maxValue {
-                return CGFloat( ( minHue + ( (velocity - minValue) * (maxHue - minHue) ) / (maxValue - minValue) ) )
+                return CGFloat((minHue + ((velocity - minValue) * (maxHue - minHue)) / (maxValue - minValue)))
             }
             
             return CGFloat(velocity)
         })
     }
-    
-    
 }
 
 class GradientPolylineRenderer: MKPolylineRenderer {
@@ -79,7 +68,6 @@ class GradientPolylineRenderer: MKPolylineRenderer {
             let mapRectCG = rect(for: mapRect)
 
             if(!mapRectCG.intersects(boundingBox)) { return }
-
 
             var prevColor: CGColor?
             var currentColor: CGColor?
