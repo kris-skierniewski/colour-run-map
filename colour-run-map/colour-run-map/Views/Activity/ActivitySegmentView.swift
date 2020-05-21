@@ -11,7 +11,6 @@ import SwiftUI
 struct ActivitySegmentView: View {
     var annotation: ActivityAnnotation
     
-    
     var body: some View {
         VStack{
             if annotation.segment != nil {
@@ -19,7 +18,7 @@ struct ActivitySegmentView: View {
                     Text("\(annotation.title!) Split")
                         .font(.title).bold()
                         .padding()
-                    Text("Pace: \(PaceHelper.calculatePace(distance: 1000, start: annotation.segment!.first!.timestamp, end: annotation.segment!.last!.timestamp).asString) min/km")
+                    Text("Pace: \(PaceHelper.calculatePace(distance: DistanceHelper.sumOfDistances(betweenLocations: annotation.segment!), start: annotation.segment!.first!.timestamp, end: annotation.segment!.last!.timestamp).asString) min/km")
                 }
                 
             }

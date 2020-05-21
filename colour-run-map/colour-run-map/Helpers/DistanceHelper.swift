@@ -15,7 +15,7 @@ class DistanceHelper {
         var sumOfDistance: CLLocationDistance = 0
         
         locations.enumerated().forEach { (index, location) in
-            if locations[index+1] != nil {
+            if locations.indices.contains(index+1) {
                 sumOfDistance += location.distance(from: locations[index+1])
             }
         }
