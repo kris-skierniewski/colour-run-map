@@ -33,6 +33,8 @@
 		037404B42464ACD000F8DFAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 037404B32464ACD000F8DFAF /* Assets.xcassets */; };
 		037404B72464ACD000F8DFAF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 037404B62464ACD000F8DFAF /* Preview Assets.xcassets */; };
 		037404BA2464ACD000F8DFAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 037404B82464ACD000F8DFAF /* LaunchScreen.storyboard */; };
+		037E8FA62472E03700351603 /* ActivityAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037E8FA52472E03700351603 /* ActivityAnnotation.swift */; };
+		037E8FA82473F69800351603 /* ActivitySegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037E8FA72473F69800351603 /* ActivitySegmentView.swift */; };
 		A3215BBF246C5CA9003DCB2B /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3215BBE246C5CA9003DCB2B /* TabBarView.swift */; };
 		A3920F0E246DB2C000511F8D /* DistanceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3920F0D246DB2C000511F8D /* DistanceHelper.swift */; };
 		A3D2272E24697D8800B55BDD /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D2272924697D8800B55BDD /* LocationManager.swift */; };
@@ -69,6 +71,8 @@
 		037404B62464ACD000F8DFAF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		037404B92464ACD000F8DFAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		037404BB2464ACD000F8DFAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		037E8FA52472E03700351603 /* ActivityAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityAnnotation.swift; sourceTree = "<group>"; };
+		037E8FA72473F69800351603 /* ActivitySegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySegmentView.swift; sourceTree = "<group>"; };
 		A3215BBE246C5CA9003DCB2B /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		A3920F0D246DB2C000511F8D /* DistanceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceHelper.swift; sourceTree = "<group>"; };
 		A3D2272924697D8800B55BDD /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -93,6 +97,7 @@
 				036F6099246AE9AB0036BCF0 /* Activity+CoreDataClass.swift */,
 				036F609A246AE9AB0036BCF0 /* Activity+CoreDataProperties.swift */,
 				036F60912469BA210036BCF0 /* UserData.swift */,
+				037E8FA52472E03700351603 /* ActivityAnnotation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -210,6 +215,7 @@
 				036F60FB246C0F140036BCF0 /* ActivityDetailView.swift */,
 				036F60D0246B24480036BCF0 /* ActivityList.swift */,
 				036F60C6246B0FA60036BCF0 /* ActivityRow.swift */,
+				037E8FA72473F69800351603 /* ActivitySegmentView.swift */,
 			);
 			path = Activity;
 			sourceTree = "<group>";
@@ -308,7 +314,9 @@
 				036F60D1246B24480036BCF0 /* ActivityList.swift in Sources */,
 				A3D2272F24697D8800B55BDD /* MapView.swift in Sources */,
 				037404B02464ACCD00F8DFAF /* SceneDelegate.swift in Sources */,
+				037E8FA82473F69800351603 /* ActivitySegmentView.swift in Sources */,
 				037404B22464ACCD00F8DFAF /* LiveRecorderView.swift in Sources */,
+				037E8FA62472E03700351603 /* ActivityAnnotation.swift in Sources */,
 				036F60EB246C0B670036BCF0 /* CLLocationDistanceExtensions.swift in Sources */,
 				036F6102246D48B60036BCF0 /* MKCoordinateRegionExtensions.swift in Sources */,
 				036F60EA246C0B670036BCF0 /* DateExtensions.swift in Sources */,

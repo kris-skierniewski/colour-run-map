@@ -21,7 +21,7 @@ struct LiveRecorderView: View {
     
     var body: some View {
         ZStack {
-            MapView(mapState: isRecording ? .showRecordingActivity : .showUserLocation, recordedLocations: locationManager.recordedLocations)
+            MapView(selected: .constant(nil), polylineType: .speed, mapState: isRecording ? .showRecordingActivity : .showUserLocation, recordedLocations: locationManager.recordedLocations)
                 .edgesIgnoringSafeArea(.all)
             
             VStack {

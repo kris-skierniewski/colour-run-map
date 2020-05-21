@@ -14,7 +14,7 @@ struct ActivityRow: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            MapView(mapState: .showActivityRow, recordedLocations: activity.locations)
+            MapView(selected: .constant(nil), polylineType: .speed, mapState: .showActivityRow, recordedLocations: activity.locations)
             
             VStack(alignment: .leading) {
                 Text(activity.createdAt.mwFormatted("EEEE\n dd MMMM").uppercased())
@@ -54,7 +54,7 @@ struct ActivityRowDetails: View {
             HStack() {
                 StackedTextView(topText: "\(activity.distance.mwKilometersRoundedDown2dp)", bottomText: "distance")
                 Spacer()
-                StackedTextView(topText: "\(activity.duration.mwRoundedMinutesString)", bottomText: "time")
+                StackedTextView(topText: "\(activity.duration.asString)", bottomText: "time")
                 Spacer()
                 StackedTextView(topText: "\(activity.pace.asString)", bottomText: "min/km")
             }

@@ -21,6 +21,9 @@ struct MapView: UIViewRepresentable {
     @State private var showsUserLocation = true
     @State private var isUserInteractionEnabled = true
     
+    @Binding var selected: ActivityAnnotation?
+    var polylineType: GradientPolyline.type
+    
     var mapState: MapState
     var recordedLocations: [CLLocation]?
     
@@ -31,6 +34,7 @@ struct MapView: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<MapView>) -> MKMapView {
         let map = MKMapView(frame: .zero)
         map.delegate = context.coordinator
+        map.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: "Pin")
         return map
     }
     
@@ -50,31 +54,45 @@ struct MapView: UIViewRepresentable {
     
     // MARK: - Helpers
     private func addMilestonePins(map: MKMapView, locations: [CLLocation]) {
+        
+        
         var totalDistance: CLLocationDistance = 0
         var milestone: CLLocationDistance = 1000
+        var milestoneAnnotation = ActivityAnnotation()
+        milestoneAnnotation.segment = [CLLocation]()
+        
         locations.enumerated().forEach( { index, location in
-            guard index != 0 else { return } //ignore first coordinate
+            //start pin
+            guard index != 0 else {
+                let start = ActivityAnnotation()
+                start.coordinate = location.coordinate
+                start.title = "Start"
+                map.addAnnotation(start)
+                return
+            }
+            
+            milestoneAnnotation.segment?.append(location)
             totalDistance = totalDistance + location.distance(from: locations[index - 1])
             
-            if totalDistance >= milestone {
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = location.coordinate
-                annotation.title = milestone.mwKilometersRoundedDown0dp
-                map.addAnnotation(annotation)
+            if index == locations.count - 1 {
+                milestoneAnnotation.coordinate = location.coordinate
+                milestoneAnnotation.title = "End"
+                milestoneAnnotation.subtitle = locations.last!.timestamp.timeIntervalSince(locations[0].timestamp).asString
+                map.addAnnotation(milestoneAnnotation)
+                milestoneAnnotation = ActivityAnnotation()
+                milestoneAnnotation.segment = [CLLocation]()
+                
+            } else if totalDistance >= milestone {
+                milestoneAnnotation.coordinate = location.coordinate
+                milestoneAnnotation.title = milestone.mwKilometersRoundedDown0dp
+                milestoneAnnotation.subtitle = location.timestamp.timeIntervalSince(locations[0].timestamp).asString
+                map.addAnnotation(milestoneAnnotation)
+                milestoneAnnotation = ActivityAnnotation()
+                milestoneAnnotation.segment = [CLLocation]()
                 milestone = milestone + 1000
             }
         })
-        
-        let start = MKPointAnnotation()
-        start.coordinate = locations.first!.coordinate
-        start.title = "Start"
-        map.addAnnotation(start)
-        
-        let end = MKPointAnnotation()
-        end.coordinate = locations.last!.coordinate
-        end.title = "End"
-        map.addAnnotation(end)
-        
+
     }
     
     private func showUserLocation(_ uiView: MKMapView) {
@@ -109,8 +127,9 @@ struct MapView: UIViewRepresentable {
     private func showActivityDetail(_ uiView: MKMapView) {
         uiView.showsUserLocation = false
         uiView.isUserInteractionEnabled = true
+        uiView.removeOverlays(uiView.overlays)
         guard let locations = recordedLocations else { return }
-        uiView.addOverlay(GradientPolyline(locations: locations))
+        uiView.addOverlay(GradientPolyline(locations: locations, type: polylineType))
         addMilestonePins(map: uiView, locations: locations)
         let region = MKCoordinateRegion.enclosingRegion(locations: locations)
         uiView.setRegion(region, animated: true)
@@ -119,8 +138,9 @@ struct MapView: UIViewRepresentable {
     private func showActivityRow(_ uiView: MKMapView) {
         uiView.showsUserLocation = false
         uiView.isUserInteractionEnabled = false
+        uiView.removeOverlays(uiView.overlays)
         guard let locations = recordedLocations else { return }
-        uiView.addOverlay(GradientPolyline(locations: locations))
+        uiView.addOverlay(GradientPolyline(locations: locations, type: polylineType))
         let region = MKCoordinateRegion.enclosingRegion(locations: locations)
         uiView.setRegion(region, animated: true)
     }
@@ -133,11 +153,29 @@ class Coordinator: NSObject, MKMapViewDelegate {
         self.parent = parent
     }
     
-//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//        let view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: nil)
-//        view.canShowCallout = true
-//        return view
-//    }
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if let activityAnnotation = annotation as? ActivityAnnotation,
+            let view = mapView.dequeueReusableAnnotationView(withIdentifier: "Pin", for: activityAnnotation) as? MKMarkerAnnotationView {
+            view.annotation = activityAnnotation
+            view.glyphImage = UIImage(systemName: "flag")
+            if annotation.title == "Start" {
+                view.markerTintColor = #colorLiteral(red: 0.3411764801, green: 0.9618825605, blue: 0.1686274558, alpha: 1)
+            } else if annotation.title == "End" {
+                view.markerTintColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+            } else {
+                view.markerTintColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+            }
+            return view
+        }
+        return nil
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let annotation = view.annotation as? ActivityAnnotation {
+            parent.selected = annotation
+        }
+        
+    }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is GradientPolyline {
@@ -156,7 +194,7 @@ class Coordinator: NSObject, MKMapViewDelegate {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(mapState: .showUserLocation, recordedLocations: nil)
+        MapView(selected: .constant(nil), polylineType: .speed, mapState: .showUserLocation, recordedLocations: nil)
             .edgesIgnoringSafeArea(.all)
     }
 }

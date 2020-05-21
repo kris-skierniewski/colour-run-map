@@ -9,57 +9,59 @@
 import Foundation
 import MapKit
 
+
+
 class GradientPolyline: MKPolyline {
+    enum type {
+        case speed
+        case altitude
+    }
+    
     var hues: [CGFloat]?
     public func getHue(from index: Int) -> CGColor {
         return UIColor(hue: (hues?[index])!, saturation: 1, brightness: 1, alpha: 1).cgColor
     }
     
     
-    convenience init(locations: [CLLocation]) {
+    convenience init(locations: [CLLocation], type: GradientPolyline.type) {
         let coordinates = locations.map( { $0.coordinate } )
         self.init(coordinates: coordinates, count: coordinates.count)
         
-        let ordered = locations.sorted(by: { $0.speed > $1.speed })
-
-        let maxSpeed: Double = ordered.first?.speed ?? 5.0
-        let minSpeed = ordered.last?.speed ?? 2.0
+        let ordered: [CLLocation]
+        let maxValue: Double
+        let minValue: Double
+        
+        if type == .speed {
+            ordered = locations.sorted(by: { $0.speed > $1.speed })
+            maxValue = ordered.first?.speed ?? 5.0
+            minValue = ordered.last?.speed ?? 2.0
+        } else {
+            ordered = locations.sorted(by: { $0.altitude > $1.altitude })
+            maxValue = ordered.first?.altitude ?? 1000.0
+            minValue = ordered.last?.altitude ?? 0.0
+        }
+    
         let maxHue = 0.3
         let minHue = 0.03
-
-//        hues = [
-//            0.03,
-//            0.04,
-//            0.05,
-//            0.06,
-//            0.07,
-//            0.08,
-//            0.09,
-//            0.1,
-//            0.15,
-//            0.26,
-//            0.26,
-//            0.27,
-//            0.28,
-//            0.29,
-//            0.3,
-//            0.3
-//
-//        ]
         
         hues = locations.map({
-            let velocity: Double = $0.speed
+            let velocity: Double
+            if type == .speed {
+                velocity = $0.speed
+            } else {
+                velocity = $0.altitude
+            }
 
-            if velocity == maxSpeed {
+            if velocity == maxValue {
                 return CGFloat(maxHue)
             }
             
-            if velocity == minSpeed {
+            if velocity == minValue {
                 return CGFloat(minHue)
             }
 
-            if minSpeed < velocity || velocity < maxSpeed {
-                return CGFloat( ( minHue + ( (velocity - minSpeed) * (maxHue - minHue) ) / (maxSpeed - minSpeed) ) )
+            if minValue < velocity || velocity < maxValue {
+                return CGFloat( ( minHue + ( (velocity - minValue) * (maxHue - minHue) ) / (maxValue - minValue) ) )
             }
             
             return CGFloat(velocity)
