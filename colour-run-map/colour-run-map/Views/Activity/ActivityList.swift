@@ -30,15 +30,8 @@ struct ActivityList: View {
                     }
                 }
                 .navigationBarTitle("Activities")
-                .sheet(isPresented: $isShowingActivityDetailView) {
-                    LiveRecorderView()
-                        .environment(\.managedObjectContext, self.managedObjectContext)
-                        .environmentObject(self.userData)
-                }
             }
-            
         }
-        
     }
 }
 

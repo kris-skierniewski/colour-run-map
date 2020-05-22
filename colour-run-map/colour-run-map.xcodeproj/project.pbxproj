@@ -226,11 +226,11 @@
 		A3215BC1246C61F8003DCB2B /* Activity */ = {
 			isa = PBXGroup;
 			children = (
+				A3920F132477D57C00511F8D /* ActivityDetails.swift */,
 				036F60FB246C0F140036BCF0 /* ActivityDetailView.swift */,
 				036F60D0246B24480036BCF0 /* ActivityList.swift */,
 				036F60C6246B0FA60036BCF0 /* ActivityRow.swift */,
 				037E8FA72473F69800351603 /* ActivitySegmentView.swift */,
-				A3920F132477D57C00511F8D /* ActivityDetails.swift */,
 			);
 			path = Activity;
 			sourceTree = "<group>";

@@ -11,6 +11,7 @@ import SwiftUI
 struct DataSetSelector: View {
     
     @Binding var selectedState: DataSet
+    
     @State private var selfSelectedState: DataSet
     
     init(selectedState: Binding<DataSet>) {

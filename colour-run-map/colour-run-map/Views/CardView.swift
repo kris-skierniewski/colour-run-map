@@ -16,7 +16,7 @@ public struct CardView<ContentView: View>: View {
     private let content: ContentView
     
     private let topBarHeight: CGFloat = 30
-    private var maxHeight: CGFloat = UIScreen.main.bounds.size.height * 0.8
+    private var maxHeight: CGFloat = UIScreen.main.bounds.size.height * 0.7
     private var minHeight: CGFloat = UIScreen.main.bounds.size.height * 0.2
     
     public init(height: Binding<CGFloat>,
@@ -31,7 +31,7 @@ public struct CardView<ContentView: View>: View {
                 self.topBar(geometry: geometry)
                 VStack {
                     self.content
-                        .padding(.top, geometry.safeAreaInsets.bottom)
+                        //.padding(.top, geometry.safeAreaInsets.bottom)
                     Spacer()
                 }
             }
