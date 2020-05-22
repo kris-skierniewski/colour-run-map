@@ -72,7 +72,8 @@ struct CardView_Previews: PreviewProvider {
         mockActivity.createdAt = Date()
         mockActivity.distance = CLLocationDistance(1678.0)
         mockActivity.duration = TimeInterval.hourInSeconds * 0.34
-        
+        mockActivity.locations = [CLLocation(latitude: 36.063457, longitude: -95.880516),
+                                  CLLocation(latitude: 36.063457, longitude: -95.980516)]
         return CardView(height: 400,
                         content: { ActivityRowDetails(activity: mockActivity) })
             .background(Color.black)

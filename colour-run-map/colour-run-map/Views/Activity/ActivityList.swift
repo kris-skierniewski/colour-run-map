@@ -10,13 +10,13 @@ import SwiftUI
 
 struct ActivityList: View {
     
-    @State var isShowingActivityDetailView = false
+    @State private var isShowingActivityDetailView = false
     
     @Environment(\.managedObjectContext) var managedObjectContext
     
     @EnvironmentObject var userData: UserData
     
-    @FetchRequest(fetchRequest: Activity.fetchRequest()) var activities: FetchedResults<Activity>
+    @FetchRequest(fetchRequest: Activity.fetchRequest()) private var activities: FetchedResults<Activity>
     
     var body: some View {
         NavigationView {
@@ -44,9 +44,7 @@ struct ActivityList: View {
 
 struct ActivityList_Previews: PreviewProvider {
     static var previews: some View {
-        
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
         
         return ActivityList()
             .environment(\.managedObjectContext, context)

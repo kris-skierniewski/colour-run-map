@@ -13,9 +13,8 @@ struct ActivityDetailView: View {
     
     var activity: Activity
     
-    @State var selected: ActivityAnnotation?
-    
-    @State var polylineType: GradientPolyline.type = .speed
+    @State private var selected: ActivityAnnotation?
+    @State private var polylineType: GradientPolyline.type = .speed
     
     var body: some View {
         VStack{
@@ -54,9 +53,7 @@ struct ActivityDetailView_Previews: PreviewProvider {
         mockActivity.duration = .minuteInSeconds
         mockActivity.distance = .kilometerInMeters
         
-        return ActivityDetailView(activity: mockActivity,
-                                  selected: ActivityAnnotation(),
-                                  polylineType: .speed)
+        return NavigationView{ ActivityDetailView(activity: mockActivity) }
     }
 }
 

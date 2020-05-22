@@ -98,6 +98,7 @@ struct LiveRecorderView: View {
                 print("successfully saved")
             } catch {
                 print(error)
+                showingAlert = true
             }
         }
     }

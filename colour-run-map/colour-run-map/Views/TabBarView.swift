@@ -36,6 +36,7 @@ struct TabBarView: View {
 
 struct TabBarView_Previews: PreviewProvider {
     static var previews: some View {
-        TabBarView()
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        return TabBarView().environment(\.managedObjectContext, context).environmentObject(UserData())
     }
 }
