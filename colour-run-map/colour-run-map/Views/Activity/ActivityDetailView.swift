@@ -50,8 +50,6 @@ struct ActivityDetailView_Previews: PreviewProvider {
         mockActivity.createdAt = Date()
         mockActivity.locations = [CLLocation(latitude: 36.063457, longitude: -95.880516),
                                   CLLocation(latitude: 36.063457, longitude: -95.980516)]
-        mockActivity.duration = .minuteInSeconds
-        mockActivity.distance = .kilometerInMeters
         
         return NavigationView{ ActivityDetailView(activity: mockActivity) }
     }

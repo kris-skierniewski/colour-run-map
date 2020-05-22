@@ -32,11 +32,12 @@ struct LiveRecorderView: View {
                 ZStack {
                     if isRecording {
                         LiveActivityDetails(locations: locationManager.recordedLocations)
-                            .padding(.bottom, 10)
-                            .background(BlurView().edgesIgnoringSafeArea(.top))
+                            .padding([.bottom, .top], 10)
                     }
                 }
-                .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
+                .background(BlurView().edgesIgnoringSafeArea(.top))
+                .cornerRadius(20, corners: .allCorners)
+                .padding([.leading, .trailing], 10)
                 Spacer()
             }
             
@@ -97,10 +98,7 @@ struct LiveRecorderView: View {
             let activity = Activity(context: managedObjectContext)
             activity.locations = locationManager.recordedLocations
             activity.id = UUID().uuidString
-            activity.createdAt = Date()
-            activity.distance = locationManager.distance
-            activity.duration = abs(locationManager.startDate.timeIntervalSinceNow)
-            
+            activity.createdAt = Date()            
             do {
                 try self.managedObjectContext.save()
                 print("successfully saved")

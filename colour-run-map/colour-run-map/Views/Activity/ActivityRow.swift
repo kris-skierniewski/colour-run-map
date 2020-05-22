@@ -34,8 +34,6 @@ struct ActivityRow_Previews: PreviewProvider {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let mockActivity = Activity.init(context: context)
         mockActivity.createdAt = Date()
-        mockActivity.distance = CLLocationDistance(1250.0)
-        mockActivity.duration = TimeInterval.hourInSeconds * 1
         mockActivity.locations = [CLLocation(latitude: 36.063457, longitude: -95.880516),
                                   CLLocation(latitude: 36.063457, longitude: -95.980516)]
         

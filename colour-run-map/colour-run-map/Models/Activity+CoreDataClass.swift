@@ -9,7 +9,7 @@
 
 import Foundation
 import CoreData
-
+import CoreLocation
 
 public class Activity: NSManagedObject, Identifiable {
 
@@ -17,8 +17,15 @@ public class Activity: NSManagedObject, Identifiable {
         let pace = PaceHelper.calculatePace(distance: distance,
                                             start: createdAt,
                                             end: createdAt.addingTimeInterval(duration))
-        return pace
-        //return pace.isInfinite || pace.isNaN ? nil : pace
+        return pace.isInfinite || pace.isNaN ? 0 : pace
     }
     
+    var duration: TimeInterval {
+        guard let first = locations.first, let last = locations.last else { return 0 }
+        return abs(first.timestamp.timeIntervalSince(last.timestamp))
+    }
+    
+    var distance: CLLocationDistance {
+        return DistanceHelper.sumOfDistances(betweenLocations: locations)
+    }
 }

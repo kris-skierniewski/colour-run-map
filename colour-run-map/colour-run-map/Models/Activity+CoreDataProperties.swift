@@ -25,8 +25,4 @@ extension Activity {
     @NSManaged public var createdAt: Date
     
     @NSManaged public var locations: [CLLocation]
-    
-    @NSManaged public var duration: TimeInterval
-    @NSManaged public var distance: CLLocationDistance
-
 }
