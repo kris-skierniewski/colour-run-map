@@ -29,21 +29,21 @@ struct LiveRecorderView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                Spacer().frame(height: 70)
-                if isRecording {
-                    Text("Distance: \(locationManager.distance.mwKilometersRoundedDown2dp)")
-                        .font(.system(size: 30))
-                    Text("Time: \(locationManager.startDate.mwTimeSince(now))")
-                        .font(.system(size: 30))
-                    Text("Pace: \(PaceHelper.paceString(distance: locationManager.distance, startDate: locationManager.startDate))")
-                        .font(.system(size: 30))
+                ZStack {
+                    if isRecording {
+                        LiveActivityDetails(locations: locationManager.recordedLocations)
+                            .padding(.bottom, 10)
+                            .background(BlurView().edgesIgnoringSafeArea(.top))
+                        //.cornerRadius(20, corners: [.bottomLeft, .bottomRight])
+                    }
+                    
                 }
                 Spacer()
             }
             
             VStack {
                 Spacer()
-                    .frame(height: 10)
+                    
                 HStack{
                     Spacer()
                     TextButtonView(text: isRecording ? "Stop" : "Start",
@@ -53,9 +53,9 @@ struct LiveRecorderView: View {
                                                                    message: Text("We could not save your activity"),
                                                                    dismissButton: .default(Text("OK"))) }
                     Spacer()
-                        .frame(width: 10)
                 }
                 Spacer()
+                    .frame(height: 50)
             }
         }
     }

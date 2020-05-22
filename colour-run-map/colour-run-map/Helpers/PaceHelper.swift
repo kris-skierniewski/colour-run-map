@@ -24,9 +24,12 @@ class PaceHelper {
     }
     
     static func calculatePace(distance: CLLocationDistance, start: Date, end: Date) -> TimeInterval {
-        let seconds = abs(start.timeIntervalSince(end))
-        let pace = seconds / (distance / 1000)
-        return pace.isInfinite ? 0 : pace
+        return Self.calculatePace(distance: distance, duration: abs(start.timeIntervalSince(end)))
+    }
+    
+    static func calculatePace(distance: CLLocationDistance, duration: TimeInterval) -> TimeInterval {
+        let pace = duration / (distance / 1000)
+        return pace.isInfinite || pace.isNaN ? 0 : pace
     }
     
     private static var paceFormatter: DateComponentsFormatter {

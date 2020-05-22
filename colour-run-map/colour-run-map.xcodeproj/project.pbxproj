@@ -37,6 +37,7 @@
 		037E8FA82473F69800351603 /* ActivitySegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037E8FA72473F69800351603 /* ActivitySegmentView.swift */; };
 		A3215BBF246C5CA9003DCB2B /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3215BBE246C5CA9003DCB2B /* TabBarView.swift */; };
 		A3920F0E246DB2C000511F8D /* DistanceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3920F0D246DB2C000511F8D /* DistanceHelper.swift */; };
+		A3920F142477D57C00511F8D /* LiveActivityDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3920F132477D57C00511F8D /* LiveActivityDetails.swift */; };
 		A3D2272E24697D8800B55BDD /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D2272924697D8800B55BDD /* LocationManager.swift */; };
 		A3D2272F24697D8800B55BDD /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D2272A24697D8800B55BDD /* MapView.swift */; };
 		A3D2273024697D8800B55BDD /* TextButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D2272B24697D8800B55BDD /* TextButtonView.swift */; };
@@ -75,6 +76,7 @@
 		037E8FA72473F69800351603 /* ActivitySegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySegmentView.swift; sourceTree = "<group>"; };
 		A3215BBE246C5CA9003DCB2B /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		A3920F0D246DB2C000511F8D /* DistanceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceHelper.swift; sourceTree = "<group>"; };
+		A3920F132477D57C00511F8D /* LiveActivityDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityDetails.swift; sourceTree = "<group>"; };
 		A3D2272924697D8800B55BDD /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		A3D2272A24697D8800B55BDD /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		A3D2272B24697D8800B55BDD /* TextButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextButtonView.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				036F60D0246B24480036BCF0 /* ActivityList.swift */,
 				036F60C6246B0FA60036BCF0 /* ActivityRow.swift */,
 				037E8FA72473F69800351603 /* ActivitySegmentView.swift */,
+				A3920F132477D57C00511F8D /* LiveActivityDetails.swift */,
 			);
 			path = Activity;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				036F60EB246C0B670036BCF0 /* CLLocationDistanceExtensions.swift in Sources */,
 				036F6102246D48B60036BCF0 /* MKCoordinateRegionExtensions.swift in Sources */,
 				036F60EA246C0B670036BCF0 /* DateExtensions.swift in Sources */,
+				A3920F142477D57C00511F8D /* LiveActivityDetails.swift in Sources */,
 				036F609E246AE9AB0036BCF0 /* Activity+CoreDataProperties.swift in Sources */,
 				036F60E6246C0B670036BCF0 /* ViewExtensions.swift in Sources */,
 				036F60F4246C0DDD0036BCF0 /* CardView.swift in Sources */,

@@ -26,7 +26,7 @@ struct TextButtonView: View {
                 .lineLimit(1)
                 .padding(.all, 9.0)
                 .background(backgroundColor)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .cornerRadius(10, corners: .allCorners)
         }
         )
         
