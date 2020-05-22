@@ -73,7 +73,7 @@ struct CardView_Previews: PreviewProvider {
         mockActivity.locations = [CLLocation(latitude: 36.063457, longitude: -95.880516),
                                   CLLocation(latitude: 36.063457, longitude: -95.980516)]
         return CardView(height: Binding.constant(400),
-                        content: { ActivityRowDetails(activity: mockActivity) })
+                        content: { ActivityDetails(activity: mockActivity) })
             .background(Color.black)
     }
 }

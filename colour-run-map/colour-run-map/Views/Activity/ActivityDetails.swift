@@ -9,21 +9,30 @@
 import SwiftUI
 import CoreLocation
 
-struct LiveActivityDetails: View {
+struct ActivityDetails: View {
     
-    var locations: [CLLocation]
+    private let distance: CLLocationDistance
+    private let duration: TimeInterval
+    private var pace: TimeInterval
     
-    private var distance: CLLocationDistance {
-        return DistanceHelper.sumOfDistances(betweenLocations: locations)
+    init(locations: [CLLocation]) {
+        let distance = DistanceHelper.sumOfDistances(betweenLocations: locations)
+        var duration: TimeInterval = 0
+        
+        if let first = locations.first, let last = locations.last {
+            duration = abs(first.timestamp.timeIntervalSince(last.timestamp))
+        }
+        
+        let pace = PaceHelper.calculatePace(distance: distance, duration: duration)
+        
+        self.distance = distance
+        self.duration = duration
+        self.pace = pace
     }
     
-    private var duration: TimeInterval {
-        guard let first = locations.first, let last = locations.last else { return 0 }
-        return abs(first.timestamp.timeIntervalSince(last.timestamp))
+    init(activity: Activity) {
+        self.init(locations: activity.locations)
     }
-    
-    private var pace: TimeInterval {
-        return PaceHelper.calculatePace(distance: distance, duration: duration) }
     
     var body: some View {
         HStack() {
@@ -53,7 +62,7 @@ struct LiveActivityDetails_Previews: PreviewProvider {
         
         let mockLocations = [loc1, loc2]
         
-        return LiveActivityDetails(locations: mockLocations)
+        return ActivityDetails(locations: mockLocations)
             .previewLayout(.sizeThatFits)
     }
 }

@@ -108,7 +108,7 @@ struct RecordingHeadBar: View {
     
     var body: some View {
         ZStack {
-            LiveActivityDetails(locations: recordedLocations)
+            ActivityDetails(locations: recordedLocations)
                 .padding([.bottom, .top], 10)
         }
         .background(BlurView().edgesIgnoringSafeArea(.top))

@@ -20,7 +20,7 @@ struct ActivityRow: View {
                 Text(activity.createdAt.mwFormatted("EEEE\n dd MMMM").uppercased())
                     .padding(.horizontal)
                     .font(.system(size: 30, weight: .bold, design: Font.Design.default))
-                ActivityRowDetails(activity: activity)
+                ActivityDetails(activity: activity).padding([.top, .bottom], 10).background(BlurView())
             }
         }
         .frame(height: 300)
@@ -40,24 +40,5 @@ struct ActivityRow_Previews: PreviewProvider {
         return ActivityRow(activity: mockActivity)
             .previewLayout(.sizeThatFits)
             .padding(10)
-    }
-}
-
-struct ActivityRowDetails: View {
-    var activity: Activity
-    
-    var body: some View {
-        ZStack(alignment: .leading) {
-            BlurView()
-                .frame(height: 90)
-            HStack() {
-                StackedTextView(topText: "\(activity.distance > 10 ? activity.distance.mwKilometersRoundedDown0dp : activity.distance.mwKilometersRoundedDown2dp)", bottomText: "distance")
-                Spacer()
-                StackedTextView(topText: "\(activity.duration.asString)", bottomText: "time")
-                Spacer()
-                StackedTextView(topText: "\(activity.pace.asString)", bottomText: "min/km")
-            }
-            .padding(.horizontal)
-        }
     }
 }
