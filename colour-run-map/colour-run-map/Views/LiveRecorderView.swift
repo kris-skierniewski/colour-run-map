@@ -34,10 +34,9 @@ struct LiveRecorderView: View {
                         LiveActivityDetails(locations: locationManager.recordedLocations)
                             .padding(.bottom, 10)
                             .background(BlurView().edgesIgnoringSafeArea(.top))
-                        //.cornerRadius(20, corners: [.bottomLeft, .bottomRight])
                     }
-                    
                 }
+                .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
                 Spacer()
             }
             
@@ -58,7 +57,6 @@ struct LiveRecorderView: View {
                                         .padding(.all, 9.0)
                     }
                     .shadow(radius: 30)
-                    .animation(.easeInOut)
                     .alert(isPresented: $showingAlert) { Alert(title: Text("Failed to save"),
                                                                message: Text("We could not save your activity"),
                                                                dismissButton: .default(Text("OK"))) }
