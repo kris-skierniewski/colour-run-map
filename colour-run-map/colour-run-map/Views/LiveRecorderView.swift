@@ -11,32 +11,22 @@ import MapKit
 
 struct LiveRecorderView: View {
     
+    @State private var showingAlert = false
     @State private var isRecording: Bool = false
     
-    @ObservedObject var locationManager: LocationManager = LocationManager.shared
+    @ObservedObject private var locationManager: LocationManager = LocationManager.shared
     
-    @Environment(\.managedObjectContext) var managedObjectContext
+    @Environment(\.managedObjectContext) private var managedObjectContext
     
     @EnvironmentObject var userData: UserData
     
     var body: some View {
         ZStack {
-            MapView(selected: .constant(nil), polylineType: .speed, mapState: isRecording ? .showRecordingActivity : .showUserLocation, recordedLocations: locationManager.recordedLocations)
+            MapView(selected: .constant(nil),
+                    polylineType: .speed,
+                    mapState: isRecording ? .showRecordingActivity : .showUserLocation,
+                    recordedLocations: locationManager.recordedLocations)
                 .edgesIgnoringSafeArea(.all)
-            
-            VStack {
-                Spacer()
-                    .frame(height: 10)
-                HStack{
-                    Spacer()
-                    TextButtonView(text: isRecording ? "Stop" : "Start",
-                                   backgroundColor: isRecording ? .red : .green,
-                                   tappedHandler: startStopButtonTappedHandler)
-                    Spacer()
-                        .frame(width: 10)
-                }
-                Spacer()
-            }
             
             VStack {
                 Spacer().frame(height: 70)
@@ -51,8 +41,21 @@ struct LiveRecorderView: View {
                 Spacer()
             }
             
-            CardView(height: 150) {
-                Text("Content")
+            VStack {
+                Spacer()
+                    .frame(height: 10)
+                HStack{
+                    Spacer()
+                    TextButtonView(text: isRecording ? "Stop" : "Start",
+                                   backgroundColor: isRecording ? .red : .green,
+                        tappedHandler: startStopButtonTappedHandler)
+                        .alert(isPresented: $showingAlert) { Alert(title: Text("Failed to save"),
+                                                                   message: Text("We could not save your activity"),
+                                                                   dismissButton: .default(Text("OK"))) }
+                    Spacer()
+                        .frame(width: 10)
+                }
+                Spacer()
             }
         }
     }
@@ -80,20 +83,23 @@ struct LiveRecorderView: View {
     
     // MARK: - Helpers
     private func saveActivity() {
-        let activity = Activity(context: managedObjectContext)
-        activity.locations = locationManager.recordedLocations
-        activity.id = UUID().uuidString
-        activity.createdAt = Date()
-        activity.distance = locationManager.distance
-        activity.duration = abs(locationManager.startDate.timeIntervalSinceNow)
-        
-        do {
-            try self.managedObjectContext.save()
-            print("successfully saved")
-        } catch {
-            print(error)
+        if locationManager.recordedLocations.count == 0 {
+            showingAlert = true
+        } else {
+            let activity = Activity(context: managedObjectContext)
+            activity.locations = locationManager.recordedLocations
+            activity.id = UUID().uuidString
+            activity.createdAt = Date()
+            activity.distance = locationManager.distance
+            activity.duration = abs(locationManager.startDate.timeIntervalSinceNow)
+            
+            do {
+                try self.managedObjectContext.save()
+                print("successfully saved")
+            } catch {
+                print(error)
+            }
         }
-        
     }
 }
 
