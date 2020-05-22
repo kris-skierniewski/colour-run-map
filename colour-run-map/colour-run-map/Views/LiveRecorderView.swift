@@ -43,15 +43,25 @@ struct LiveRecorderView: View {
             
             VStack {
                 Spacer()
-                    
+                
                 HStack{
                     Spacer()
-                    TextButtonView(text: isRecording ? "Stop" : "Start",
-                                   backgroundColor: isRecording ? .red : .green,
-                        tappedHandler: startStopButtonTappedHandler)
-                        .alert(isPresented: $showingAlert) { Alert(title: Text("Failed to save"),
-                                                                   message: Text("We could not save your activity"),
-                                                                   dismissButton: .default(Text("OK"))) }
+                    CirlceButton(diameter: 100,
+                                 backgroundColor: isRecording ? .red : .green,
+                                 tappedHandler: startStopButtonTappedHandler) {
+                                    Text(isRecording ? "Stop" : "Start")
+                                        .fontWeight(.bold)
+                                        .font(.system(size: 30))
+                                        .foregroundColor(Color.white)
+                                        .multilineTextAlignment(.center)
+                                        .lineLimit(1)
+                                        .padding(.all, 9.0)
+                    }
+                    .shadow(radius: 30)
+                    .animation(.easeInOut)
+                    .alert(isPresented: $showingAlert) { Alert(title: Text("Failed to save"),
+                                                               message: Text("We could not save your activity"),
+                                                               dismissButton: .default(Text("OK"))) }
                     Spacer()
                 }
                 Spacer()

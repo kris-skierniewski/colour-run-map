@@ -38,6 +38,8 @@
 		A3215BBF246C5CA9003DCB2B /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3215BBE246C5CA9003DCB2B /* TabBarView.swift */; };
 		A3920F0E246DB2C000511F8D /* DistanceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3920F0D246DB2C000511F8D /* DistanceHelper.swift */; };
 		A3920F142477D57C00511F8D /* LiveActivityDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3920F132477D57C00511F8D /* LiveActivityDetails.swift */; };
+		A3920F162477DD2800511F8D /* RoundedRectangleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3920F152477DD2800511F8D /* RoundedRectangleButton.swift */; };
+		A3920F182477E0C800511F8D /* CirlceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3920F172477E0C800511F8D /* CirlceButton.swift */; };
 		A3D2272E24697D8800B55BDD /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D2272924697D8800B55BDD /* LocationManager.swift */; };
 		A3D2272F24697D8800B55BDD /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D2272A24697D8800B55BDD /* MapView.swift */; };
 		A3D2273024697D8800B55BDD /* TextButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D2272B24697D8800B55BDD /* TextButtonView.swift */; };
@@ -77,6 +79,8 @@
 		A3215BBE246C5CA9003DCB2B /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		A3920F0D246DB2C000511F8D /* DistanceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceHelper.swift; sourceTree = "<group>"; };
 		A3920F132477D57C00511F8D /* LiveActivityDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityDetails.swift; sourceTree = "<group>"; };
+		A3920F152477DD2800511F8D /* RoundedRectangleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectangleButton.swift; sourceTree = "<group>"; };
+		A3920F172477E0C800511F8D /* CirlceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirlceButton.swift; sourceTree = "<group>"; };
 		A3D2272924697D8800B55BDD /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		A3D2272A24697D8800B55BDD /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		A3D2272B24697D8800B55BDD /* TextButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextButtonView.swift; sourceTree = "<group>"; };
@@ -207,6 +211,8 @@
 				036F60F3246C0DDD0036BCF0 /* ImageButtonView.swift */,
 				036F60CA246B1A130036BCF0 /* StackedTextView.swift */,
 				A3D2272B24697D8800B55BDD /* TextButtonView.swift */,
+				A3920F152477DD2800511F8D /* RoundedRectangleButton.swift */,
+				A3920F172477E0C800511F8D /* CirlceButton.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -305,6 +311,7 @@
 				036F60E9246C0B670036BCF0 /* CLAuthorizationStatusExtensions.swift in Sources */,
 				036F60EE246C0CDA0036BCF0 /* PaceHelper.swift in Sources */,
 				A3215BBF246C5CA9003DCB2B /* TabBarView.swift in Sources */,
+				A3920F182477E0C800511F8D /* CirlceButton.swift in Sources */,
 				036F60E7246C0B670036BCF0 /* TimeIntervalExtensions.swift in Sources */,
 				036F60C9246B13FF0036BCF0 /* BlurView.swift in Sources */,
 				036F60C7246B0FA60036BCF0 /* ActivityRow.swift in Sources */,
@@ -327,6 +334,7 @@
 				036F609E246AE9AB0036BCF0 /* Activity+CoreDataProperties.swift in Sources */,
 				036F60E6246C0B670036BCF0 /* ViewExtensions.swift in Sources */,
 				036F60F4246C0DDD0036BCF0 /* CardView.swift in Sources */,
+				A3920F162477DD2800511F8D /* RoundedRectangleButton.swift in Sources */,
 				036F60FA246C0E170036BCF0 /* RoundedCorner.swift in Sources */,
 				036F6098246AE62E0036BCF0 /* colour-run-map.xcdatamodeld in Sources */,
 				036F60F7246C0DDD0036BCF0 /* ImageButtonView.swift in Sources */,

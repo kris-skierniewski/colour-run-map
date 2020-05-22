@@ -15,20 +15,16 @@ struct TextButtonView: View {
     var tappedHandler: (() -> Void)?
     
     var body: some View {
-        Button(action: {
-            self.tappedHandler?()
-        }, label: {
-            Text(text)
-                .fontWeight(.bold)
-                .font(.system(size: 30))
-                .foregroundColor(Color.white)
-                .multilineTextAlignment(.center)
-                .lineLimit(1)
-                .padding(.all, 9.0)
-                .background(backgroundColor)
-                .cornerRadius(10, corners: .allCorners)
+        RoundedRectangleButton(backgroundColor: backgroundColor,
+                               tappedHandler: tappedHandler) {
+                                Text(text)
+                                    .fontWeight(.bold)
+                                    .font(.system(size: 30))
+                                    .foregroundColor(Color.white)
+                                    .multilineTextAlignment(.center)
+                                    .lineLimit(1)
+                                    .padding(.all, 9.0)
         }
-        )
         
     }
 }

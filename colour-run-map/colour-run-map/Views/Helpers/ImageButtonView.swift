@@ -14,17 +14,13 @@ struct ImageButtonView: View {
     @State var tappedHandler: (() -> Void)?
     
     var body: some View {
-        Button(action: {
-            self.tappedHandler?()
-        }, label: {
-            image
-                .foregroundColor(Color.white)
-                .padding(.all, 9.0)
-                .background(backgroundColor)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-        }
-        )
-        
+        RoundedRectangleButton(backgroundColor: backgroundColor,
+                               tappedHandler: tappedHandler,
+                               content: {
+                                image
+                                    .foregroundColor(Color.white)
+                                    .padding(.all, 10.0)
+        })
     }
 }
 
