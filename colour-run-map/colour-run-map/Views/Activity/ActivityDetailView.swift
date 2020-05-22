@@ -52,11 +52,6 @@ struct ActivityDetailView: View {
                         mapState: .showActivityDetail,
                         recordedLocations: activity.locations)
                     .edgesIgnoringSafeArea(.all)
-                if selectedAnnotation != nil {
-                    CardView(height: $cardHeight) {
-                        ActivitySegmentView(annotation: selectedAnnotation!)
-                    }
-                }
                 
                 VStack {
                     RecordingHeadBar(recordedLocations: activity.locations)
@@ -68,7 +63,11 @@ struct ActivityDetailView: View {
                     Spacer()
                 }
                 
-                
+                if selectedAnnotation != nil {
+                    CardView(height: $cardHeight) {
+                        ActivitySegmentView(selectedAnnotation: selectedAnnotation!, activity: activity)
+                    }
+                }
             }
         }
 //        .navigationBarItems(trailing:

@@ -49,7 +49,7 @@ public extension TimeInterval {
         let hours = (interval / 3600)
         
         if hours > 0 {
-            return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+            return String(format: "%01d:%02d", hours, minutes)
         } else {
             return String(format: "%02d:%02d", minutes, seconds)
         }

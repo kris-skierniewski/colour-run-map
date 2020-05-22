@@ -51,7 +51,7 @@ struct ActivityRowDetails: View {
             BlurView()
                 .frame(height: 90)
             HStack() {
-                StackedTextView(topText: "\(activity.distance.mwKilometersRoundedDown2dp)", bottomText: "distance")
+                StackedTextView(topText: "\(activity.distance > 10 ? activity.distance.mwKilometersRoundedDown0dp : activity.distance.mwKilometersRoundedDown2dp)", bottomText: "distance")
                 Spacer()
                 StackedTextView(topText: "\(activity.duration.asString)", bottomText: "time")
                 Spacer()

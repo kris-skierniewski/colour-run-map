@@ -10,7 +10,17 @@ import SwiftUI
 import CoreLocation
 
 struct ActivitySegmentView: View {
-    var annotation: ActivityAnnotation
+    private var annotation: ActivityAnnotation
+    private let isStart: Bool
+    private let isEnd: Bool
+    private let activity: Activity
+    
+    init(selectedAnnotation: ActivityAnnotation, isStart: Bool = false, isEnd: Bool = false, activity: Activity) {
+        self.annotation = selectedAnnotation
+        self.isStart = isStart
+        self.isEnd = isEnd
+        self.activity = activity
+    }
     
     var body: some View {
         VStack{
@@ -52,7 +62,15 @@ struct ActivitySegmentView_Previews: PreviewProvider {
         mockAnnotation.segment = mockLocations
         mockAnnotation.title = "Sample"
         
-        return ActivitySegmentView(annotation: mockAnnotation)
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let mockActivity = Activity.init(context: context)
+        mockActivity.createdAt = Date()
+        mockActivity.locations = mockLocations
+        
+        return ActivitySegmentView(selectedAnnotation: mockAnnotation,
+                                   isStart: false,
+                                   isEnd: false,
+                                   activity: mockActivity)
             .previewLayout(.sizeThatFits)
             .padding(10)
     }
