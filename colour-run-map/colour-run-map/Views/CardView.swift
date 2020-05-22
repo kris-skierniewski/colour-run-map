@@ -11,7 +11,7 @@ import CoreLocation
 
 public struct CardView<ContentView: View>: View {
     
-    @State private var height: CGFloat = 200
+    @Binding var height: CGFloat
     
     private let content: ContentView
     
@@ -19,9 +19,9 @@ public struct CardView<ContentView: View>: View {
     private var maxHeight: CGFloat = UIScreen.main.bounds.size.height * 0.8
     private var minHeight: CGFloat = UIScreen.main.bounds.size.height * 0.2
     
-    public init(height: CGFloat,
+    public init(height: Binding<CGFloat>,
                 @ViewBuilder content: () -> ContentView) {
-        self._height = State(initialValue: height)
+        self._height = height
         self.content = content()
     }
     
@@ -72,7 +72,7 @@ struct CardView_Previews: PreviewProvider {
         mockActivity.createdAt = Date()
         mockActivity.locations = [CLLocation(latitude: 36.063457, longitude: -95.880516),
                                   CLLocation(latitude: 36.063457, longitude: -95.980516)]
-        return CardView(height: 400,
+        return CardView(height: Binding.constant(400),
                         content: { ActivityRowDetails(activity: mockActivity) })
             .background(Color.black)
     }

@@ -169,9 +169,7 @@ class Coordinator: NSObject, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        if let annotation = view.annotation as? ActivityAnnotation {
-            parent.selectedAnnotation = annotation
-        }
+        parent.selectedAnnotation = view.annotation as? ActivityAnnotation
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {

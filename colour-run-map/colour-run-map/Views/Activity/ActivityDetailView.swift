@@ -13,26 +13,29 @@ struct ActivityDetailView: View {
     
     var activity: Activity
     
-    @State private var selected: ActivityAnnotation?
+    @State private var selectedAnnotation: ActivityAnnotation?
     @State private var polylineType: GradientPolyline.type = .speed
+    @State private var cardHeight: CGFloat = 200
+    @State private var isHidden: Bool = false
     
     var body: some View {
         VStack{
             ZStack {
-                MapView(selectedAnnotation: $selected,
+                MapView(selectedAnnotation: $selectedAnnotation,
                         polylineType: polylineType,
                         mapState: .showActivityDetail,
                         recordedLocations: activity.locations)
                     .edgesIgnoringSafeArea(.all)
-                CardView(height: 300) {
-                    if selected != nil {
-                        ActivitySegmentView(annotation: selected!)
-                    } else {
-                        Text("Nothing selected")
+                if selectedAnnotation != nil {
+                    CardView(height: $cardHeight) {
+                        ActivitySegmentView(annotation: selectedAnnotation!)
                     }
                 }
+                
+                RecordingHeadBar(recordedLocations: activity.locations)
             }
-        }.navigationBarItems(trailing:
+        }
+        .navigationBarItems(trailing:
             Picker(selection: $polylineType, label: Text("Line type")) {
                 Text("Speed").tag(GradientPolyline.type.speed)
                 Text("Altitude").tag(GradientPolyline.type.altitude)
@@ -52,6 +55,7 @@ struct ActivityDetailView_Previews: PreviewProvider {
                                   CLLocation(latitude: 36.063457, longitude: -95.980516)]
         
         return NavigationView{ ActivityDetailView(activity: mockActivity) }
+            
     }
 }
 
