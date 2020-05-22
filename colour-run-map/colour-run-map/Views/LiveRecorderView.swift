@@ -30,7 +30,10 @@ struct LiveRecorderView: View {
                 .edgesIgnoringSafeArea(.all)
             
             if isRecording {
-                RecordingHeadBar(recordedLocations: locationManager.recordedLocations)
+                VStack {
+                    RecordingHeadBar(recordedLocations: locationManager.recordedLocations)
+                    Spacer()
+                }
             }
             
             StartStopButtonWithProgressView(isRecording: $isRecording,
@@ -104,16 +107,13 @@ struct RecordingHeadBar: View {
     var recordedLocations: [CLLocation]
     
     var body: some View {
-        VStack {
-            ZStack {
-                LiveActivityDetails(locations: recordedLocations)
-                    .padding([.bottom, .top], 10)
-            }
-            .background(BlurView().edgesIgnoringSafeArea(.top))
-            .cornerRadius(20, corners: .allCorners)
-            .padding([.leading, .trailing], 10)
-            Spacer()
+        ZStack {
+            LiveActivityDetails(locations: recordedLocations)
+                .padding([.bottom, .top], 10)
         }
+        .background(BlurView().edgesIgnoringSafeArea(.top))
+        .cornerRadius(20, corners: .allCorners)
+        .padding([.leading, .trailing], 10)
     }
     
 }

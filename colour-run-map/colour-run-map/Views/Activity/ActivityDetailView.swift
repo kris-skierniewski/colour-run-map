@@ -9,12 +9,38 @@
 import SwiftUI
 import CoreLocation
 
+public enum DataSet: Int {
+    case speed = 0
+    case altitude = 1
+    
+    var asString: String {
+        switch self {
+        case .speed: return "Speed"
+        case .altitude: return "Altitude"
+        }
+    }
+    
+    var icon: Image {
+        switch self {
+        case .speed: return Image(systemName: "speedometer")
+        case .altitude: return Image(systemName: "airplane")
+        }
+    }
+    
+    var polylineType: GradientPolyline.type {
+        switch self {
+        case .speed: return .speed
+        case .altitude: return .altitude
+        }
+    }
+}
+
 struct ActivityDetailView: View {
     
     var activity: Activity
     
     @State private var selectedAnnotation: ActivityAnnotation?
-    @State private var polylineType: GradientPolyline.type = .speed
+    @State private var polylineType: DataSet = .speed
     @State private var cardHeight: CGFloat = 200
     @State private var isHidden: Bool = false
     
@@ -22,7 +48,7 @@ struct ActivityDetailView: View {
         VStack{
             ZStack {
                 MapView(selectedAnnotation: $selectedAnnotation,
-                        polylineType: polylineType,
+                        polylineType: polylineType.polylineType,
                         mapState: .showActivityDetail,
                         recordedLocations: activity.locations)
                     .edgesIgnoringSafeArea(.all)
@@ -32,15 +58,25 @@ struct ActivityDetailView: View {
                     }
                 }
                 
-                RecordingHeadBar(recordedLocations: activity.locations)
+                VStack {
+                    RecordingHeadBar(recordedLocations: activity.locations)
+                    HStack {
+                        Spacer().frame(height: 10)
+                        DataSetSelector(selectedState: $polylineType)
+                        Spacer()
+                    }
+                    Spacer()
+                }
+                
+                
             }
         }
-        .navigationBarItems(trailing:
-            Picker(selection: $polylineType, label: Text("Line type")) {
-                Text("Speed").tag(GradientPolyline.type.speed)
-                Text("Altitude").tag(GradientPolyline.type.altitude)
-            }.pickerStyle(SegmentedPickerStyle())
-        )
+//        .navigationBarItems(trailing:
+//            Picker(selection: $polylineType, label: Text("Line type")) {
+//                Text("Speed").tag(GradientPolyline.type.speed)
+//                Text("Altitude").tag(GradientPolyline.type.altitude)
+//            }.pickerStyle(SegmentedPickerStyle())
+//        )
         
     }
 }

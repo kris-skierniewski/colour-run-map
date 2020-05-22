@@ -41,6 +41,7 @@
 		A3920F162477DD2800511F8D /* RoundedRectangleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3920F152477DD2800511F8D /* RoundedRectangleButton.swift */; };
 		A3920F182477E0C800511F8D /* CirlceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3920F172477E0C800511F8D /* CirlceButton.swift */; };
 		A3920F1A2477EC9F00511F8D /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3920F192477EC9F00511F8D /* CircularProgressBar.swift */; };
+		A3920F1C2478131A00511F8D /* DataSetSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3920F1B2478131A00511F8D /* DataSetSelector.swift */; };
 		A3D2272E24697D8800B55BDD /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D2272924697D8800B55BDD /* LocationManager.swift */; };
 		A3D2272F24697D8800B55BDD /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D2272A24697D8800B55BDD /* MapView.swift */; };
 		A3D2273024697D8800B55BDD /* TextButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D2272B24697D8800B55BDD /* TextButtonView.swift */; };
@@ -83,6 +84,7 @@
 		A3920F152477DD2800511F8D /* RoundedRectangleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectangleButton.swift; sourceTree = "<group>"; };
 		A3920F172477E0C800511F8D /* CirlceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirlceButton.swift; sourceTree = "<group>"; };
 		A3920F192477EC9F00511F8D /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
+		A3920F1B2478131A00511F8D /* DataSetSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSetSelector.swift; sourceTree = "<group>"; };
 		A3D2272924697D8800B55BDD /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		A3D2272A24697D8800B55BDD /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		A3D2272B24697D8800B55BDD /* TextButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextButtonView.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				A3920F152477DD2800511F8D /* RoundedRectangleButton.swift */,
 				A3920F172477E0C800511F8D /* CirlceButton.swift */,
 				A3920F192477EC9F00511F8D /* CircularProgressBar.swift */,
+				A3920F1B2478131A00511F8D /* DataSetSelector.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				036F60CB246B1A130036BCF0 /* StackedTextView.swift in Sources */,
 				036F609D246AE9AB0036BCF0 /* Activity+CoreDataClass.swift in Sources */,
 				A3D2273024697D8800B55BDD /* TextButtonView.swift in Sources */,
+				A3920F1C2478131A00511F8D /* DataSetSelector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
