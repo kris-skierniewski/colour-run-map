@@ -14,7 +14,7 @@ struct ActivityRow: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            MapView(selected: .constant(nil), polylineType: .speed, mapState: .showActivityRow, recordedLocations: activity.locations)
+            MapView(selectedAnnotation: .constant(nil), polylineType: .speed, mapState: .showActivityRow, recordedLocations: activity.locations)
             
             VStack(alignment: .leading) {
                 Text(activity.createdAt.mwFormatted("EEEE\n dd MMMM").uppercased())

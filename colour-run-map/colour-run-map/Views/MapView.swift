@@ -21,7 +21,7 @@ struct MapView: UIViewRepresentable {
     @State private var showsUserLocation = true
     @State private var isUserInteractionEnabled = true
     
-    @Binding var selected: ActivityAnnotation?
+    @Binding var selectedAnnotation: ActivityAnnotation?
     var polylineType: GradientPolyline.type
     
     var mapState: MapState
@@ -54,8 +54,6 @@ struct MapView: UIViewRepresentable {
     
     // MARK: - Helpers
     private func addMilestonePins(map: MKMapView, locations: [CLLocation]) {
-        
-        
         var totalDistance: CLLocationDistance = 0
         var milestone: CLLocationDistance = 1000
         var milestoneAnnotation = ActivityAnnotation()
@@ -172,9 +170,8 @@ class Coordinator: NSObject, MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let annotation = view.annotation as? ActivityAnnotation {
-            parent.selected = annotation
+            parent.selectedAnnotation = annotation
         }
-        
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -194,7 +191,10 @@ class Coordinator: NSObject, MKMapViewDelegate {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(selected: .constant(nil), polylineType: .speed, mapState: .showUserLocation, recordedLocations: nil)
+        MapView(selectedAnnotation: .constant(nil),
+                polylineType: .speed,
+                mapState: .showUserLocation,
+                recordedLocations: nil)
             .edgesIgnoringSafeArea(.all)
     }
 }

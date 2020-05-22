@@ -19,7 +19,7 @@ struct ActivityDetailView: View {
     var body: some View {
         VStack{
             ZStack {
-                MapView(selected: $selected,
+                MapView(selectedAnnotation: $selected,
                         polylineType: polylineType,
                         mapState: .showActivityDetail,
                         recordedLocations: activity.locations)

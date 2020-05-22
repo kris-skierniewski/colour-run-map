@@ -31,6 +31,12 @@ extension MKCoordinateRegion {
             }
         }
         
+        minLat -= 0.001
+        maxLat += 0.001
+        
+        minLon -= 0.001
+        maxLon += 0.001
+        
         let span = MKCoordinateSpan(latitudeDelta: maxLat - minLat , longitudeDelta: maxLon - minLon)
         let center = CLLocationCoordinate2DMake((maxLat - span.latitudeDelta / 2), maxLon - span.longitudeDelta / 2);
         

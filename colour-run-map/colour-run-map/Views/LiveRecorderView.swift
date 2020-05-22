@@ -23,7 +23,7 @@ struct LiveRecorderView: View {
     
     var body: some View {
         ZStack {
-            MapView(selected: .constant(nil),
+            MapView(selectedAnnotation: .constant(nil),
                     polylineType: .speed,
                     mapState: isRecording ? .showRecordingActivity : .showUserLocation,
                     recordedLocations: locationManager.recordedLocations)
