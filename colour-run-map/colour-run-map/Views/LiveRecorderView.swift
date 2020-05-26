@@ -132,7 +132,7 @@ fileprivate struct StartStopButtonWithProgressView: View {
             
             HStack{
                 Spacer()
-                ZStack {
+                ZStack (alignment: .center){
                     if isRecording {
                         CircularProgressBar(color: .yellow, diameter: 120, lineWidth: 5, progress: $currentKilometerProgress)
                     }
@@ -153,7 +153,7 @@ fileprivate struct StartStopButtonWithProgressView: View {
                                                                message: Text("We could not save your activity"),
                                                                dismissButton: .default(Text("OK"))) }
                     
-                }
+                }.frame(width: 150, height: 150)
                 
                 
                 Spacer()
