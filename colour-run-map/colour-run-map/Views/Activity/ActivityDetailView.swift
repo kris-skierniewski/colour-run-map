@@ -54,6 +54,7 @@ struct ActivityDetailView: View {
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack {
+                    Spacer().frame(height: 60)
                     RecordingHeadBar(recordedLocations: activity.locations)
                     HStack {
                         Spacer().frame(height: 10)
@@ -61,7 +62,7 @@ struct ActivityDetailView: View {
                         Spacer()
                     }
                     Spacer()
-                }
+                }.edgesIgnoringSafeArea(.all)
                 
                 
                 if selectedAnnotation != nil {
