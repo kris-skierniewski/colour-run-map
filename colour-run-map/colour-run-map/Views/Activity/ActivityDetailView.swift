@@ -63,6 +63,7 @@ struct ActivityDetailView: View {
                     Spacer()
                 }
                 
+                
                 if selectedAnnotation != nil {
                     BottomCardContainer(bottomCardHeightOffset: selectedAnnotation != nil ? $bottomCardOffset : .constant(screenSize.height)) {
                         ActivitySegmentView(selectedAnnotation: selectedAnnotation!, activity: activity)
@@ -70,13 +71,6 @@ struct ActivityDetailView: View {
                 }
             }
         }
-        //        .navigationBarItems(trailing:
-        //            Picker(selection: $polylineType, label: Text("Line type")) {
-        //                Text("Speed").tag(GradientPolyline.type.speed)
-        //                Text("Altitude").tag(GradientPolyline.type.altitude)
-        //            }.pickerStyle(SegmentedPickerStyle())
-        //        )
-        
     }
 }
 
@@ -93,5 +87,3 @@ struct ActivityDetailView_Previews: PreviewProvider {
         
     }
 }
-
-

@@ -37,10 +37,8 @@ struct ActivityList: View {
 
 struct ActivityList_Previews: PreviewProvider {
     static var previews: some View {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
         return ActivityList()
-            .environment(\.managedObjectContext, context)
+            .environment(\.managedObjectContext, MockHelper.mockContext)
             .environmentObject(UserData())
     }
 }

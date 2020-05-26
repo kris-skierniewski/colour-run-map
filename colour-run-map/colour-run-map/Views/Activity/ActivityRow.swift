@@ -31,13 +31,7 @@ struct ActivityRow: View {
 
 struct ActivityRow_Previews: PreviewProvider {
     static var previews: some View {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let mockActivity = Activity.init(context: context)
-        mockActivity.createdAt = Date()
-        mockActivity.locations = [CLLocation(latitude: 36.063457, longitude: -95.880516),
-                                  CLLocation(latitude: 36.063457, longitude: -95.980516)]
-        
-        return ActivityRow(activity: mockActivity)
+        return ActivityRow(activity: MockHelper.mockActivity)
             .previewLayout(.sizeThatFits)
             .padding(10)
     }

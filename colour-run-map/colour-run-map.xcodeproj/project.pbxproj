@@ -36,6 +36,7 @@
 		037E8FA62472E03700351603 /* ActivityAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037E8FA52472E03700351603 /* ActivityAnnotation.swift */; };
 		037E8FA82473F69800351603 /* ActivitySegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037E8FA72473F69800351603 /* ActivitySegmentView.swift */; };
 		A3215BBF246C5CA9003DCB2B /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3215BBE246C5CA9003DCB2B /* TabBarView.swift */; };
+		A32EDD56247D445700F68A62 /* MockHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32EDD55247D445700F68A62 /* MockHelper.swift */; };
 		A3920F0E246DB2C000511F8D /* DistanceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3920F0D246DB2C000511F8D /* DistanceHelper.swift */; };
 		A3920F142477D57C00511F8D /* ActivityDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3920F132477D57C00511F8D /* ActivityDetails.swift */; };
 		A3920F162477DD2800511F8D /* RoundedRectangleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3920F152477DD2800511F8D /* RoundedRectangleButton.swift */; };
@@ -82,6 +83,7 @@
 		037E8FA52472E03700351603 /* ActivityAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityAnnotation.swift; sourceTree = "<group>"; };
 		037E8FA72473F69800351603 /* ActivitySegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySegmentView.swift; sourceTree = "<group>"; };
 		A3215BBE246C5CA9003DCB2B /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		A32EDD55247D445700F68A62 /* MockHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHelper.swift; sourceTree = "<group>"; };
 		A3920F0D246DB2C000511F8D /* DistanceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceHelper.swift; sourceTree = "<group>"; };
 		A3920F132477D57C00511F8D /* ActivityDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetails.swift; sourceTree = "<group>"; };
 		A3920F152477DD2800511F8D /* RoundedRectangleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectangleButton.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			children = (
 				036F60ED246C0CDA0036BCF0 /* PaceHelper.swift */,
 				A3920F0D246DB2C000511F8D /* DistanceHelper.swift */,
+				A32EDD55247D445700F68A62 /* MockHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				036F60E6246C0B670036BCF0 /* ViewExtensions.swift in Sources */,
 				036F60F4246C0DDD0036BCF0 /* CardView.swift in Sources */,
 				A3920F162477DD2800511F8D /* RoundedRectangleButton.swift in Sources */,
+				A32EDD56247D445700F68A62 /* MockHelper.swift in Sources */,
 				036F60FA246C0E170036BCF0 /* RoundedCorner.swift in Sources */,
 				036F6098246AE62E0036BCF0 /* colour-run-map.xcdatamodeld in Sources */,
 				A3920F1A2477EC9F00511F8D /* CircularProgressBar.swift in Sources */,

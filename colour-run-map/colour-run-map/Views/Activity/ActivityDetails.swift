@@ -48,21 +48,7 @@ struct ActivityDetails: View {
 
 struct LiveActivityDetails_Previews: PreviewProvider {
     static var previews: some View {
-        let loc1 = CLLocation(coordinate: CLLocationCoordinate2D(latitude: 36.063457, longitude: -95.880516),
-                              altitude: CLLocationDistance(exactly: 0.0)!,
-                              horizontalAccuracy: CLLocationAccuracy(exactly: 1)!,
-                              verticalAccuracy: CLLocationAccuracy(exactly: 1)!,
-                              timestamp: Date())
-        
-        let loc2 = CLLocation(coordinate: CLLocationCoordinate2D(latitude: 36.063457, longitude: -95.980516),
-                              altitude: CLLocationDistance(exactly: 0.0)!,
-                              horizontalAccuracy: CLLocationAccuracy(exactly: 1)!,
-                              verticalAccuracy: CLLocationAccuracy(exactly: 1)!,
-                              timestamp: Date().addingTimeInterval(.minuteInSeconds))
-        
-        let mockLocations = [loc1, loc2]
-        
-        return ActivityDetails(locations: mockLocations)
+        return ActivityDetails(locations: MockHelper.mockLocations)
             .previewLayout(.sizeThatFits)
     }
 }
