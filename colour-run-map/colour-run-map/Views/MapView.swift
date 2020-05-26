@@ -51,7 +51,6 @@ struct MapView: UIViewRepresentable {
         }
     }
     
-    
     // MARK: - Helpers
     private func addMilestonePins(map: MKMapView, locations: [CLLocation]) {
         var totalDistance: CLLocationDistance = 0
@@ -90,7 +89,7 @@ struct MapView: UIViewRepresentable {
                 milestone = milestone + 1000
             }
         })
-
+        
     }
     
     private func showUserLocation(_ uiView: MKMapView) {
@@ -146,7 +145,7 @@ struct MapView: UIViewRepresentable {
 
 class Coordinator: NSObject, MKMapViewDelegate {
     var parent: MapView
-
+    
     init(_ parent: MapView) {
         self.parent = parent
     }
@@ -169,7 +168,16 @@ class Coordinator: NSObject, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        parent.selectedAnnotation = view.annotation as? ActivityAnnotation
+        if let annotation = view.annotation as? ActivityAnnotation {
+            parent.selectedAnnotation = annotation
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        if let annotation = view.annotation as? ActivityAnnotation,
+            parent.selectedAnnotation == annotation {
+            parent.selectedAnnotation = nil
+        }
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -185,6 +193,8 @@ class Coordinator: NSObject, MKMapViewDelegate {
             return renderer
         }
     }
+    
+    
 }
 
 struct MapView_Previews: PreviewProvider {

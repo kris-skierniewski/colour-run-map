@@ -41,8 +41,8 @@ struct ActivityDetailView: View {
     
     @State private var selectedAnnotation: ActivityAnnotation?
     @State private var polylineType: DataSet = .speed
-    @State private var cardHeight: CGFloat = 200
     @State private var isHidden: Bool = false
+    @State private var bottomCardOffset: CGFloat = 450
     
     var body: some View {
         VStack{
@@ -64,18 +64,18 @@ struct ActivityDetailView: View {
                 }
                 
                 if selectedAnnotation != nil {
-                    CardView(height: $cardHeight) {
+                    BottomCardContainer(bottomCardHeightOffset: selectedAnnotation != nil ? $bottomCardOffset : .constant(screenSize.height)) {
                         ActivitySegmentView(selectedAnnotation: selectedAnnotation!, activity: activity)
                     }
                 }
             }
         }
-//        .navigationBarItems(trailing:
-//            Picker(selection: $polylineType, label: Text("Line type")) {
-//                Text("Speed").tag(GradientPolyline.type.speed)
-//                Text("Altitude").tag(GradientPolyline.type.altitude)
-//            }.pickerStyle(SegmentedPickerStyle())
-//        )
+        //        .navigationBarItems(trailing:
+        //            Picker(selection: $polylineType, label: Text("Line type")) {
+        //                Text("Speed").tag(GradientPolyline.type.speed)
+        //                Text("Altitude").tag(GradientPolyline.type.altitude)
+        //            }.pickerStyle(SegmentedPickerStyle())
+        //        )
         
     }
 }
@@ -90,7 +90,7 @@ struct ActivityDetailView_Previews: PreviewProvider {
                                   CLLocation(latitude: 36.063457, longitude: -95.980516)]
         
         return NavigationView{ ActivityDetailView(activity: mockActivity) }
-            
+        
     }
 }
 

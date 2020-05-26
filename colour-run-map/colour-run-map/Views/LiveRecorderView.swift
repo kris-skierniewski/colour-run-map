@@ -111,7 +111,7 @@ struct RecordingHeadBar: View {
             ActivityDetails(locations: recordedLocations)
                 .padding([.bottom, .top], 10)
         }
-        .background(BlurView().edgesIgnoringSafeArea(.top))
+        .background(BlurView())
         .cornerRadius(20, corners: .allCorners)
         .padding([.leading, .trailing], 10)
     }
