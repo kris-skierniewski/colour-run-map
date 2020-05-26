@@ -57,7 +57,7 @@ struct CircularProgressBar: View {
             
             if showPercentage {
                 Text("\((progress * 100).mwRoundTo(decimalPlaces: 0))%")
-                    .font(.system(size: self.textMaxDiameter * 0.4, weight: .bold))
+                    .font(.system(size: self.textMaxDiameter * (progress >= 1 ? 0.3 : 0.4), weight: .bold))
                     .foregroundColor(color)
                     .frame(width: self.textMaxDiameter, height: self.textMaxDiameter)
                     .clipShape(Circle())
@@ -71,7 +71,7 @@ struct CircularProgressBar: View {
 struct CircularProgressBar_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CircularProgressBar(showPercentage: true, progress: Binding.constant(0.3))
+            CircularProgressBar(showPercentage: true, progress: Binding.constant(0.35))
                 .padding(.all, 20)
                 .previewLayout(.sizeThatFits)
             

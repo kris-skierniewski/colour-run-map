@@ -22,14 +22,57 @@ struct ActivitySegmentView: View {
         self.activity = activity
     }
     
+    var segmentPaceVsAveragePace: Double {
+        guard let segments = annotation.segment else { return 0.0 }
+        let averagePace = PaceHelper.calculatePace(forLocations: activity.locations)
+        let segmentPace = PaceHelper.calculatePace(forLocations: segments)
+        
+        return averagePace / segmentPace
+    }
+    
+    var paceProgressColor: Color {
+        let pace = segmentPaceVsAveragePace
+        
+        if pace >= 1 { return Color.blue }
+        else if pace >= 0.9 { return Color.green }
+        else if pace >= 0.75 { return Color.yellow }
+        else if pace >= 0.5 { return Color.orange }
+        
+        return Color.red
+    }
+    
     var body: some View {
         VStack{
             if annotation.segment != nil {
-                VStack{
-                    Text("\(annotation.title!) Split")
-                        .font(.title).bold()
-                        .padding()
-                    Text("Pace: \(PaceHelper.calculatePace(distance: DistanceHelper.sumOfDistances(betweenLocations: annotation.segment!), start: annotation.segment!.first!.timestamp, end: annotation.segment!.last!.timestamp).asString) min/km")
+                VStack(spacing: 20){
+                    VStack {
+                        Text("\(annotation.title!) Split")
+                            .font(.title).bold()
+                            .padding()
+                    }
+                    VStack(alignment: .leading) {
+//                        Text("Pace: \(PaceHelper.calculatePace(distance: DistanceHelper.sumOfDistances(betweenLocations: annotation.segment!), start: annotation.segment!.first!.timestamp, end: annotation.segment!.last!.timestamp).asString) min/km")
+//
+//                        Text("Pace Average: \(PaceHelper.calculatePace(forLocations: activity.locations).asString) min/km")
+                        
+                        HStack {
+                            CircularProgressBar(color: paceProgressColor,
+                                                diameter: 50,
+                                                lineWidth: 5,
+                                                clockwise: true,
+                                                showPercentage: true,
+                                                showBackground: true,
+                                                progress: .constant(segmentPaceVsAveragePace))
+                            Text("of your average pace")
+                        }
+                        
+                        HStack(alignment: .bottom) {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                PaceChart(activity: self.activity)
+                            }
+                            
+                        }
+                    }
                 }
             }
         }

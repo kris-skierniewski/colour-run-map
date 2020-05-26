@@ -54,7 +54,7 @@ struct MapView: UIViewRepresentable {
     // MARK: - Helpers
     private func addMilestonePins(map: MKMapView, locations: [CLLocation]) {
         var totalDistance: CLLocationDistance = 0
-        var milestone: CLLocationDistance = 1000
+        var milestone: CLLocationDistance = .kilometerInMeters
         var milestoneAnnotation = ActivityAnnotation()
         milestoneAnnotation.segment = [CLLocation]()
         
@@ -86,10 +86,9 @@ struct MapView: UIViewRepresentable {
                 map.addAnnotation(milestoneAnnotation)
                 milestoneAnnotation = ActivityAnnotation()
                 milestoneAnnotation.segment = [CLLocation]()
-                milestone = milestone + 1000
+                milestone += 1000
             }
         })
-        
     }
     
     private func showUserLocation(_ uiView: MKMapView) {

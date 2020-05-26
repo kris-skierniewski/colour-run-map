@@ -32,6 +32,16 @@ class PaceHelper {
         return pace.isInfinite || pace.isNaN ? 0 : pace
     }
     
+    static func calculatePace(forLocations locations: [CLLocation]) -> TimeInterval {
+        return calculatePace(distance: DistanceHelper.sumOfDistances(betweenLocations: locations),
+                             start: locations.first!.timestamp,
+                             end: locations.last!.timestamp)
+    }
+    
+    static func calculatePaces(forLocationGroups locationGroups: [[CLLocation]]) -> [TimeInterval] {
+        return locationGroups.compactMap { calculatePace(forLocations: $0) }
+    }
+    
     private static var paceFormatter: DateComponentsFormatter {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute, .second]

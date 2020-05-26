@@ -53,23 +53,26 @@ struct ActivityDetailView: View {
                         recordedLocations: activity.locations)
                     .edgesIgnoringSafeArea(.all)
                 
-                VStack {
-                    Spacer().frame(height: 60)
-                    RecordingHeadBar(recordedLocations: activity.locations)
-                    HStack {
-                        Spacer().frame(height: 10)
-                        DataSetSelector(selectedState: $polylineType)
+                ZStack {
+                    VStack {
+                        Spacer().frame(height: 60)
+                        RecordingHeadBar(recordedLocations: activity.locations)
+                        HStack {
+                            Spacer().frame(height: 10)
+                            DataSetSelector(selectedState: $polylineType)
+                            Spacer()
+                        }
                         Spacer()
-                    }
-                    Spacer()
-                }.edgesIgnoringSafeArea(.all)
-                
-                
-                if selectedAnnotation != nil {
-                    BottomCardContainer(bottomCardHeightOffset: selectedAnnotation != nil ? $bottomCardOffset : .constant(screenSize.height)) {
-                        ActivitySegmentView(selectedAnnotation: selectedAnnotation!, activity: activity)
+                    }.edgesIgnoringSafeArea(.all)
+                    
+                    if selectedAnnotation != nil {
+                        BottomCardContainer(bottomCardHeightOffset: selectedAnnotation != nil ? $bottomCardOffset : .constant(screenSize.height)) {
+                            ActivitySegmentView(selectedAnnotation: selectedAnnotation!, activity: activity)
+                        }
                     }
                 }
+                
+                
             }
         }
     }

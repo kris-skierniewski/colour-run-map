@@ -35,6 +35,8 @@
 		037404BA2464ACD000F8DFAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 037404B82464ACD000F8DFAF /* LaunchScreen.storyboard */; };
 		037E8FA62472E03700351603 /* ActivityAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037E8FA52472E03700351603 /* ActivityAnnotation.swift */; };
 		037E8FA82473F69800351603 /* ActivitySegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037E8FA72473F69800351603 /* ActivitySegmentView.swift */; };
+		A304C5C3247DB0DD0002A64A /* PaceChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A304C5C2247DB0DD0002A64A /* PaceChart.swift */; };
+		A310EBC4247D978600DE860E /* VerticalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A310EBC3247D978600DE860E /* VerticalProgressBar.swift */; };
 		A3215BBF246C5CA9003DCB2B /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3215BBE246C5CA9003DCB2B /* TabBarView.swift */; };
 		A32EDD56247D445700F68A62 /* MockHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32EDD55247D445700F68A62 /* MockHelper.swift */; };
 		A3920F0E246DB2C000511F8D /* DistanceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3920F0D246DB2C000511F8D /* DistanceHelper.swift */; };
@@ -82,6 +84,8 @@
 		037404BB2464ACD000F8DFAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		037E8FA52472E03700351603 /* ActivityAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityAnnotation.swift; sourceTree = "<group>"; };
 		037E8FA72473F69800351603 /* ActivitySegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySegmentView.swift; sourceTree = "<group>"; };
+		A304C5C2247DB0DD0002A64A /* PaceChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceChart.swift; sourceTree = "<group>"; };
+		A310EBC3247D978600DE860E /* VerticalProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalProgressBar.swift; sourceTree = "<group>"; };
 		A3215BBE246C5CA9003DCB2B /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		A32EDD55247D445700F68A62 /* MockHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHelper.swift; sourceTree = "<group>"; };
 		A3920F0D246DB2C000511F8D /* DistanceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceHelper.swift; sourceTree = "<group>"; };
@@ -224,13 +228,15 @@
 			isa = PBXGroup;
 			children = (
 				036F60C8246B13FF0036BCF0 /* BlurView.swift */,
+				A3920F192477EC9F00511F8D /* CircularProgressBar.swift */,
+				A3920F172477E0C800511F8D /* CirlceButton.swift */,
+				A3920F1B2478131A00511F8D /* DataSetSelector.swift */,
 				036F60F3246C0DDD0036BCF0 /* ImageButtonView.swift */,
+				A3920F152477DD2800511F8D /* RoundedRectangleButton.swift */,
 				036F60CA246B1A130036BCF0 /* StackedTextView.swift */,
 				A3D2272B24697D8800B55BDD /* TextButtonView.swift */,
-				A3920F152477DD2800511F8D /* RoundedRectangleButton.swift */,
-				A3920F172477E0C800511F8D /* CirlceButton.swift */,
-				A3920F192477EC9F00511F8D /* CircularProgressBar.swift */,
-				A3920F1B2478131A00511F8D /* DataSetSelector.swift */,
+				A310EBC3247D978600DE860E /* VerticalProgressBar.swift */,
+				A304C5C2247DB0DD0002A64A /* PaceChart.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -358,6 +364,7 @@
 				A3920F162477DD2800511F8D /* RoundedRectangleButton.swift in Sources */,
 				A32EDD56247D445700F68A62 /* MockHelper.swift in Sources */,
 				036F60FA246C0E170036BCF0 /* RoundedCorner.swift in Sources */,
+				A310EBC4247D978600DE860E /* VerticalProgressBar.swift in Sources */,
 				036F6098246AE62E0036BCF0 /* colour-run-map.xcdatamodeld in Sources */,
 				A3920F1A2477EC9F00511F8D /* CircularProgressBar.swift in Sources */,
 				036F60F7246C0DDD0036BCF0 /* ImageButtonView.swift in Sources */,
@@ -365,6 +372,7 @@
 				036F609D246AE9AB0036BCF0 /* Activity+CoreDataClass.swift in Sources */,
 				A3D2273024697D8800B55BDD /* TextButtonView.swift in Sources */,
 				A3920F1C2478131A00511F8D /* DataSetSelector.swift in Sources */,
+				A304C5C3247DB0DD0002A64A /* PaceChart.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
