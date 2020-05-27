@@ -67,7 +67,10 @@ struct ActivitySegmentView: View {
                                 .font(.title)
                             HStack(alignment: .bottom) {
                                 ScrollView(.horizontal, showsIndicators: false) {
-                                    SpeedChart(activity: self.activity)
+                                    SpeedChart(segments: getSubArray(startIndex: max(0, annotation.segment!.index - 6),
+                                                                     endIndex: min(activity.segments.count, annotation.segment!.index + 6),
+                                                                     inclusive: min(activity.segments.count, annotation.segment!.index + 6) == annotation.segment!.index + 6),
+                                               highlightedSegment: annotation.segment)
                                 }
                             }
                         }
@@ -77,6 +80,11 @@ struct ActivitySegmentView: View {
                 }
             }
         }
+    }
+    
+    func getSubArray(startIndex: Int, endIndex: Int, inclusive: Bool = true) -> [Activity.Segement] {
+        return inclusive ? Array(activity.segments[min(startIndex, endIndex) ... max(startIndex, endIndex)])
+        : Array(activity.segments[min(startIndex, endIndex) ..< max(startIndex, endIndex)])
     }
 }
 

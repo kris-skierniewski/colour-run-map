@@ -3,4 +3,70 @@
    uuid = "9642210C-A74D-4C44-826A-6D642A147137"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "59187A3C-4FF3-46B1-AAE6-FC9A1E2C8D4D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "colour-run-map/Views/Helpers/SpeedChart.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "59187A3C-4FF3-46B1-AAE6-FC9A1E2C8D4D - b3d7aed94811343a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "colour_run_map.SpeedChart.body.getter : some"
+                  moduleName = "colour-run-map"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luke/Mapway/ColorRunMap/colour-run-map/colour-run-map/Views/Helpers/SpeedChart.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "38">
+               </Location>
+               <Location
+                  uuid = "59187A3C-4FF3-46B1-AAE6-FC9A1E2C8D4D - cde0689519e7fe34"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;colour_run_map.Activity.Segement&gt;, Swift.ObjectIdentifier, colour_run_map.VerticalProgressBar&gt; in colour_run_map.SpeedChart.body.getter : some"
+                  moduleName = "colour-run-map"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luke/Mapway/ColorRunMap/colour-run-map/colour-run-map/Views/Helpers/SpeedChart.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "38">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2101A583-CEF4-47D1-AA05-F64148E6F16B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "colour-run-map/Views/Activity/ActivitySegmentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

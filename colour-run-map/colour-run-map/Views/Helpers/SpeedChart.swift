@@ -11,22 +11,22 @@ import CoreLocation
 
 struct SpeedChart: View {
     
-    var activity: Activity
+    var segments: [Activity.Segement]
+    var highlightedSegment: Activity.Segement?
     
     private func generateBar(segment: Activity.Segement) -> VerticalProgressBar {
-        let slowest = activity.segments.sorted(by: {$0.pace > $1.pace}).last!.pace
-        let percentage = slowest / segment.pace
+        let slowest = segments.sorted(by: {$0.pace > $1.pace}).last!.pace
         
         return VerticalProgressBar(width: 10,
-                                   height: 200,
-                                   color: .green,
-                                   value: CGFloat(percentage),
+                                   height: 150,
+                                   color: segment == highlightedSegment ? .red : .green,
+                                   value: CGFloat(slowest / segment.pace),
                                    text: "\(segment.index + 1)")
     }
     
     var body: some View {
         HStack(alignment: .bottom) {
-            ForEach(activity.segments) { segment in
+            ForEach(segments) { segment in
                 self.generateBar(segment: segment)
             }
         }
@@ -35,6 +35,6 @@ struct SpeedChart: View {
 
 struct PaceChart_Previews: PreviewProvider {
     static var previews: some View {
-        SpeedChart(activity: MockHelper.mockActivity)
+        SpeedChart(segments: MockHelper.mockActivity.segments, highlightedSegment: nil)
     }
 }
