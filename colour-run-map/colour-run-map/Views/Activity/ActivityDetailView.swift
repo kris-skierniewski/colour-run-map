@@ -49,7 +49,7 @@ struct ActivityDetailView: View {
             ZStack {
                 MapView(selectedAnnotation: $selectedAnnotation,
                         polylineType: polylineType.polylineType,
-                        mapState: .showActivityDetail,
+                        mapState: $selectedAnnotation.wrappedValue == nil ? .showActivityDetail : .showActivityDetailSegement,
                         activity: activity)
                     .edgesIgnoringSafeArea(.all)
                 

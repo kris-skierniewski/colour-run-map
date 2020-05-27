@@ -42,5 +42,17 @@ extension MKCoordinateRegion {
         
         return MKCoordinateRegion(center: center, span: span);
     }
+    
+    static func regionFor(trackingLocation location: CLLocation) -> MKCoordinateRegion {
+        let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
+        let region = MKCoordinateRegion(center: location.coordinate, span: span)
+        return region
+    }
+    
+    static func regionForActivityDetails(atLocation location: CLLocation) -> MKCoordinateRegion {
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        let region = MKCoordinateRegion(center: location.coordinate, span: span)
+        return region
+    }
 }
 

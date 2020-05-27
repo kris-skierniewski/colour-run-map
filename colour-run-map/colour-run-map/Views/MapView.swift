@@ -13,6 +13,7 @@ public enum MapState: Equatable {
     case showUserLocation
     case showActivityRow
     case showActivityDetail
+    case showActivityDetailSegement
     case showRecordingActivity
 }
 
@@ -47,30 +48,29 @@ struct MapView: UIViewRepresentable {
         switch mapState {
         case .showUserLocation: showUserLocation(uiView)
         case .showRecordingActivity: showRecordingActivity(uiView)
-        case .showActivityDetail: showActivityDetail(uiView)
+        case .showActivityDetail, .showActivityDetailSegement: showActivityDetail(uiView)
         case .showActivityRow: showActivityRow(uiView)
         }
     }
     
     // MARK: - Helpers
     private func addMilestonePins(map: MKMapView, activity: Activity) {
-        
         activity.segments.forEach { segment in
-            
             if segment == activity.segments.first {
                 let start = ActivityAnnotation(segment: nil)
                 start.coordinate = segment.locations.first!.coordinate
                 start.title = "Start"
                 map.addAnnotation(start)
             }
+            
             if segment == activity.segments.last {
                 let end = ActivityAnnotation(segment: segment)
-                end.coordinate = segment.locations.last!.coordinate
+                end.coordinate = end.milestoneCoordinate.coordinate
                 end.title = "End"
                 map.addAnnotation(end)
             } else {
                 let milestoneAnnotation = ActivityAnnotation(segment: segment)
-                milestoneAnnotation.coordinate = segment.locations.last!.coordinate
+                milestoneAnnotation.coordinate = milestoneAnnotation.milestoneCoordinate.coordinate
                 milestoneAnnotation.title = "\(segment.index + 1) km"
                 milestoneAnnotation.subtitle = segment.duration.asString
                 map.addAnnotation(milestoneAnnotation)
@@ -99,11 +99,10 @@ struct MapView: UIViewRepresentable {
     private func showRecordingActivity(_ uiView: MKMapView) {
         uiView.showsUserLocation = true
         uiView.isUserInteractionEnabled = true
-        if let coordinates = recordedLocations?.compactMap({ $0.coordinate }) {
+        if let coordinates = recordedLocations?.compactMap({ $0.coordinate }),
+            let lastLocation = recordedLocations?.last {
             uiView.addOverlay(MKPolyline(coordinates: coordinates, count: coordinates.count))
-            let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
-            let region = MKCoordinateRegion(center: coordinates.last ?? uiView.userLocation.coordinate, span: span)
-            uiView.setRegion(region, animated: true)
+            uiView.setRegion(MKCoordinateRegion.regionFor(trackingLocation: lastLocation), animated: true)
         }
     }
     
@@ -114,8 +113,11 @@ struct MapView: UIViewRepresentable {
         guard let activity = activity else { return }
         uiView.addOverlay(GradientPolyline(locations: activity.locations, type: polylineType))
         addMilestonePins(map: uiView, activity: activity)
-        let region = MKCoordinateRegion.enclosingRegion(locations: activity.locations)
-        uiView.setRegion(region, animated: true)
+        if mapState == .showActivityDetail {
+            uiView.setRegion(MKCoordinateRegion.enclosingRegion(locations: activity.locations), animated: true)
+        } else if mapState == .showActivityDetailSegement{
+            uiView.setRegion(MKCoordinateRegion.regionForActivityDetails(atLocation: selectedAnnotation!.milestoneCoordinate), animated: true)
+        }
     }
     
     private func showActivityRow(_ uiView: MKMapView) {
@@ -141,12 +143,10 @@ class Coordinator: NSObject, MKMapViewDelegate {
             let view = mapView.dequeueReusableAnnotationView(withIdentifier: "Pin", for: activityAnnotation) as? MKMarkerAnnotationView {
             view.annotation = activityAnnotation
             view.glyphImage = UIImage(systemName: "flag")
-            if annotation.title == "Start" {
-                view.markerTintColor = #colorLiteral(red: 0.3411764801, green: 0.9618825605, blue: 0.1686274558, alpha: 1)
-            } else if annotation.title == "End" {
-                view.markerTintColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
-            } else {
-                view.markerTintColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+            switch annotation.title {
+            case "Start":  view.markerTintColor = #colorLiteral(red: 0.3411764801, green: 0.9618825605, blue: 0.1686274558, alpha: 1)
+            case "End": view.markerTintColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+            default: view.markerTintColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
             }
             return view
         }
@@ -156,6 +156,7 @@ class Coordinator: NSObject, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let annotation = view.annotation as? ActivityAnnotation {
             parent.selectedAnnotation = annotation
+            parent.mapState = .showActivityDetailSegement
         }
     }
     
@@ -179,8 +180,6 @@ class Coordinator: NSObject, MKMapViewDelegate {
             return renderer
         }
     }
-    
-    
 }
 
 struct MapView_Previews: PreviewProvider {

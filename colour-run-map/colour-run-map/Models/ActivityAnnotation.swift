@@ -12,6 +12,10 @@ import MapKit
 class ActivityAnnotation: MKPointAnnotation {
     var segment: Activity.Segement?
     
+    var milestoneCoordinate: CLLocation {
+        return segment!.locations.last!
+    }
+    
     init(segment: Activity.Segement?) {
         self.segment = segment
     }
