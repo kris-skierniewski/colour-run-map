@@ -11,31 +11,29 @@ import SwiftUI
 struct BottomCardContainer<ContentView: View>: View {
     
     @Binding var bottomCardHeightOffset: CGFloat
+    @Binding var isVisible: Bool
     
-    private let bottomCardMaxHeightOffset: CGFloat = screenSize.height * 0.1
+    private let bottomCardMaxHeightOffset: CGFloat = screenSize.height * 0.3
     private let bottomCardHiddenHeightOffset: CGFloat = screenSize.height
-    private let bottomCardMinimumHeightOffset: CGFloat = screenSize.height * 0.8
+    private let bottomCardMinimumHeightOffset: CGFloat = screenSize.height * 0.75
     
     @State private var bottomCardModifiedHeightOffset: CGFloat = 0
     
     private let cardContent: ContentView
     
-    public init(bottomCardHeightOffset: Binding<CGFloat>, @ViewBuilder content: () -> ContentView) {
+    public init(bottomCardHeightOffset: Binding<CGFloat>, isVisible: Binding<Bool>,
+                @ViewBuilder content: () -> ContentView) {
         self._bottomCardHeightOffset = bottomCardHeightOffset
+        self._isVisible = isVisible
         self.cardContent = content()
     }
     
     var body: some View {
         ZStack {
-//            Color.white.opacity( bottomCardOrigionalHeightOffset + bottomCardModifiedHeightOffset > bottomCardMinimumHeightOffset ? 0.00001 : 0)
-//                .onTapGesture {
-//                    self.bottomCardModifiedHeightOffset = .zero
-//                    self.bottomCardOrigionalHeightOffset = 550
-//            }
-            
-            BottomCard() {
-                cardContent
-            }
+            if isVisible {
+                BottomCard() {
+                    cardContent
+                }
                 .offset(y: bottomCardHeightOffset)
                 .offset(y: bottomCardModifiedHeightOffset)
                 .animation(.timingCurve(0.2, 0.8, 0.2, 1, duration: 0.8))
@@ -47,15 +45,18 @@ struct BottomCardContainer<ContentView: View>: View {
                         .onEnded({ _ in
                             let newHeight: CGFloat = self.bottomCardHeightOffset + self.bottomCardModifiedHeightOffset
                             
-                            if newHeight > 700 { self.bottomCardHeightOffset = self.bottomCardHiddenHeightOffset }
-                            else if newHeight < self.bottomCardMaxHeightOffset {
+                            if newHeight > self.bottomCardMinimumHeightOffset {
+                                self.isVisible = false
+                            } else if newHeight < self.bottomCardMaxHeightOffset {
                                 self.bottomCardHeightOffset = self.bottomCardMaxHeightOffset
-                            }// hide card
-                            else { self.bottomCardHeightOffset = newHeight }
+                            } else {
+                                self.bottomCardHeightOffset = newHeight
+                            }
                             
                             self.bottomCardModifiedHeightOffset = 0
                         })
-            )
+                )
+            }
         }
     }
 }
@@ -63,9 +64,10 @@ struct BottomCardContainer<ContentView: View>: View {
 
 struct BottomCardContainer_Previews: PreviewProvider {
     static var previews: some View {
-        BottomCardContainer(bottomCardHeightOffset: .constant(450)) {
-            Text("Sample Content").foregroundColor(.red)
+        BottomCardContainer(bottomCardHeightOffset: .constant(450),
+                            isVisible: .constant(true)) {
+                                Text("Sample Content").foregroundColor(.red)
         }
-            .background(Color.black)
+        .background(Color.black)
     }
 }

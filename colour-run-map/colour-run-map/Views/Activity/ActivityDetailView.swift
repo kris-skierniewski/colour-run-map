@@ -44,47 +44,49 @@ struct ActivityDetailView: View {
     @State private var isHidden: Bool = false
     @State private var bottomCardOffset: CGFloat = 450
     
+    private var isShowingBottomCard: Binding<Bool> { Binding (
+        get: { self.selectedAnnotation != nil },
+        set: { if !$0 { self.selectedAnnotation = nil } }
+        )
+    }
+    
     var body: some View {
+        ZStack {
+            MapView(selectedAnnotation: $selectedAnnotation,
+                    polylineType: polylineType.polylineType,
+                    mapState: $selectedAnnotation.wrappedValue == nil ? .showActivityDetail : .showActivityDetailSegement,
+                    activity: activity)
+                .edgesIgnoringSafeArea(.all)
+            
             ZStack {
-                MapView(selectedAnnotation: $selectedAnnotation,
-                        polylineType: polylineType.polylineType,
-                        mapState: $selectedAnnotation.wrappedValue == nil ? .showActivityDetail : .showActivityDetailSegement,
-                        activity: activity)
-                    .edgesIgnoringSafeArea(.all)
-                
-                ZStack {
-                    VStack {
-                        RecordingHeadBar(recordedLocations: activity.locations)
-                        HStack {
-                            Spacer().frame(height: 10)
-                            DataSetSelector(selectedState: $polylineType)
-                            Spacer()
-                        }
+                VStack {
+                    RecordingHeadBar(recordedLocations: activity.locations)
+                        .padding(.top)
+                    HStack {
+                        Spacer().frame(height: 10)
+                        DataSetSelector(selectedState: $polylineType)
                         Spacer()
                     }
-                    
-                    if selectedAnnotation != nil {
-                        BottomCardContainer(bottomCardHeightOffset: selectedAnnotation != nil ? $bottomCardOffset : .constant(screenSize.height)) {
-                            ActivitySegmentView(selectedAnnotation: selectedAnnotation!, activity: activity)
-                        }
-                    }
+                    Spacer()
                 }
                 
-                
-            }.navigationBarTitle(Text(activity.createdAt.mwFormatted("EEEE dd MMMM")), displayMode: .inline)
+                BottomCardContainer(bottomCardHeightOffset: $bottomCardOffset,
+                                    isVisible: isShowingBottomCard) {
+                    if selectedAnnotation != nil {
+                        ActivitySegmentView(selectedAnnotation: selectedAnnotation!, activity: activity)
+                    }
+                    
+                }
+            }
+            
+            
+        }.navigationBarTitle(Text(activity.createdAt.mwFormatted("EEEE dd MMMM")), displayMode: .inline)
     }
 }
 
 struct ActivityDetailView_Previews: PreviewProvider {
-    
     static var previews: some View {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let mockActivity = Activity.init(context: context)
-        mockActivity.createdAt = Date()
-        mockActivity.locations = [CLLocation(latitude: 36.063457, longitude: -95.880516),
-                                  CLLocation(latitude: 36.063457, longitude: -95.980516)]
-        
-        return NavigationView{ ActivityDetailView(activity: mockActivity) }
+        return NavigationView{ ActivityDetailView(activity: MockHelper.mockActivity) }
         
     }
 }
