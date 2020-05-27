@@ -33,12 +33,12 @@ struct ActivitySegmentView: View {
     var paceProgressColor: Color {
         let pace = segmentPaceVsAveragePace
         
-        if pace >= 1 { return Color.blue }
-        else if pace >= 0.9 { return Color.green }
+        if pace >= 1 { return Color.red }
+        else if pace >= 0.9 { return Color.orange }
         else if pace >= 0.75 { return Color.yellow }
-        else if pace >= 0.5 { return Color.orange }
+        else if pace >= 0.5 { return Color.green }
         
-        return Color.red
+        return Color.blue
     }
     
     var body: some View {
