@@ -37,16 +37,25 @@ struct BottomCardContainer<ContentView: View>: View {
                 .offset(y: bottomCardHeightOffset)
                 .offset(y: bottomCardModifiedHeightOffset)
                 .animation(.timingCurve(0.2, 0.8, 0.2, 1, duration: 0.8))
+                .opacity(self.bottomCardHeightOffset + self.bottomCardModifiedHeightOffset > self.bottomCardMinimumHeightOffset ? 0.4  : 1)
                 .gesture(
                     DragGesture()
                         .onChanged({
-                            self.bottomCardModifiedHeightOffset = $0.translation.height
+                            let newHeight: CGFloat = self.bottomCardHeightOffset + $0.translation.height
+                            if newHeight < self.bottomCardMaxHeightOffset {
+                                self.bottomCardModifiedHeightOffset = 0
+                                self.bottomCardHeightOffset = self.bottomCardMaxHeightOffset
+                            } else {
+                                self.bottomCardModifiedHeightOffset = $0.translation.height
+                            }
                         })
                         .onEnded({ _ in
                             let newHeight: CGFloat = self.bottomCardHeightOffset + self.bottomCardModifiedHeightOffset
                             
                             if newHeight > self.bottomCardMinimumHeightOffset {
                                 self.isVisible = false
+                                self.bottomCardModifiedHeightOffset = 0
+                                self.bottomCardHeightOffset = 450
                             } else if newHeight < self.bottomCardMaxHeightOffset {
                                 self.bottomCardHeightOffset = self.bottomCardMaxHeightOffset
                             } else {
