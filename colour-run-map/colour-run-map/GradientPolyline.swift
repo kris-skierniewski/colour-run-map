@@ -28,19 +28,24 @@ class GradientPolyline: MKPolyline {
         let ordered: [CLLocation]
         let maxValue: Double
         let minValue: Double
+        let maxHue: Double
+        let minHue: Double
         
         if type == .speed {
             ordered = locations.sorted(by: { $0.speed > $1.speed })
             maxValue = ordered.first?.speed ?? 5.0
             minValue = ordered.last?.speed ?? 2.0
+            
+            maxHue = 0.3
+            minHue = 0.03
         } else {
             ordered = locations.sorted(by: { $0.altitude > $1.altitude })
             maxValue = ordered.first?.altitude ?? 1000.0
             minValue = ordered.last?.altitude ?? 0.0
+            
+            maxHue = 0.5
+            minHue = 1.0
         }
-    
-        let maxHue = 0.3
-        let minHue = 0.03
         
         hues = locations.map({
             let velocity: Double

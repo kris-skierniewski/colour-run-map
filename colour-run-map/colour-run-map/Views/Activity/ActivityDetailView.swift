@@ -23,7 +23,7 @@ public enum DataSet: Int {
     var icon: Image {
         switch self {
         case .speed: return Image(systemName: "speedometer")
-        case .altitude: return Image(systemName: "airplane")
+        case .altitude: return Image(systemName: "square.stack.3d.up")
         }
     }
     
@@ -45,7 +45,6 @@ struct ActivityDetailView: View {
     @State private var bottomCardOffset: CGFloat = 450
     
     var body: some View {
-        VStack{
             ZStack {
                 MapView(selectedAnnotation: $selectedAnnotation,
                         polylineType: polylineType.polylineType,
@@ -55,7 +54,6 @@ struct ActivityDetailView: View {
                 
                 ZStack {
                     VStack {
-                        Spacer().frame(height: 60)
                         RecordingHeadBar(recordedLocations: activity.locations)
                         HStack {
                             Spacer().frame(height: 10)
@@ -63,7 +61,7 @@ struct ActivityDetailView: View {
                             Spacer()
                         }
                         Spacer()
-                    }.edgesIgnoringSafeArea(.all)
+                    }
                     
                     if selectedAnnotation != nil {
                         BottomCardContainer(bottomCardHeightOffset: selectedAnnotation != nil ? $bottomCardOffset : .constant(screenSize.height)) {
@@ -73,8 +71,7 @@ struct ActivityDetailView: View {
                 }
                 
                 
-            }
-        }
+            }.navigationBarTitle(Text(activity.createdAt.mwFormatted("EEEE dd MMMM")), displayMode: .inline)
     }
 }
 

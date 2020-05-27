@@ -32,7 +32,6 @@ struct BottomCard<ContentView: View>: View {
         }
         .padding(.top, 8)
         .padding(.horizontal, 20)
-        .frame(width: screenSize.width, height: screenSize.height)
         .background(Color.white)
         .cornerRadius(30)
         .shadow(radius: 20)

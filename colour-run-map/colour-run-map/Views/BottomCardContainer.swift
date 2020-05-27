@@ -47,7 +47,10 @@ struct BottomCardContainer<ContentView: View>: View {
                         .onEnded({ _ in
                             let newHeight: CGFloat = self.bottomCardHeightOffset + self.bottomCardModifiedHeightOffset
                             
-                            if newHeight > 700 { self.bottomCardHeightOffset = self.bottomCardHiddenHeightOffset } // hide card
+                            if newHeight > 700 { self.bottomCardHeightOffset = self.bottomCardHiddenHeightOffset }
+                            else if newHeight < self.bottomCardMaxHeightOffset {
+                                self.bottomCardHeightOffset = self.bottomCardMaxHeightOffset
+                            }// hide card
                             else { self.bottomCardHeightOffset = newHeight }
                             
                             self.bottomCardModifiedHeightOffset = 0
