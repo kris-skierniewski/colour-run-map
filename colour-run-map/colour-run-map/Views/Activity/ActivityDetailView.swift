@@ -73,9 +73,8 @@ struct ActivityDetailView: View {
                 BottomCardContainer(bottomCardHeightOffset: $bottomCardOffset,
                                     isVisible: isShowingBottomCard) {
                     if selectedAnnotation != nil {
-                        ActivitySegmentView(selectedAnnotation: selectedAnnotation!, activity: activity)
+                        ActivitySegmentView(annotation: $selectedAnnotation, activity: activity)
                     }
-                    
                 }
             }
             

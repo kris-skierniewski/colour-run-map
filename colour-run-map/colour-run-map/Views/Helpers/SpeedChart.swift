@@ -18,7 +18,7 @@ struct SpeedChart: View {
         let slowest = segments.sorted(by: {$0.pace > $1.pace}).last!.pace
         
         return VerticalProgressBar(width: 10,
-                                   height: 150,
+                                   height: 100,
                                    color: segment == highlightedSegment ? .red : .green,
                                    value: CGFloat(slowest / segment.pace),
                                    text: "\(segment.index + 1)")

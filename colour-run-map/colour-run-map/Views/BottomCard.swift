@@ -41,9 +41,14 @@ struct BottomCard<ContentView: View>: View {
 struct BottomCard_Previews: PreviewProvider {
     static var previews: some View {
         BottomCard() {
-            Text("Sample Content")
+            VStack {
+                Text("Sample Content")
+                Text("Sample Content")
+                Text("Sample Content")
+                Text("Sample Content")
+            }
         }
-            .offset(x: 0, y : 500)
+        .offset(x: 0, y : 500)
     }
 }
 
