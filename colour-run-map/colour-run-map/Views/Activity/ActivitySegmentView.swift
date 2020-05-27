@@ -21,12 +21,12 @@ struct ActivitySegmentView: View {
                         Text("\(annotation!.title!) Split")
                             .font(.title).bold()
                     }
-                    ScrollView(.vertical, showsIndicators: true) {
+                    //ScrollView(.vertical, showsIndicators: true) {
                         VStack(alignment: .leading) {
                             ActivitySegmentView_Pace(annotation: $annotation, activity: activity)
                             ActivitySegmentView_Speed(annotation: $annotation, activity: activity)
                         }.padding(.all)
-                    }.frame(height: 250)
+                    //}.frame(height: 250)
                 }
                 
             }
@@ -61,7 +61,7 @@ fileprivate struct ActivitySegmentView_Speed: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         SpeedChart(segments: getSubArray(startIndex: max(0, annotation!.segment!.index - 6),
                                                          endIndex: min(activity.segments.count, annotation!.segment!.index + 6),
-                                                         inclusive: min(activity.segments.count, annotation!.segment!.index + 6) == annotation!.segment!.index + 6),
+                                                         inclusive: min(activity.segments.count - 1, annotation!.segment!.index + 6) == annotation!.segment!.index + 6),
                                    highlightedSegment: annotation!.segment)
                     }
                     
@@ -91,12 +91,12 @@ fileprivate struct ActivitySegmentView_Pace: View {
     var paceProgressColor: Color {
         let pace = segmentPaceVsAveragePace
         
-        if pace >= 1 { return Color.red }
-        else if pace >= 0.9 { return Color.orange }
+        if pace >= 1 { return Color.blue }
+        else if pace >= 0.9 { return Color.green }
         else if pace >= 0.75 { return Color.yellow }
-        else if pace >= 0.5 { return Color.green }
+        else if pace >= 0.5 { return Color.orange }
         
-        return Color.blue
+        return Color.red
     }
     
     var body: some View {
