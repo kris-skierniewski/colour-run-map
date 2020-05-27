@@ -43,7 +43,7 @@ class MockHelper {
     }
     
     static var mockAnnotation: ActivityAnnotation {
-        let mockAnnotation = ActivityAnnotation(segment: MockHelper.mockActivity.segments.first!)
+        let mockAnnotation = ActivityAnnotation(segment: MockHelper.mockActivity.segments.first!, isStart: true)
         mockAnnotation.title = "Sample"
         
         return mockAnnotation

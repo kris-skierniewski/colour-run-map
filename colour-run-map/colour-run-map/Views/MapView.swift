@@ -57,14 +57,14 @@ struct MapView: UIViewRepresentable {
     private func addMilestonePins(map: MKMapView, activity: Activity) {
         activity.segments.forEach { segment in
             if segment == activity.segments.first {
-                let start = ActivityAnnotation(segment: nil)
+                let start = ActivityAnnotation(segment: segment, isStart: true)
                 start.coordinate = segment.locations.first!.coordinate
                 start.title = "Start"
                 map.addAnnotation(start)
             }
             
             if segment == activity.segments.last {
-                let end = ActivityAnnotation(segment: segment)
+                let end = ActivityAnnotation(segment: segment, isEnd: true)
                 end.coordinate = end.milestoneCoordinate.coordinate
                 end.title = "End"
                 map.addAnnotation(end)

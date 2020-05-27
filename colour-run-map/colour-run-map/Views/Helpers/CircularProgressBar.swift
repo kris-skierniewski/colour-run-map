@@ -57,7 +57,7 @@ struct CircularProgressBar: View {
             
             if showPercentage {
                 Text("\((progress * 100).mwRoundTo(decimalPlaces: 0))%")
-                    .font(.system(size: self.textMaxDiameter * (progress >= 1 ? 0.3 : 0.4), weight: .bold))
+                    .font(.system(size: self.textMaxDiameter * (progress >= 0.9 ? 0.3 : 0.4), weight: .bold))
                     .foregroundColor(color)
                     .frame(width: self.textMaxDiameter, height: self.textMaxDiameter)
                     .clipShape(Circle())
