@@ -50,7 +50,7 @@ struct ActivityDetailView: View {
                 MapView(selectedAnnotation: $selectedAnnotation,
                         polylineType: polylineType.polylineType,
                         mapState: .showActivityDetail,
-                        recordedLocations: activity.locations)
+                        activity: activity)
                     .edgesIgnoringSafeArea(.all)
                 
                 ZStack {

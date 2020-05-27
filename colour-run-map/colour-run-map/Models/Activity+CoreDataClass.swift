@@ -13,7 +13,7 @@ import CoreLocation
 
 public class Activity: NSManagedObject, Identifiable {
 
-    public class Segement: Identifiable {
+    public class Segement: Identifiable, Equatable {
         let index: Int
         let locations: [CLLocation]
         
@@ -34,6 +34,10 @@ public class Activity: NSManagedObject, Identifiable {
         var pace: TimeInterval {
             let pace = PaceHelper.calculatePace(distance: distance, duration: duration)
             return pace.isInfinite || pace.isNaN ? 0 : pace
+        }
+        
+        public static func == (lhs: Activity.Segement, rhs: Activity.Segement) -> Bool {
+            return lhs.index == rhs.index && lhs.locations == rhs.locations
         }
     }
     

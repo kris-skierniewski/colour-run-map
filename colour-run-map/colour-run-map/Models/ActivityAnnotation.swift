@@ -10,5 +10,9 @@ import Foundation
 import MapKit
 
 class ActivityAnnotation: MKPointAnnotation {
-    var segment: [CLLocation]?
+    var segment: Activity.Segement?
+    
+    init(segment: Activity.Segement?) {
+        self.segment = segment
+    }
 }

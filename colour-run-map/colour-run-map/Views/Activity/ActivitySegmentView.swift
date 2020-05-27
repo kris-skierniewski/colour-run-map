@@ -23,9 +23,9 @@ struct ActivitySegmentView: View {
     }
     
     var segmentPaceVsAveragePace: Double {
-        guard let segments = annotation.segment else { return 0.0 }
+        guard let segmentLocations = annotation.segment?.locations else { return 0.0 }
         let averagePace = PaceHelper.calculatePace(forLocations: activity.locations)
-        let segmentPace = PaceHelper.calculatePace(forLocations: segments)
+        let segmentPace = PaceHelper.calculatePace(forLocations: segmentLocations)
         
         return averagePace / segmentPace
     }
@@ -51,10 +51,6 @@ struct ActivitySegmentView: View {
                             .padding()
                     }
                     VStack(alignment: .leading) {
-//                        Text("Pace: \(PaceHelper.calculatePace(distance: DistanceHelper.sumOfDistances(betweenLocations: annotation.segment!), start: annotation.segment!.first!.timestamp, end: annotation.segment!.last!.timestamp).asString) min/km")
-//
-//                        Text("Pace Average: \(PaceHelper.calculatePace(forLocations: activity.locations).asString) min/km")
-                        
                         HStack {
                             CircularProgressBar(color: paceProgressColor,
                                                 diameter: 50,
@@ -66,12 +62,17 @@ struct ActivitySegmentView: View {
                             Text("of your average pace")
                         }
                         
-                        HStack(alignment: .bottom) {
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                PaceChart(activity: self.activity)
+                        VStack(alignment: .leading) {
+                            Text("Speed")
+                                .font(.title)
+                            HStack(alignment: .bottom) {
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    SpeedChart(activity: self.activity)
+                                }
                             }
-                            
                         }
+                        
+                        
                     }
                 }
             }

@@ -35,7 +35,7 @@
 		037404BA2464ACD000F8DFAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 037404B82464ACD000F8DFAF /* LaunchScreen.storyboard */; };
 		037E8FA62472E03700351603 /* ActivityAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037E8FA52472E03700351603 /* ActivityAnnotation.swift */; };
 		037E8FA82473F69800351603 /* ActivitySegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037E8FA72473F69800351603 /* ActivitySegmentView.swift */; };
-		A304C5C3247DB0DD0002A64A /* PaceChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A304C5C2247DB0DD0002A64A /* PaceChart.swift */; };
+		A304C5C3247DB0DD0002A64A /* SpeedChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A304C5C2247DB0DD0002A64A /* SpeedChart.swift */; };
 		A310EBC4247D978600DE860E /* VerticalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A310EBC3247D978600DE860E /* VerticalProgressBar.swift */; };
 		A3215BBF246C5CA9003DCB2B /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3215BBE246C5CA9003DCB2B /* TabBarView.swift */; };
 		A32EDD56247D445700F68A62 /* MockHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32EDD55247D445700F68A62 /* MockHelper.swift */; };
@@ -84,7 +84,7 @@
 		037404BB2464ACD000F8DFAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		037E8FA52472E03700351603 /* ActivityAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityAnnotation.swift; sourceTree = "<group>"; };
 		037E8FA72473F69800351603 /* ActivitySegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySegmentView.swift; sourceTree = "<group>"; };
-		A304C5C2247DB0DD0002A64A /* PaceChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceChart.swift; sourceTree = "<group>"; };
+		A304C5C2247DB0DD0002A64A /* SpeedChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedChart.swift; sourceTree = "<group>"; };
 		A310EBC3247D978600DE860E /* VerticalProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalProgressBar.swift; sourceTree = "<group>"; };
 		A3215BBE246C5CA9003DCB2B /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		A32EDD55247D445700F68A62 /* MockHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHelper.swift; sourceTree = "<group>"; };
@@ -236,7 +236,7 @@
 				036F60CA246B1A130036BCF0 /* StackedTextView.swift */,
 				A3D2272B24697D8800B55BDD /* TextButtonView.swift */,
 				A310EBC3247D978600DE860E /* VerticalProgressBar.swift */,
-				A304C5C2247DB0DD0002A64A /* PaceChart.swift */,
+				A304C5C2247DB0DD0002A64A /* SpeedChart.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -372,7 +372,7 @@
 				036F609D246AE9AB0036BCF0 /* Activity+CoreDataClass.swift in Sources */,
 				A3D2273024697D8800B55BDD /* TextButtonView.swift in Sources */,
 				A3920F1C2478131A00511F8D /* DataSetSelector.swift in Sources */,
-				A304C5C3247DB0DD0002A64A /* PaceChart.swift in Sources */,
+				A304C5C3247DB0DD0002A64A /* SpeedChart.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

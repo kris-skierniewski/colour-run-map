@@ -26,6 +26,7 @@ struct MapView: UIViewRepresentable {
     
     var mapState: MapState
     var recordedLocations: [CLLocation]?
+    var activity: Activity?
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -52,43 +53,29 @@ struct MapView: UIViewRepresentable {
     }
     
     // MARK: - Helpers
-    private func addMilestonePins(map: MKMapView, locations: [CLLocation]) {
-        var totalDistance: CLLocationDistance = 0
-        var milestone: CLLocationDistance = .kilometerInMeters
-        var milestoneAnnotation = ActivityAnnotation()
-        milestoneAnnotation.segment = [CLLocation]()
+    private func addMilestonePins(map: MKMapView, activity: Activity) {
         
-        locations.enumerated().forEach( { index, location in
-            //start pin
-            guard index != 0 else {
-                let start = ActivityAnnotation()
-                start.coordinate = location.coordinate
+        activity.segments.forEach { segment in
+            
+            if segment == activity.segments.first {
+                let start = ActivityAnnotation(segment: nil)
+                start.coordinate = segment.locations.first!.coordinate
                 start.title = "Start"
                 map.addAnnotation(start)
-                return
             }
-            
-            milestoneAnnotation.segment?.append(location)
-            totalDistance = totalDistance + location.distance(from: locations[index - 1])
-            
-            if index == locations.count - 1 {
-                milestoneAnnotation.coordinate = location.coordinate
-                milestoneAnnotation.title = "End"
-                milestoneAnnotation.subtitle = locations.last!.timestamp.timeIntervalSince(locations[0].timestamp).asString
+            if segment == activity.segments.last {
+                let end = ActivityAnnotation(segment: segment)
+                end.coordinate = segment.locations.last!.coordinate
+                end.title = "End"
+                map.addAnnotation(end)
+            } else {
+                let milestoneAnnotation = ActivityAnnotation(segment: segment)
+                milestoneAnnotation.coordinate = segment.locations.last!.coordinate
+                milestoneAnnotation.title = "\(segment.index + 1) km"
+                milestoneAnnotation.subtitle = segment.duration.asString
                 map.addAnnotation(milestoneAnnotation)
-                milestoneAnnotation = ActivityAnnotation()
-                milestoneAnnotation.segment = [CLLocation]()
-                
-            } else if totalDistance >= milestone {
-                milestoneAnnotation.coordinate = location.coordinate
-                milestoneAnnotation.title = milestone.mwKilometersRoundedDown0dp
-                milestoneAnnotation.subtitle = location.timestamp.timeIntervalSince(locations[0].timestamp).asString
-                map.addAnnotation(milestoneAnnotation)
-                milestoneAnnotation = ActivityAnnotation()
-                milestoneAnnotation.segment = [CLLocation]()
-                milestone += 1000
             }
-        })
+        }
     }
     
     private func showUserLocation(_ uiView: MKMapView) {
@@ -124,10 +111,10 @@ struct MapView: UIViewRepresentable {
         uiView.showsUserLocation = false
         uiView.isUserInteractionEnabled = true
         uiView.removeOverlays(uiView.overlays)
-        guard let locations = recordedLocations else { return }
-        uiView.addOverlay(GradientPolyline(locations: locations, type: polylineType))
-        addMilestonePins(map: uiView, locations: locations)
-        let region = MKCoordinateRegion.enclosingRegion(locations: locations)
+        guard let activity = activity else { return }
+        uiView.addOverlay(GradientPolyline(locations: activity.locations, type: polylineType))
+        addMilestonePins(map: uiView, activity: activity)
+        let region = MKCoordinateRegion.enclosingRegion(locations: activity.locations)
         uiView.setRegion(region, animated: true)
     }
     
